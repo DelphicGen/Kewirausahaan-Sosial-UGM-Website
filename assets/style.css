@@ -29,6 +29,7 @@
     background-size: cover;
     background-position: center;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .landing-page-container {
@@ -42,6 +43,16 @@
 .filter {
     background-color: rgba(43, 42, 42, .8);
     min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.triangle {
+    position: absolute;
+    right: -13%;
+    bottom: -3%;
+    width: 400px;
+    height: auto;
 }
 
 .logo {
@@ -53,6 +64,8 @@
     display: table;
     height: calc(100vh - 65.8px);
     width: 70%;
+    position: relative;
+    z-index: 2;
 }
 
 .heading {
@@ -67,6 +80,10 @@
 .heading h1 {
     font-weight: 700;
     font-size: 4rem;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 20px;
+    border-left: 5px solid #FFAD08;
 }
 
 .heading h5 {
@@ -89,7 +106,7 @@
 .register-btn {
     background-color: rgba(214, 214, 214, .5);
     border: none;
-    border-left: 15px solid #FFAD08;
+    border-left: 5px solid #FFAD08;
     padding: 10px 20px;
     width: fit-content;
     font-weight: 600;
@@ -97,7 +114,7 @@
 
 .register-btn:hover, .register-btn:focus {
     background: #909090 radial-gradient(circle, transparent 1%, #909090 1%) center/15000%;
-    border-left: 15px solid #FFAD08;
+    border-left: 5px solid #FFAD08;
 }
 
 .register-btn:active {
@@ -106,13 +123,85 @@
     transition: background 0s;
 }
 
+section {
+    margin-top: 80px !important;
+}
+
+section h3 {
+    font-weight: 700;
+    font-size: 2rem;
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+section h3:nth-child(1) {
+    margin-bottom: 60px;
+}
+
+section h3:nth-child(1)::before, section h3:nth-child(2)::before {
+    content: "";
+    position: absolute;
+    width: 20%;
+    height: 5px;
+    background-color: #FFAD08;
+    bottom: 0;
+}
+
+section h3:nth-child(2)::before {
+    right: 0;
+}
+
+/* About us */
+
+.ks {
+    margin-bottom: 12px !important;
+}
+
+.ugm {
+    margin-bottom: 60px;
+}
+
+.about-us p {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 16px;
+}
+
+.statistic div {
+    color: #FFAD08;
+    text-align: center;
+    background-color: #4E3D42;
+    border-radius: 50%;
+    padding: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+.statistic div img {
+    width: 20px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.statistic div h4 {
+    font-weight: 600;
+}
+
 @media screen and (max-width: 991px) {
     html {
         font-size: 14px;
     }
 
-    .heading-container {
+    .heading-container, .about-us p {
         width: 80%;
+    }
+
+    .statistic div {
+        width: 150px;
+        height: 150px;
     }
 }
 
@@ -125,9 +214,18 @@
         min-height: 600px;
     }
 
-    .heading-container {
+    .heading-container{
         width: 90%;
         height: calc(600px - 65.8px);
+    }
+
+    .about-us p {
+        width: 90%;
+        font-size: 14px;
+    }
+
+    .statistic div {
+        margin-bottom: 20px;
     }
 }
 
@@ -137,7 +235,7 @@
     }
 
     .container {
-        padding: 0 10px;
+        padding: 0 20px;
     }
 }
 
