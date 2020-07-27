@@ -13,15 +13,12 @@ $(document).ready(function () {
     $('.upcoming-event').on('click', function() {
         if($(this).hasClass('next')) slide('left');
         else if ($(this).hasClass('prev')) slide('right');
-    });
-
-    $('.upcoming-event').on('swipeleft', function() {
+    }).on('swipeleft', function() {
+        console.log('Hi')
         slide('left');
-    });
-
-    $('.upcoming-event').on('swiperight', function() {
+    }).on('swiperight', function() {
         slide('right');
-    });
+    })
 
     $(leftControl).on('click', function() {
         slide('right');
