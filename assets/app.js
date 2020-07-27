@@ -4,37 +4,31 @@ $(document).ready(function () {
     let active = document.querySelector('.active');
     let prev = document.querySelector('.prev');
     let next = document.querySelector('.next');
+    let leftControl = document.querySelector('.left-control');
+    let rightControl = document.querySelector('.right-control');
     let activeIndex = 0;
     let nextIndex = (activeIndex + 1) % upcomingEvents.length;
     let prevIndex = (activeIndex + 4) % upcomingEvents.length;
 
-    let currentMousePos = { x: -1, y: -1 };
-    let isDragging = false;
-    let currentX;
-
-    $(document).mousemove(function(event) {
-        currentMousePos.x = event.pageX;
-        currentMousePos.y = event.pageY;
-    });
-
     $('.upcoming-event').on('click', function() {
         if($(this).hasClass('next')) slide('left');
         else if ($(this).hasClass('prev')) slide('right');
-    })
+    });
 
-    $('.upcoming-event')
-    .mousedown(function() {
-        currentX = currentMousePos.x;
-        isDragging = true;
-    })
-    .mouseup(function() {
-        if(currentX > currentMousePos.x) {
-            slide('right');
-        } else if (currentX < currentMousePos.x) {
-            slide('left');
-        }
+    $('.upcoming-event').on('swipeleft', function() {
+        slide('left');
+    });
 
-        isDragging = false;
+    $('.upcoming-event').on('swiperight', function() {
+        slide('right');
+    });
+
+    $(leftControl).on('click', function() {
+        slide('right');
+    });
+
+    $(rightControl).on('click', function() {
+        slide('left');
     });
 
     const slide = (direction) => {
