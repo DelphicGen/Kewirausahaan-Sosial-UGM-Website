@@ -7,12 +7,35 @@ $(document).ready(function () {
     let activeIndex = 0;
     let nextIndex = (activeIndex + 1) % upcomingEvents.length;
     let prevIndex = (activeIndex + 4) % upcomingEvents.length;
-    
+
+    let currentMousePos = { x: -1, y: -1 };
+    let isDragging = false;
+    let currentX;
+
+    $(document).mousemove(function(event) {
+        currentMousePos.x = event.pageX;
+        currentMousePos.y = event.pageY;
+    });
 
     $('.upcoming-event').on('click', function() {
         if($(this).hasClass('next')) slide('left');
         else if ($(this).hasClass('prev')) slide('right');
     })
+
+    $('.upcoming-event')
+    .mousedown(function() {
+        currentX = currentMousePos.x;
+        isDragging = true;
+    })
+    .mouseup(function() {
+        if(currentX > currentMousePos.x) {
+            slide('right');
+        } else if (currentX < currentMousePos.x) {
+            slide('left');
+        }
+
+        isDragging = false;
+    });
 
     const slide = (direction) => {
         if(direction === 'left') {

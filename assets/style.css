@@ -446,10 +446,5 @@ section h3:nth-child(2)::before {
     .upcoming-event {
         height: 200px;
     }
-
-    /* .upcoming-event-list {
-        width: fit-content !important;
-        margin: 0 auto;
-    } */
 }
 
