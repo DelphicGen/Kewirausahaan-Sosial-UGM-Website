@@ -116,7 +116,7 @@ li {
 
 .register-btn, .more-details-btn {
     border: none;
-    padding: 10px 20px;
+    padding: 8px 20px;
     width: fit-content;
     font-weight: 600;
 }
@@ -220,6 +220,9 @@ section h3:nth-child(2)::before {
 }
 
 /* Our Mentor */
+.owl-nav {
+    visibility: hidden;
+}
 
 .person-img {
     position: relative;
@@ -262,10 +265,10 @@ section h3:nth-child(2)::before {
     background-color: rgba(1,4,6,0.45);
     position: absolute;
     z-index: 3;
-    transition: 0.5s all;
-    -webkit-transition: 0.5s all;
-    -moz-transition: 0.5s all;
-    -o-transition: 0.5s all;
+    transition: 0.3s all;
+    -webkit-transition: 0.3s all;
+    -moz-transition: 0.3s all;
+    -o-transition: 0.3s all;
     transform: scale(2);
     -webkit-transform: scale(2);
     -moz-transform: scale(2);
@@ -400,6 +403,153 @@ section h3:nth-child(2)::before {
     margin-bottom: 12px !important;
 }
 
+/* Testimonial */
+.testimonial {
+    background-color: #4E3D42;
+    color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.testimonial-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 20px;
+}
+
+.testimonial-header img {
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.testimonial-header p {
+    font-size: 14px;
+}
+
+.testimonial-detail {
+    padding: 4px;
+    height: 100px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.testimonial-detail p {
+    height: 100%;
+    overflow-y: auto;
+}
+
+/* Meet The Founder */
+.carousel-inner {
+    width: 100%;
+    height: 30rem;
+}
+
+.carousel-item {
+    background-color: #4E3D42;
+    color: #fff;
+    width: 100%;
+    height: 30rem;
+    text-align: center;
+    padding: 40px;
+}
+
+.founder img {
+    width: 120px !important;
+    height: 120px;
+    margin: 60px auto 0;
+    border-radius: 50%;
+}
+
+.founder h5 {
+    font-weight: 600;
+    width: 80%;
+    margin: 60px auto;
+}
+
+.founder {
+    height: 100%;
+}
+
+/* Let's collaborate */
+.collaborate {
+    padding-bottom: 80px;
+}
+
+.ks-media *{
+    text-align: center;
+}
+
+.ks-media h4, .ks-media h5 {
+    font-weight: 600;
+}
+
+.ks-media i {
+    color: #FFAD08;
+    font-size: 20px;
+    margin: 20px auto;
+}
+
+.ks-media p {
+    margin-top: 20px;
+}
+
+.form {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.input-container {
+    margin-bottom: 32px;
+    position: relative;
+    width: 100%;
+}
+
+.input-bar {
+    border: none;
+    padding: 10px;
+    border-bottom: solid 1px #FFAD08;
+    width: 100%;
+}
+
+.input-bar:focus {
+    outline: none;
+}
+
+.input-bar-after {
+    width: 100%;
+    border-bottom: solid 1px #FFAD08;
+    transform: scaleX(0);
+    transition: transform 200ms ease-in-out;
+}
+
+.input-bar:focus + .input-bar-after {
+    transform-origin: 100% 50%;
+    transform: scaleX(1);
+}
+
+.submit-btn {
+    border: none;
+    padding: 8px auto;
+    width: 100%;
+    font-weight: 600;
+    border-radius: 50px;
+    margin: 0 auto;
+    background-color: #FFAD08;
+    border-radius: 50px;
+}
+
+.submit-btn:hover, .submit-btn:focus {
+    background: #FFAD08 radial-gradient(circle, transparent 1%, #FFAD08 1%) center/15000%;
+}
+
+.submit-btn:active {
+    background-color: #f0d803 !important;
+    background-size: 100%;
+    transition: background 0s;
+}
+
 @media screen and (max-width: 991px) {
     html {
         font-size: 14px;
@@ -522,6 +672,33 @@ section h3:nth-child(2)::before {
 
     .article p {
         font-size: 14px;
+    }
+
+    .founder img {
+        width: 100px !important;
+        height: 100px;
+    }
+
+    .founder h5 {
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .collaborate {
+        padding-bottom: 0;
+    }
+
+    .form {
+        margin: 0 auto 60px;
+        
+    }
+
+    .ks-media {
+        width: 100vw;
+        height: fit-content;
+        background-color: #4E3D42;
+        color: #FFAD08;
+        padding: 20px 0;
     }
 }
 
