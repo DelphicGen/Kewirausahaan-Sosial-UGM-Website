@@ -4,6 +4,7 @@ if(process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const mysql = require('mysql');
+const mariadb = require('mariadb/callback');
 const async = require("async");
 const app = express();
 const bcrypt = require('bcrypt');
@@ -15,6 +16,13 @@ const initializePassport = require('./passport-config.js');
 const util = require('util');
 
 const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'kewirausahaan_sosial_ugm'
+});
+
+const connection2 = mariadb.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
@@ -111,8 +119,7 @@ app.post('/register', async(req, res) => {
             }
         }
         else res.redirect('/adminDashboard');
-    })
-    
+    }) 
 });
 
 app.delete('/logout', (req, res) => {
@@ -141,6 +148,20 @@ app.get('/adminDashboard', checkAuthenticated, async function(req, res){
 
     
 });
+
+app.get('/userList', async function(req, res){
+    req.user.then (data => {
+        if(data.role === "super admin") {
+            connection.query(
+                'SELECT * FROM users WHERE role = "admin"',
+                function(error, results) {
+                    if(error) throw error;
+                    else res.render('./admin/userList.ejs', { users: results });
+                }
+            );
+        } else res.redirect('/adminDashboard');
+    })
+})
 
 app.get('/edit', function(req, res) {
     connection.query(

@@ -6,23 +6,27 @@
 
     <h1>Edit <%= table[0].toUpperCase() %><%= table.slice(1).replace(/_([a-z])/g, function(g) { return g[1].toUpperCase() }) %>'s Table</h1>
     
-    <form action="/edit?table=<%= table %>&id=<%= id %>" method="POST">
+    <% if (table == "users") { %>
+        <form action="/editAdmin" method="POST">
+    <% } else { %>
+        <form action="/edit?table=<%= table %>&id=<%= id %>" method="POST">
+    <% } %>
         <% for (const [key, value] of Object.entries(data)) { %>
-            <% if(key !== "id") {%>
+            <% if(key !== "id" && key !== "role" && key !== "created") {%>
 
                 
                     <div class="form-group">
                         <label for="<%= key %>">
                             <%= key %> 
-                            <% if(key == "date") {%>
-                                (Format yyyy-mm-dd hh:mm:ss (for upcoming event) | yyyy-mm-dd (for latest event))
+                            <% if(key == "date" || key == "created") {%>
+                                (Format yyyy-mm-dd hh:mm:ss (for upcoming event and users) | yyyy-mm-dd (for latest event))
                             <% } %>
                             <% if(columns[index].Null == 'NO' && columns[index].Default == null) {%>
                                 *
                             <% } %>
                         </label>
 
-                        <% if(key == "date") {%>
+                        <% if(key == "date" || key == "created") {%>
                             <% if(columns[index].Null == 'NO' && columns[index].Default == null) {%>
                                 <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= dateFormat(value) %>" required>
                             <% } else { %>

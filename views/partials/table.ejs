@@ -12,7 +12,9 @@
                 <% columns.forEach((column) => { %>
                     <th scope="col"><%= column %></th>
                 <% }) %>
+                <% if (caption !== "Users") { %>
                 <th scope="col">Edit</th>
+                <% } %>
                 <th scope="col">Delete</th>
             </tr>
         </thead>
@@ -21,16 +23,18 @@
             <% rows.forEach((row, index) => { %>
                 <tr>
                     <% for (const [key, value] of Object.entries(row)) { %>
-                        <% if(key == "date") {%>
+                        <% if(key == "date" || key == "created") {%>
                             <td><%= dateFormat(value) %></td>
                         <% } else {%>
                             <td><%= value %></td>
                         <% } %>
                     <% } %>
-
+                    
+                    <% if (caption !== "Users") { %>
                     <td>
                         <a href="/edit?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" class="btn btn-warning " id="edit <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Edit</a>
                     </td>
+                    <% } %>
                     <td>
                         <form action="/delete?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" method="post">
                             <input type="submit" value="Delete" class="btn btn-danger">
