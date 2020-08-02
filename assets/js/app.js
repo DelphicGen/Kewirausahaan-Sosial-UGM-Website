@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    // Wow JS
+    new WOW().init();
+
+    // Owl Carousel
     let mentors = document.querySelectorAll('.mentor');
     $('.owl-carousel-1').owlCarousel({
         loop:false,
@@ -69,7 +73,7 @@ $(document).ready(function () {
     let rightControl = document.querySelector('.right-control');
     let activeIndex = 0;
     let nextIndex = (activeIndex + 1) % upcomingEvents.length;
-    let prevIndex = (activeIndex + 4) % upcomingEvents.length;
+    let prevIndex = (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;
 
     $('.upcoming-event').on('click', function() {
         if($(this).hasClass('next')) slide('left');
@@ -97,7 +101,7 @@ $(document).ready(function () {
             $(prev).addClass('active-event').removeClass('prev');
             $(activeEvent).addClass('next').removeClass('active-event');
             $(next).addClass('hidden-event').removeClass('next');
-            $(upcomingEvents[(prevIndex + 4) % upcomingEvents.length]).addClass('prev').removeClass('hidden-event');
+            $(upcomingEvents[(prevIndex + upcomingEvents.length-1) % upcomingEvents.length]).addClass('prev').removeClass('hidden-event');
             $(details[activeIndex]).addClass('hidden-event');
             $(details[prevIndex]).removeClass('hidden-event');
         }
@@ -107,9 +111,9 @@ $(document).ready(function () {
         next = document.querySelector('.next');
         upcomingEvents = document.querySelectorAll('.upcoming-event');
         details = document.querySelectorAll('.detail');
-        activeIndex = direction === 'left' ? (activeIndex + 1) % upcomingEvents.length : (activeIndex + 4) % upcomingEvents.length;
+        activeIndex = direction === 'left' ? (activeIndex + 1) % upcomingEvents.length : (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;
         nextIndex = (activeIndex + 1) % upcomingEvents.length;
-        prevIndex = (activeIndex + 4) % upcomingEvents.length;
+        prevIndex = (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;
 
     }
 });

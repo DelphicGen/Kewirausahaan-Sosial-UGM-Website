@@ -1,0 +1,43 @@
+<%- include('../admin/function') %>
+
+<div class="heading d-flex justify-content-between align-items-center mb-2">
+    <h5><%= caption %></h5>
+    <a href="./new?table=<%= caption.split(' ').join('_').toLowerCase() %>" class="btn btn-primary">Add</a>
+</div>
+
+<div class="table-container position-relative overflow-auto mw-100">
+    <table class="table">
+        <thead>
+            <tr>
+                <% columns.forEach((column) => { %>
+                    <th scope="col"><%= column %></th>
+                <% }) %>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% rows.forEach((row, index) => { %>
+                <tr>
+                    <% for (const [key, value] of Object.entries(row)) { %>
+                        <% if(key == "date") {%>
+                            <td><%= dateFormat(value) %></td>
+                        <% } else {%>
+                            <td><%= value %></td>
+                        <% } %>
+                    <% } %>
+
+                    <td>
+                        <a href="/edit?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" class="btn btn-warning " id="edit <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Edit</a>
+                    </td>
+                    <td>
+                        <form action="/delete?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" method="post">
+                            <input type="submit" value="Delete" class="btn btn-danger">
+                        </form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>

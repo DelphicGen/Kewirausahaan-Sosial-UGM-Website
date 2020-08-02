@@ -1,0 +1,38 @@
+<%- include('../partials/header', {user: "admin"}) %>
+
+    <div class="container pt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h1 class="mb-5">Hi <%= username %></h1>
+            <div>
+                <form class="logout" action="/logout?_method=DELETE" method="POST">
+                    <button class="btn" type="submit">Logout</button>
+                </form>
+                <% if(role === "super admin") { %>
+                    <a href="/register" class="btn">Add Admin</a>
+                <% } %>
+            </div>
+        </div>   
+
+        <!-- List of Mentor -->
+        <%- include('../partials/table', { caption: "Mentor", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: mentors }) %>
+
+        <!-- Latest Event -->
+        <%- include('../partials/table', { caption: "Latest Event", columns: ["id", "date", "link"], rows: latestEvents }) %>
+
+        <!-- Upcoming Event -->
+        <%- include('../partials/table', { caption: "Upcoming Event", columns: ["id", "title", "details", "date", "image", "link"], rows: upcomingEvents }) %>
+
+        <!-- Team Members -->
+        <%- include('../partials/table', { caption: "Team Member", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: teamMembers }) %>
+
+        <!-- Artikel -->
+        <%- include('../partials/table', { caption: "Article", columns: ["id", "title", "details", "image", "link"], rows: articles }) %>
+
+        <!-- testimonial -->
+        <%- include('../partials/table', { caption: "Testimonial", columns: ["id", "name", "details", "image"], rows: testimonials }) %>
+
+        <!-- Leader -->
+        <%- include('../partials/table', { caption: "Meet The Founder", columns: ["id", "name", "title", "details", "image"], rows: leaderReviews }) %>
+    </div>
+
+<%- include('../partials/script', {user: "admin"}) %>

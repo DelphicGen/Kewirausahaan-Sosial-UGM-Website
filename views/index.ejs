@@ -1,0 +1,309 @@
+<%- include('partials/header') %>
+
+  <!-- Landing Page -->
+  <div class="landing-page" id="landing-page">
+    <div class="filter">
+      <div class="container landing-page-container">
+
+        <%- include('partials/nav') %>
+
+        <img class="triangle" src="./assets/images/triangle.png" alt="triangle">
+
+        <div class="wow fadeInUp heading-container">
+          <div class="heading">
+            <h1 class="main-heading">Bentuk Mindset Wirausaha</h1>
+            <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta ab vitae sequi, illum ratione veritatis inventore ut nisi enim quasi in voluptas placeat consequuntur autem officia doloribus quidem qui unde.</h5>
+            <button class="register-btn btn">Gabung Sekarang</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- About us -->
+  <section class="about-us container" id="about-us">
+    <h3 class="ks">Kewirausahaan Sosial</h3>
+    <h3 class="ugm">Universitas Gadjah Mada</h3>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio, esse modi libero rerum ad aliquam sint blanditiis, perspiciatis fugit quaerat eligendi atque iure. Necessitatibus voluptatem quis expedita doloribus atque alias laborum quasi amet hic? Modi eveniet animi sapiente aspernatur assumenda.</p>
+
+    <div class="statistic d-flex justify-content-around justify-content-sm-between flex-wrap">
+      <div class="startup wow bounceInLeft d-flex flex-column justify-content-around">
+        <img src="./assets/images/rocket2.png" alt="rocket">
+        <h4>37</h4>
+        <h5>Startups</h5>
+      </div>
+      <div class="talent wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".1s">
+        <img src="./assets/images/people.svg" alt="rocket">
+        <h4>37</h4>
+        <h5>Talents</h5>
+      </div>
+      <div class="partner wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".2s">
+        <img src="./assets/images/handyman.svg" alt="rocket">
+        <h4>37</h4>
+        <h5>Partners</h5>
+      </div>
+      <div class="event wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".3s">
+        <img src="./assets/images/date.svg" alt="rocket">
+        <h4>37</h4>
+        <h5>Events</h5>
+      </div>
+    </div>
+  </section>
+
+  <!-- Curiculum -->
+  <section class="curiculum container" id="curiculum">
+    <h3>Kurikulum</h3>
+  </section>
+
+  <!-- Our Mentor -->
+  <section class="our-mentor container" id="our-mentor">
+    <h3>Mentor Kita</h3>
+    <div class="owl-carousel owl-carousel-1 owl-theme">
+      <% mentors.forEach((mentor) => { %>
+        <div class="item mentor">
+          <div class="person-img">
+            <img class="person-pic" src="<%= mentor.image %>" alt="">
+            <div class="person-media">
+              <ul>
+                <% if(mentor.facebook) { %>
+                  <li><a target="_blank" href="<%= mentor.facebook %>"><i class="fa fa-facebook-f"></i></a></li>
+                <% } %>
+                <% if(mentor.twitter) { %>
+                  <li><a target="_blank" href="<%= mentor.twitter %>"><i class="fa fa-twitter"></i></a></li>
+                <% } %>
+                <% if(mentor.instagram) { %>
+                  <li><a target="_blank" href="<%= mentor.instagram %>"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <% } %>
+                <% if(mentor.linkedin) { %>
+                  <li><a target="_blank" href="<%= mentor.linkedin %>"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+          <div class="person-details">
+            <h5 class="person-name"><%= mentor.name %></h5>
+            <p><%= mentor.title %></p>
+          </div>
+        </div>
+      <% }) %>
+      </div>
+  </section>
+
+  <!-- Latest Event -->
+  <section class="latest-event container" id="latest-event">
+    <h3>Event Terbaru</h3>
+    <div class="latest-event-list d-flex flex-column flex-lg-row justify-content-lg-between flex-wrap">
+      <% latestEvents.forEach((latestEvent) => { %>
+        <iframe width="560" height="315" src="<%= latestEvent.link %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Upcoming Event -->
+  <section class="upcoming-events container" id="upcoming-events">
+    <h3>Event Kami Kedepannya</h3>
+
+    <div class="d-flex justify-content-between align-items-center row upcoming-events-container">
+      
+      <div class="col-lg-6 col-12 upcoming-event-list">
+        <div class="control-container">
+          <a class="" data-slide="prev">
+            <img class="left-control" src="./assets/images/left_arrow.svg" alt="prev">
+          </a>
+          <a class="">
+            <img class="right-control" src="./assets/images/right_arrow.svg" alt="next">
+          </a>
+        </div>
+        <% upcomingEvents.forEach((upcomingEvent, index) => { %>
+          <% if(index === 0) { %>
+            <div class="active-event upcoming-event">
+          <% } else if(index === 1) { %>
+            <div class="next upcoming-event">
+          <% } else if(index === upcomingEvents.length - 1) { %>
+            <div class="prev upcoming-event">
+          <% } else { %>
+            <div class="hidden-event upcoming-event">
+          <% } %>  
+            <img class="upcoming-event-img" id="upcoming-event-img" src="<%= upcomingEvent.image %>" alt="">
+          </div>
+
+        <% }) %>
+      </div>
+
+      <div class="col-lg-6 col-12 event-details">
+          <% upcomingEvents.forEach((upcomingEvent, index) => { %>
+            <% if(index === 0) { %>
+              <div class="detail">
+            <% } else { %>
+              <div class="hidden-event detail">
+            <% } %> 
+                <h4 class="event-title"><%= upcomingEvent.title %></h4>
+                <p class="event-detail"><%= upcomingEvent.details %></p>
+                <a href="<%= upcomingEvent.link %>" class="more-details-btn btn">More Details</a>
+              </div>
+          <% }) %>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Our Team -->
+  <section class="our-team container" id="our-team">
+    <h3>Team Kita</h3>
+    <div class="owl-carousel owl-carousel-2 owl-theme">
+      <% teamMembers.forEach((member) => { %>
+        <div class="member">
+          <div class="person-img">
+            <img class="person-pic" src="<%= member.image %>" alt="">
+            <div class="person-media">
+              <ul>
+                <% if(member.facebook) { %>
+                  <li><a target="_blank" href="<%= member.facebook %>"><i class="fa fa-facebook-f"></i></a></li>
+                <% } %>
+                <% if(member.twitter) { %>
+                  <li><a target="_blank" href="<%= member.twitter %>"><i class="fa fa-twitter"></i></a></li>
+                <% } %>
+                <% if(member.instagram) { %>
+                  <li><a target="_blank" href="<%= member.instagram %>"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <% } %>
+                <% if(member.linkedin) { %>
+                  <li><a target="_blank" href="<%= member.linkedin %>"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+          <div class="person-details">
+            <h5 class="person-name"><%= member.name %></h5>
+            <p><%= member.title %></p>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Article -->
+  <section class="articles container" id="articles">
+    <h3>Artikel</h3>
+
+    <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-lg-between">
+
+      <% articles.forEach((article) => { %>
+        <div class="article card">
+          <% if(article.image) { %>
+            <img src="<%= article.image %>" class="card-img-top" alt="">
+          <% } else { %>
+            <img src="./assets/images/logo2.png" class="card-img-top" alt="">
+          <% } %>
+          <div class="card-body">
+            <h5 class="card-title"><%= article.title %></h5>
+            <p class="card-text"><%= article.details %></p>
+            <a href="<%= article.link %>" class="article-btn more-details-btn btn">More Details</a>
+          </div>
+        </div>
+      <% }) %>
+      
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  <section class="participant-testimonial container" id="participant-testimonial">
+    <h3>Testimonial</h3>
+    <div class="owl-carousel owl-carousel-3 owl-theme">
+      <% testimonials.forEach((testimonial) => { %>
+        <div class="item testimonial">
+          <div class="testimonial-header d-flex align-items-center">
+            <% if(testimonial.image) { %>
+              <img src="<%= testimonial.image %>" alt="">
+            <% } else { %>
+              <img src="./assets/images/logo2.png" alt="">
+            <% } %>
+            <p><%= testimonial.name %></p>
+          </div>
+          <div class="testimonial-detail d-flex align-items-center">
+            <p><%= testimonial.details %></p>
+          </div>
+        </div>
+      <% }) %>
+
+    </div>
+  </section>
+
+  <!-- Meet The Founder -->
+  <section class="meet-the-founder container" id="meet-the-founder">
+    <h3>Meet the Founder</h3>
+    
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <% leaderReviews.forEach((review, index) => { %>
+            
+            <% if(index === 0) { %>
+              <div class="founder carousel-item active">
+            <% } else { %>
+              <div class="founder carousel-item">
+            <% } %> 
+              <h4><%= review.details %></h4>
+              <% if(review.image) { %>
+                <img src="<%= review.image %>" class="d-block w-100" alt="">
+              <% } else { %>
+                <img src="./assets/images/logo2.png" class="d-block w-100" alt="">
+              <% } %>
+              <em><%= review.name %>, <%= review.title %></em>
+            </div>
+          <% }) %>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+  </section>
+
+  <!-- Collaborate -->
+  <section class="collaborate container" id="collaborate">
+    <h3>Let's Collaborate</h3>
+    <div class="contact-us d-flex flex-md-row flex-column-reverse justify-content-around align-items-center">
+      <div class="ks-media col-md-6">
+        <h4>Hubungi Kami</h4>
+        <div>
+          <ul>
+            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+            <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          </ul>
+        </div>
+        <h5>atau :</h5>
+        <p>+62 852 9340 0470 (hanya Whatsapp) <br />
+          bayudardias@ugm.ac.id</p>
+      </div>
+
+      <div class="contact-form col-md-6">
+        <form action="" class="form">
+          <div class="input-container d-flex flex-column align-items-start">
+            <label for="email">Email :</label>
+            <input type="text" name="email" class="email input-bar" id="email">
+            <div class="input-bar-after"></div>
+          </div>
+
+          <div class="input-container d-flex flex-column align-items-start">
+            <label for="phone">No telp :</label>
+            <input type="text" name="phone" class="phone input-bar" id="phone">
+            <div class="input-bar-after"></div>
+          </div>
+
+          <button type="submit" class="btn submit-btn">Kirim</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+<%- include('partials/script') %>

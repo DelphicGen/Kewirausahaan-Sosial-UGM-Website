@@ -1,0 +1,124 @@
+CREATE TABLE mentor (
+     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+     name VARCHAR(255) NOT NULL,
+     title VARCHAR(255) NOT NULL,
+     facebook VARCHAR(255) NULL,
+     twitter VARCHAR(255) NULL,
+     instagram VARCHAR(255) NULL,
+     linkedin VARCHAR(255) NULL,
+     image VARCHAR(255) NULL);
+INSERT INTO mentor (name, title, facebook, twitter, instagram, linkedin, image)
+VALUES
+("Dodo", "Co Founder of Dodo Cafe", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Helo", "Co Founder of Helo Cafe", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Eric", "Co Founder of Eric Cafe", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Crystal", "Co Founder of Crystal Cafe", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Jasmine", "Co Founder of Jasmine Cafe", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg");
+
+
+
+CREATE TABLE team_member (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    facebook VARCHAR(255) NULL,
+    twitter VARCHAR(255) NULL,
+    instagram VARCHAR(255) NULL,
+    linkedin VARCHAR(255) NULL,
+    image VARCHAR(255) NULL);
+INSERT INTO team_member (name, title, facebook, twitter, instagram, linkedin, image)
+VALUES
+("Dodo", "CTO", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Helo", "CEO", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Eric", "Designer", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Crystal", "HR", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg"),
+("Jasmine", "CTO VP", "https://www.facebook.com/", "https://twitter.com/", "https://www.instagram.com/", "https://www.linkedin.com/", "./assets/images/example1.jpeg");
+
+
+
+CREATE TABLE latest_event (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    date DATETIME NOT NULL,
+    link VARCHAR(255) NOT NULL);
+DELIMITER $$
+CREATE TRIGGER `default_date` BEFORE INSERT ON `latest_event` FOR EACH ROW
+    if ( isnull(new.date) ) then
+    set new.date=curdate();                                                          
+    end if;                                                                                    
+    $$
+delimiter ;
+INSERT INTO latest_event (date, link)
+VALUES
+("2020-01-01", "https://www.youtube.com/embed/VNTRlO2zuSU"),
+(NULL, "https://www.youtube.com/embed/0voJG1P1ago");
+
+
+
+CREATE TABLE upcoming_event (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    details VARCHAR(255) NOT NULL,
+    date TIMESTAMP NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    link VARCHAR(255) NOT NULL);
+INSERT INTO upcoming_event (title, details, date, image, link)
+VALUES
+("A", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime, eum quia placeat tempore, qui, necessitatibus asperiores sed consequatur ratione. Nostrum aspernatur obcaecati vel?", "2020-12-15 09:00:00", "./assets/images/example2.JPG", "https://medium.com/"),
+("B for Banana", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime.", "2020-11-15 13:00:00", "./assets/images/example1.jpeg", "https://medium.com/"),
+("C for Candy", "Just another event", "2020-10-15 19:30:00", "./assets/images/example2.JPG", "https://medium.com/"),
+("D for Dodo", "Just another event", "2020-10-06 15:00:00", "./assets/images/example1.jpeg", "https://medium.com/");
+
+
+
+CREATE TABLE article (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    details VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NULL,
+    link VARCHAR(255) NOT NULL);
+INSERT INTO article (title, details, image, link)
+VALUES
+("A for Apple", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime, eum quia placeat tempore, qui, necessitatibus asperiores sed consequatur ratione. Nostrum aspernatur obcaecati vel?", "./assets/images/example2.JPG", "https://medium.com/"),
+("B for Banana", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime.", "./assets/images/example1.jpeg", "https://medium.com/"),
+("C for Candy", "Just another article", "./assets/images/example2.JPG", "https://medium.com/"),
+("D for Dodo", "Just another article", "./assets/images/example1.jpeg", "https://medium.com/");
+
+
+
+CREATE TABLE testimonial (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    details VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NULL);
+INSERT INTO testimonial (name, details, image)
+VALUES
+("A for Apple", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime, eum quia placeat tempore, qui, necessitatibus asperiores sed consequatur ratione. Nostrum aspernatur obcaecati vel?", "./assets/images/example2.JPG"),
+("B for Banana", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime.", "./assets/images/example1.jpeg"),
+("C for Candy", "Just another testimonial", "./assets/images/example2.JPG"),
+("D for Dodo", "Just another testimonial", "./assets/images/example1.jpeg");
+
+
+
+CREATE TABLE leader_review (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    details VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NULL);
+INSERT INTO leader_review (name, title, details, image)
+VALUES
+("Dodo", "CTO", "Keren banget pokoknya! Pas banget buat kalian yang ingin memulai bisnis atau hanya ingin nambah ilmu", "./assets/images/example2.JPG"),
+("Helo", "CEO", "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime.", "./assets/images/example1.jpeg"),
+("Eric", "Designer", "Just another testimonial", "./assets/images/example2.JPG"),
+("Crystal", "HR", "Just another testimonial", NULL),
+("Jasmine", "CTO VP", "Keren banget pokoknya! Pas banget buat kalian yang ingin memulai bisnis atau hanya ingin nambah ilmu. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit aut laborum voluptate ducimus error cum maxime.", NULL);
+
+
+
+CREATE TABLE users (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(255) NOT NULL DEFAULT "admin",
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP);
