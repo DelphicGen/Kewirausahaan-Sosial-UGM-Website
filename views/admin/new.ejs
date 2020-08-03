@@ -11,12 +11,12 @@
     <form action="/new?table=<%= table %>" method="POST">
     <% } %>
         <% columns.forEach((column) => { %>
-            <% if(column.Field !== 'id') { %>
+            <% if(column.Field !== 'id' && column.Field !== 'role' && column.Field !== 'created') { %>
                 <div class="form-group">
                     <label for="<%= column.Field %>">
                         <%= column.Field %>
-                        <% if(column.Field == "date" || column.Field == "created") {%>
-                           (Format yyyy-mm-dd hh:mm:ss (for upcoming event and users) | yyyy-mm-dd (for latest event))
+                        <% if(column.Field == "date") {%>
+                           (Format yyyy-mm-dd hh:mm:ss (for upcoming event) | yyyy-mm-dd (for latest event))
                         <% }%>
 
                         <% if(column.Null == 'NO' && column.Default == null) { %>
