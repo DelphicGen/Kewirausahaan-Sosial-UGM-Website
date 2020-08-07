@@ -229,6 +229,12 @@ section h3:nth-child(2)::before {
     font-weight: 600;
 }
 
+/* curriculum */
+.curriculum-img {
+    width: 100%;
+    height: auto;
+}
+
 /* Our Mentor */
 .owl-nav {
     visibility: hidden;
