@@ -14,6 +14,8 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const initializePassport = require('./passport-config.js');
 const util = require('util');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -30,7 +32,6 @@ const connection2 = mariadb.createConnection({
 });
 
 const query = util.promisify(connection.query).bind(connection);
-
 
 initializePassport(passport, async (email) => {
     let selectedUser = await query("SELECT * FROM users WHERE email = '" + email + "'");
@@ -126,7 +127,137 @@ app.post('/register', async(req, res) => {
 app.delete('/logout', (req, res) => {
     req.logOut();
     res.redirect('/login');
-})
+});
+
+app.get('/forgot', function(req, res) {
+    res.render('forgot');
+});
+
+app.post('/forgot', function(req, res, next) {
+    async.waterfall([
+      function(done) {
+        crypto.randomBytes(20, function(err, buf) {
+          var token = buf.toString('hex');
+          done(err, token);
+        });
+      },
+      function(token, done) {
+        connection.query("SELECT * FROM users WHERE email = ? " , 
+            req.body.email , 
+            function(err , user){
+                var date;
+                date = new Date();
+                date = date.getUTCFullYear() + '-' +
+                    ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
+                    ('00' + date.getUTCDate()).slice(-2) + ' ' + 
+                    ('00' + (date.getHours() + 1)).slice(-2) + ':' + 
+                    ('00' + date.getMinutes()).slice(-2) + ':' + 
+                    ('00' + date.getSeconds()).slice(-2);
+                console.log(date)
+
+                if (user.length === 0) {
+                    req.flash('error', 'No account with that email address exists.');
+                    return res.redirect('/forgot');
+                }
+
+                connection.query("UPDATE users SET resetPasswordToken = ?, resetPasswordExpires = ? WHERE email = ?",
+                    [ token, date, user[0].email ],
+                    function(err) {
+                        done(err, token, user);
+                    }
+                )
+
+            });
+      },
+      function(token, user, done) {
+        var smtpTransport = nodemailer.createTransport({
+          service: 'Gmail',
+          auth: {
+            user: 'ksugm123',
+            pass: 'ksjaya123'
+          }
+        });
+        var mailOptions = {
+          to: user[0].email,
+          from: 'ksugm123',
+          subject: 'Node.js Password Reset',
+          text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+            'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+          req.flash('info', 'An e-mail has been sent to ' + user[0].email + ' with further instructions.');
+          done(err, 'done');
+        });
+      }
+    ], function(err) {
+      if (err) return next(err);
+      res.redirect('/forgot');
+    });
+  });
+
+app.get('/reset/:token', function(req, res) {
+    connection.query("SELECT * FROM users WHERE resetPasswordToken = ? " ,
+        req.params.token,
+        function(err, user) {
+            if (user.length === 0) {
+                req.flash('error', 'Password reset token is invalid or has expired.');
+                return res.redirect('/forgot');
+            }
+            res.render('reset', {user: user[0]});
+        });
+});
+
+app.post('/reset/:token', function(req, res) {
+    async.waterfall([
+      function(done) {
+            connection.query("SELECT * FROM users WHERE resetPasswordToken = ? " ,
+                req.params.token,
+                async function(err, user) {
+                    console.log(user)
+                    if (user.length === 0) {
+                        req.flash('error', 'Password reset token is invalid or has expired.');
+                        return res.redirect('back');
+                    }
+
+                    if (req.body.newPassword !== req.body.confirmPassword) {
+                        req.flash('error', 'New Password did not match with Confirm Password');
+                        return res.redirect('back');
+                    }
+
+                    const hashedPassword = await bcrypt.hash(req.body.newPassword, 10);
+                    connection.query("UPDATE users SET password = ?, resetPasswordToken = NULL, resetPasswordExpires = NULL WHERE email = ?",
+                        [ hashedPassword, user[0].email ],
+                        function(err) {
+                            done(err, req.params.token, user);
+                        }
+                    )
+                });
+        
+      },
+      function(user, done) {
+        var smtpTransport = nodemailer.createTransport({
+          service: 'Gmai',
+          auth: {
+            user: 'ksugm123',
+            pass: 'ksjaya123'
+          }
+        });
+        var mailOptions = {
+          to: user.email,
+          from: 'ksugm123',
+          subject: 'Your password has been changed',
+          text: 'Hello,\n\n' +
+            'This is a confirmation that the password for your account ' + user[0].email + ' has just been changed.\n'
+        };
+        smtpTransport.sendMail(mailOptions, function(err) {
+          req.flash('success', 'Success! Your password has been changed.');
+          res.redirect('/login');
+        });
+      }
+    ]);
+  });
 
 app.get('/adminDashboard', checkAuthenticated, async function(req, res){
     
@@ -374,6 +505,7 @@ app.post('/new', function(req, res) {
             res.redirect('/adminDashboard')
     }
 });
+
 
 app.get('*', function(req, res){
     res.render('404.ejs');

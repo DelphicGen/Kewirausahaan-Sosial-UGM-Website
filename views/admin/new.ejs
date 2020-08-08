@@ -25,7 +25,11 @@
                     </label>
                     
                     <% if(column.Null == 'NO' && column.Default == null) { %>
-                        <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                        <% if (column.Field === 'password') { %>
+                            <input type="password" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                        <% } else { %>
+                            <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                        <% } %>
                     <% } else { %>
                         <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>">
                     <% } %>

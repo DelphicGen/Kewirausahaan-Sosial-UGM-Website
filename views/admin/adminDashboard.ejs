@@ -4,13 +4,12 @@
         <div class="d-flex justify-content-between align-items-center">
             <h1 class="mb-5">Hi <%= username %></h1>
             <div>
+                <% if(role === "super admin") { %>
+                    <a href="/userList" class="btn">List of Admin</a>
+                <% } %>
                 <form class="logout" action="/logout?_method=DELETE" method="POST">
                     <button class="btn" type="submit">Logout</button>
                 </form>
-                <% if(role === "super admin") { %>
-                    <!-- <a href="/register" class="btn">Add Admin</a> -->
-                    <a href="/userList" class="btn">List of Admin</a>
-                <% } %>
             </div>
         </div>   
 
