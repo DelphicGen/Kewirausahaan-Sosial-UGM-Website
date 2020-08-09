@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
         function(callback) { connection.query('SELECT * FROM team_member', callback); },
         function(callback) { connection.query('SELECT * FROM latest_event WHERE date <= CURDATE() ORDER BY date DESC LIMIT 2', callback); },
         function(callback) { connection.query('SELECT * FROM upcoming_event WHERE (date >= CURRENT_TIMESTAMP()) OR (date >= CURRENT_TIMESTAMP() AND HOUR(date) >= HOUR(CURRENT_TIMESTAMP())) ORDER BY date', callback); },
-        function(callback) { connection.query('SELECT * FROM article LIMIT 3', callback); },
+        function(callback) { connection.query('SELECT * FROM article ORDER BY created DESC LIMIT 3', callback); },
         function(callback) { connection.query('SELECT * FROM testimonial LIMIT 6', callback); },
         function(callback) { connection.query('SELECT * FROM leader_review LIMIT 6', callback); },
     ], function(error, results) {
@@ -238,7 +238,7 @@ app.post('/reset/:token', function(req, res) {
       },
       function(user, done) {
         var smtpTransport = nodemailer.createTransport({
-          service: 'Gmai',
+          service: 'Gmail',
           auth: {
             user: 'ksugm123',
             pass: 'ksjaya123'
@@ -307,6 +307,12 @@ app.get('/edit', function(req, res) {
                     "SELECT * FROM (??) WHERE id = (?)",
                     [req.query.table, req.query.id],
                     (error, results) => {
+                        let mm = results[0].date.getMonth() + 1 < 9 ? `0${results[0].date.getMonth() + 1}` : results[0].date.getMonth() + 1;
+                        let dd = results[0].date.getDate() < 9 ? `0${results[0].date.getDate()}` : results[0].date.getDate();
+                        let yyyy = results[0].date.getFullYear();
+                        let hh = results[0].date.getHours() < 9 ? `0${results[0].date.getHours()}` : results[0].date.getHours();
+                        let m = results[0].date.getMinutes() < 9 ? `0${results[0].date.getMinutes()}` : results[0].date.getMinutes();
+                        results[0].date = `${yyyy}-${mm}-${dd}T${hh}:${m}`;
                         if (error) throw error;
                         else res.render('./admin/edit.ejs', { data: results[0], table: req.query.table, id: req.query.id, columns: columns });
                     }
@@ -318,11 +324,18 @@ app.get('/edit', function(req, res) {
 });
 
 app.post('/edit', function(req, res) {
+    let date, image;
+    if(req.body.date) {
+        date = req.body.date.replace('T', ' ');
+    }
+    if(req.body.image) {
+        image = `./assets/images/${req.body.image}`;
+    }
     switch(req.query.table) {
         case 'mentor':
             connection.query(
                 'UPDATE (??) SET name = ?, title = ?, facebook = ?, twitter = ?, instagram = ?, linkedin = ?, image = ? WHERE id = ?',
-                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, req.body.image, req.query.id],
+                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -333,7 +346,7 @@ app.post('/edit', function(req, res) {
         case 'latest_event':
             connection.query(
                 'UPDATE (??) SET date = ?, link = ? WHERE id = ?',
-                [req.query.table, req.body.date, req.body.link, req.query.id],
+                [req.query.table, date, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -344,7 +357,7 @@ app.post('/edit', function(req, res) {
         case 'upcoming_event':
             connection.query(
                 'UPDATE (??) SET title = ?, details = ?, date = ?, image = ?, link = ? WHERE id = ?',
-                [req.query.table, req.body.title, req.body.details, req.body.date, req.body.image, req.body.link, req.query.id],
+                [req.query.table, req.body.title, req.body.details, date, image, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -355,7 +368,7 @@ app.post('/edit', function(req, res) {
         case 'team_member':
             connection.query(
                 'UPDATE (??) SET name = ?, title = ?, facebook = ?, twitter = ?, instagram = ?, linkedin = ?, image = ? WHERE id = ?',
-                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, req.body.image, req.query.id],
+                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -366,7 +379,7 @@ app.post('/edit', function(req, res) {
         case 'article':
             connection.query(
                 'UPDATE (??) SET title = ?, details = ?, image = ?, link = ? WHERE id = ?',
-                [req.query.table, req.body.title, req.body.details, req.body.image, req.body.link, req.query.id],
+                [req.query.table, req.body.title, req.body.details, image, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -377,7 +390,7 @@ app.post('/edit', function(req, res) {
         case 'testimonial':
             connection.query(
                 'UPDATE (??) SET name = ?, details = ?, image = ? WHERE id = ?',
-                [req.query.table, req.body.name, req.body.details, req.body.image, req.query.id],
+                [req.query.table, req.body.name, req.body.details, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -388,7 +401,7 @@ app.post('/edit', function(req, res) {
         case 'leader_review':
             connection.query(
                 'UPDATE (??) SET name = ?, title = ?, details = ?, image = ? WHERE id = ?',
-                [req.query.table, req.body.name, req.body.title, req.body.details, req.body.image, req.query.id],
+                [req.query.table, req.body.name, req.body.title, req.body.details, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -424,11 +437,19 @@ app.get('/new', function(req, res) {
 });
 
 app.post('/new', function(req, res) {
+    console.log(req.body)
+    let date, image;
+    if(req.body.date) {
+        date = req.body.date.replace('T', ' ');
+    }
+    if(req.body.image) {
+        image = `./assets/images/${req.body.image}`;
+    }
     switch(req.query.table) {
         case 'mentor':
             connection.query(
                 'INSERT INTO ?? (name, title, facebook, twitter, instagram, linkedin, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, req.body.image],
+                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -439,7 +460,7 @@ app.post('/new', function(req, res) {
         case 'latest_event':
             connection.query(
                 'INSERT INTO ?? (date, link) VALUES (?, ?)',
-                [req.query.table, req.body.date, req.body.link],
+                [req.query.table, date, req.body.link],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -450,7 +471,7 @@ app.post('/new', function(req, res) {
         case 'upcoming_event':
             connection.query(
                 'INSERT INTO ?? (title, details, date, image, link) VALUES (?, ?, ?, ?, ?)',
-                [req.query.table, req.body.title, req.body.details, req.body.date, req.body.image, req.body.link],
+                [req.query.table, req.body.title, req.body.details, date, image, req.body.link],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -461,7 +482,7 @@ app.post('/new', function(req, res) {
         case 'team_member':
             connection.query(
                 'INSERT INTO ?? (name, title, facebook, twitter, instagram, linkedin, image) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, req.body.image],
+                [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -472,7 +493,7 @@ app.post('/new', function(req, res) {
         case 'article':
             connection.query(
                 'INSERT INTO ?? (title, details, image, link) VALUES (?, ?, ?, ?)',
-                [req.query.table, req.body.title, req.body.details, req.body.image, req.body.link],
+                [req.query.table, req.body.title, req.body.details, image, req.body.link],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -483,7 +504,7 @@ app.post('/new', function(req, res) {
         case 'testimonial':
             connection.query(
                 'INSERT INTO ?? (name, details, image) VALUES (?, ?, ?)',
-                [req.query.table, req.body.name, req.body.details, req.body.image],
+                [req.query.table, req.body.name, req.body.details, image],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -494,7 +515,7 @@ app.post('/new', function(req, res) {
         case 'leader_review':
             connection.query(
                 'INSERT INTO ?? (name, title, details, image) VALUES (?, ?, ?, ?)',
-                [req.query.table, req.body.name, req.body.title, req.body.details, req.body.image],
+                [req.query.table, req.body.name, req.body.title, req.body.details, image],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')

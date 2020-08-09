@@ -330,6 +330,7 @@ section h3:nth-child(2)::before {
 
 .upcoming-event-list {
     position: relative;
+    margin-bottom: 40px;
 }
 
 .left-control, .right-control {
@@ -350,9 +351,9 @@ section h3:nth-child(2)::before {
 }
 
 .upcoming-event {
-    height: 300px;
+    height: 500px;
     display: inline-block;
-    width: 400px;
+    /* width: 100vw; */
     transition: .3s left ease-in, .3s transform ease-in, .5s opacity ease-in-out;
     cursor: pointer;
 }
@@ -367,7 +368,7 @@ section h3:nth-child(2)::before {
 
 .prev, .next {
     width: 70%;
-    opacity: .7;
+    opacity: .2;
     position: absolute;
     transform: scale(.9);
     cursor: pointer
@@ -392,14 +393,24 @@ section h3:nth-child(2)::before {
     width: 100%;
 }
 
+
+.detail {
+    text-align: center;
+}
+
 .event-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 600;
+}
+
+.event-date {
+    color: #808080;
+    font-size: 16px;
     margin-bottom: 20px;
 }
 
 .event-detail {
-    font-size: 16px;
+    font-size: 20px;
     line-height: 1.5;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -628,16 +639,8 @@ section h3:nth-child(2)::before {
         margin-bottom: 20px;
     }
 
-    .upcoming-event-list {
-        margin-bottom: 40px;
-    }
-
     .upcoming-event {
         height: 400px;
-    }
-
-    .detail {
-        text-align: center;
     }
 
     .person-img:hover .person-media {

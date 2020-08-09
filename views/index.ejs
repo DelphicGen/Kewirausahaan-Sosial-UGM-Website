@@ -105,9 +105,9 @@
   <section class="upcoming-events container" id="upcoming-events">
     <h3>Event Kami Kedepannya</h3>
 
-    <div class="d-flex justify-content-between align-items-center row upcoming-events-container">
+    <div class="d-flex flex-row justify-content-between align-items-center row upcoming-events-container">
       
-      <div class="col-lg-6 col-12 upcoming-event-list">
+      <div class="col-12 upcoming-event-list">
         <div class="control-container">
           <a class="" data-slide="prev">
             <img class="left-control" src="./assets/images/left_arrow.svg" alt="prev">
@@ -126,13 +126,13 @@
           <% } else { %>
             <div class="hidden-event upcoming-event">
           <% } %>  
-            <img class="upcoming-event-img" id="upcoming-event-img" src="<%= upcomingEvent.image %>" alt="">
+            <img class="upcoming-event-img img-fluid" id="upcoming-event-img" src="<%= upcomingEvent.image %>" alt="">
           </div>
 
         <% }) %>
       </div>
 
-      <div class="col-lg-6 col-12 event-details">
+      <div class="col-12 event-details">
           <% upcomingEvents.forEach((upcomingEvent, index) => { %>
             <% if(index === 0) { %>
               <div class="detail">
@@ -140,6 +140,7 @@
               <div class="hidden-event detail">
             <% } %> 
                 <h4 class="event-title"><%= upcomingEvent.title %></h4>
+                <p class="event-date"><%= upcomingEvent.date %></p>
                 <p class="event-detail"><%= upcomingEvent.details %></p>
                 <a href="<%= upcomingEvent.link %>" class="more-details-btn btn">More Details</a>
               </div>

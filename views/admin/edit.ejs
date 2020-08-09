@@ -18,30 +18,29 @@
                     <div class="form-group">
                         <label for="<%= key %>">
                             <%= key %> 
-                            <% if(key == "date" || key == "created") {%>
-                                (Format yyyy-mm-dd hh:mm:ss (for upcoming event and users) | yyyy-mm-dd (for latest event))
-                            <% } %>
                             <% if(columns[index].Null == 'NO' && columns[index].Default == null) {%>
                                 *
                             <% } %>
                         </label>
-
-                        <% if(key == "date" || key == "created") {%>
-                            <% if(columns[index].Null == 'NO' && columns[index].Default == null) {%>
-                                <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= dateFormat(value) %>" required>
+                        <% if(columns[index].Null == 'NO') { %>
+                            <% if (columns[index].Field === 'password') { %>
+                                <input type="password" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
+                            <% } else if (columns[index].Field === 'date') { %>
+                                <input type="datetime-local" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
+                            <% } else if (columns[index].Field === 'image') { %>
+                                <input type="file" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
                             <% } else { %>
-                                <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= dateFormat(value) %>">
+                                <input type="text" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
                             <% } %>
                         <% } else { %>
-                            <% if(columns[index].Null == 'NO' && columns[index].Default == null) {%>
-                                <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= value %>" required>
+                            <% if (columns[index].Field === 'image') { %>
+                                <input type="file" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>">
                             <% } else { %>
-                                <input type="text" class="form-control" id="<%= key %>" name="<%= key %>" value="<%= value %>">
+                                <input type="text" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>">
                             <% } %>
                         <% } %>
                     </div>
-
-            <% index++; %>
+                <% index++; %>
             <% } %>
         <% } %>
 

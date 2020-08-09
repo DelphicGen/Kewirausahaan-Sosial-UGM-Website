@@ -8,6 +8,9 @@ $(document).ready(function () {
         loop:false,
         margin:10,
         nav:true,
+        autoplay:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
         responsive:{
             0:{
                 items: mentors.length >= 1 ? 1 : mentors.length
@@ -29,6 +32,9 @@ $(document).ready(function () {
         loop:false,
         margin:10,
         nav:true,
+        autoplay:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
         responsive:{
             0:{
                 items: members.length >= 1 ? 1 : members.length
@@ -50,6 +56,9 @@ $(document).ready(function () {
         loop:false,
         margin:10,
         nav:true,
+        autoplay:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
         responsive:{
             0:{
                 items: testimonials.length >= 1 ? 1 : testimonials.length
@@ -81,6 +90,11 @@ $(document).ready(function () {
         else slide('left');
     })
 
+    if(upcomingEvents.length === 1) {
+        $(leftControl).css({"display" : "none"});
+        $(rightControl).css({"display" : "none"});
+    }
+
     $(leftControl).on('click', function() {
         slide('right');
     });
@@ -89,21 +103,29 @@ $(document).ready(function () {
         slide('left');
     });
 
+
     const slide = (direction) => {
-        if(direction === 'left') {
-            $(next).addClass('active-event').removeClass('next');
-            $(activeEvent).addClass('prev').removeClass('active-event');
-            $(prev).addClass('hidden-event').removeClass('prev');
-            $(upcomingEvents[(nextIndex + 1) % upcomingEvents.length]).addClass('next').removeClass('hidden-event');
-            $(details[activeIndex]).addClass('hidden-event');
-            $(details[nextIndex]).removeClass('hidden-event');
-        } else {
-            $(prev).addClass('active-event').removeClass('prev');
-            $(activeEvent).addClass('next').removeClass('active-event');
-            $(next).addClass('hidden-event').removeClass('next');
-            $(upcomingEvents[(prevIndex + upcomingEvents.length-1) % upcomingEvents.length]).addClass('prev').removeClass('hidden-event');
-            $(details[activeIndex]).addClass('hidden-event');
-            $(details[prevIndex]).removeClass('hidden-event');
+        if (upcomingEvents.length == 2) {
+                $(next).addClass('active-event').removeClass('next');
+                $(activeEvent).addClass('next').removeClass('active-event');
+                $(details[activeIndex]).addClass('hidden-event');
+                $(details[nextIndex]).removeClass('hidden-event');
+        } else if (upcomingEvents.length >= 3) {
+            if(direction === 'left') {
+                    $(next).addClass('active-event').removeClass('next');
+                    $(activeEvent).addClass('prev').removeClass('active-event');
+                    $(prev).addClass('hidden-event').removeClass('prev');
+                    $(upcomingEvents[(nextIndex + 1) % upcomingEvents.length]).addClass('next').removeClass('hidden-event');
+                    $(details[activeIndex]).addClass('hidden-event');
+                    $(details[nextIndex]).removeClass('hidden-event');
+            } else {
+                    $(prev).addClass('active-event').removeClass('prev');
+                    $(activeEvent).addClass('next').removeClass('active-event');
+                    $(next).addClass('hidden-event').removeClass('next');
+                    $(upcomingEvents[(prevIndex + upcomingEvents.length-1) % upcomingEvents.length]).addClass('prev').removeClass('hidden-event');
+                    $(details[activeIndex]).addClass('hidden-event');
+                    $(details[prevIndex]).removeClass('hidden-event');
+            }
         }
 
         activeEvent = document.querySelector('.active-event');
@@ -116,4 +138,5 @@ $(document).ready(function () {
         prevIndex = (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;
 
     }
+
 });

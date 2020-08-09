@@ -11,27 +11,31 @@
     <form action="/new?table=<%= table %>" method="POST">
     <% } %>
         <% columns.forEach((column) => { %>
-            <% if(column.Field !== 'id' && column.Field !== 'role' && column.Field !== 'created') { %>
+            <% if(column.Field !== 'id' && column.Field !== 'role' && column.Field !== 'created' && column.Field !== 'resetPasswordToken' && column.Field !== 'resetPasswordExpires' ) { %>
                 <div class="form-group">
                     <label for="<%= column.Field %>">
                         <%= column.Field %>
-                        <% if(column.Field == "date") {%>
-                           (Format yyyy-mm-dd hh:mm:ss (for upcoming event) | yyyy-mm-dd (for latest event))
-                        <% }%>
-
-                        <% if(column.Null == 'NO' && column.Default == null) { %>
+                        <% if(column.Null == 'NO') { %>
                             *
                         <% } %>
                     </label>
                     
-                    <% if(column.Null == 'NO' && column.Default == null) { %>
+                    <% if(column.Null == 'NO') { %>
                         <% if (column.Field === 'password') { %>
                             <input type="password" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                        <% } else if (column.Field === 'date') { %>
+                            <input type="datetime-local" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                        <% } else if (column.Field === 'image') { %>
+                            <input type="file" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
                         <% } else { %>
                             <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
                         <% } %>
                     <% } else { %>
-                        <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>">
+                        <% if (column.Field === 'image') { %>
+                            <input type="file" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>">
+                        <% } else { %>
+                            <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>">
+                        <% } %>
                     <% } %>
                 </div>
             <% } %>
