@@ -4,7 +4,8 @@
             <%- include('partials/nav') %>
 
             <h2 class="font-weight-bold"><%= article.title %></h2>
-            <small class="mt-1"><%= article.created %></small>
+
+            <small class="mt-1">by <%= article.author %>, <%= article.created %></small>
 
             <div class="full-details mt-4">
                 <%= article.full_details %>

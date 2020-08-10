@@ -405,8 +405,8 @@ app.post('/edit', function(req, res) {
         
         case 'article':
             connection.query(
-                'UPDATE (??) SET title = ?, details = ?, full_details = ?, image = ?, link = ? WHERE id = ?',
-                [req.query.table, req.body.title, req.body.details, req.body.full_details, image, req.body.link, req.query.id],
+                'UPDATE (??) SET title = ?, author = ? details = ?, full_details = ?, image = ?, link = ? WHERE id = ?',
+                [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
@@ -519,8 +519,8 @@ app.post('/new', function(req, res) {
         
         case 'article':
             connection.query(
-                'INSERT INTO ?? (title, details, full_details, image, link) VALUES (?, ?, ? ?, ?)',
-                [req.query.table, req.body.title, req.body.details, req.body.full_details, image, req.body.link],
+                'INSERT INTO ?? (title, author, details, full_details, image, link) VALUES (?, ?, ? ?, ?)',
+                [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect('/adminDashboard')
