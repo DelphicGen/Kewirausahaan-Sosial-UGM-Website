@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    let fullDetails = $('.full-details').text();
+    console.log(fullDetails);
+    $('.full-details').html(fullDetails);
+    $('.full-details p').css("margin-top", "12px");
+    
     // Wow JS
     new WOW().init();
 
@@ -71,6 +76,15 @@ $(document).ready(function () {
             }
         }
     });
+
+    
+    $('.direct').click(function() {
+        const id = $(this).attr('href');
+        event.preventDefault();
+        $('html, body').animate({
+            scrollTop: $(id).offset().top
+        }, 500);
+    })
 
     // Upcoming Event
     let upcomingEvents = document.querySelectorAll('.upcoming-event');

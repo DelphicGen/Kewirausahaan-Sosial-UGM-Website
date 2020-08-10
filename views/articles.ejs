@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+
+    <div class="article-page">
+        <div class="container">
+            <%- include('partials/nav') %>
+
+            <div class="pt-5">
+                <%- include('./partials/table', { caption: "Our Articles", columns: ["id", "title", "details", "image", "link", "created"], rows: articles }) %>
+            </div>
+        </div>
+    </div>
+
+<%- include('partials/script') %>

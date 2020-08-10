@@ -29,6 +29,9 @@
                                 <input type="datetime-local" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
                             <% } else if (columns[index].Field === 'image') { %>
                                 <input type="file" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
+                            <% } else if (columns[index].Field === 'full_details') { %>
+                                <%= columns[index].Field %>
+                                <textarea class="form-control ckeditor" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" required><%= value %></textarea>
                             <% } else { %>
                                 <input type="text" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
                             <% } %>
