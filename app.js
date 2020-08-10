@@ -4,7 +4,6 @@ if(process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const mysql = require('mysql');
-const mariadb = require('mariadb/callback');
 const async = require("async");
 const app = express();
 const bcrypt = require('bcrypt');
@@ -405,7 +404,7 @@ app.post('/edit', function(req, res) {
         
         case 'article':
             connection.query(
-                'UPDATE (??) SET title = ?, author = ? details = ?, full_details = ?, image = ?, link = ? WHERE id = ?',
+                'UPDATE (??) SET title = ?, author = ?, details = ?, full_details = ?, image = ?, link = ? WHERE id = ?',
                 [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
