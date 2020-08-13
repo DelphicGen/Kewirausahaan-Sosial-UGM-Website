@@ -26,16 +26,36 @@
                         <% } else if (column.Field === 'date') { %>
                             <input type="datetime-local" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
                         <% } else if (column.Field === 'image') { %>
-                            <input type="file" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                            <input type="file" class="upload form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                            <div class="d-flex flex-sm-row align-items-lg-center">
+                                <div class="box-2">
+                                    <div class="result"></div>
+                                </div>
+                                <div class="box-2 img-result">
+                                    <img class="cropped" src="" alt="">
+                                </div>
+                            </div>
+                            <button class="btn save d-none">Save</button>
+                            <a href="" class="btn download d-none">Download</a>
                         <% } else if (columns.Field === 'full_details') { %>
                             <%= columns.Field %>
-                            <textarea class="form-control ckeditor" id="<%= columns.Field %>" name="<%= columns.Field %>" required><%= value %></textarea>
+                            <textarea class="form-control ckeditor" id="<%= columns.Field %> ckeditor" name="<%= columns.Field %>" required><%= value %></textarea>
                         <% } else { %>
                             <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
                         <% } %>
                     <% } else { %>
                         <% if (column.Field === 'image') { %>
                             <input type="file" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>">
+                            <div class="d-flex flex-sm-row align-items-lg-center">
+                                <div class="box-2">
+                                    <div class="result"></div>
+                                </div>
+                                <div class="box-2 img-result">
+                                    <img class="cropped" src="" alt="">
+                                </div>
+                            </div>
+                            <button class="btn save d-none">Save</button>
+                            <a href="" class="btn download d-none">Download</a>
                         <% } else { %>
                             <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>">
                         <% } %>
@@ -50,4 +70,4 @@
     </form>
 </div>
 
-<%- include('../partials/script') %>
+<%- include('../partials/script', { user: 'admin' }) %>

@@ -34,3 +34,12 @@ h5 {
     display: inline-block;
     width: fit-content;
 }
+
+.box-2 {
+	padding: 0.5em;
+	width: calc(100%/2 - 1em);
+}
+
+img {
+	max-width: 100%;
+}

@@ -1,8 +1,4 @@
 $(document).ready(function () {
-    let fullDetails = $('.full-details').text();
-    console.log(fullDetails);
-    $('.full-details').html(fullDetails);
-    $('.full-details p').css("margin-top", "12px");
     
     // Wow JS
     new WOW().init();

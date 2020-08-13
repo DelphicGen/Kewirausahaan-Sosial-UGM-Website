@@ -16,8 +16,9 @@ li {
     padding: 13px;
 }
 
-img {
+.person-pic, #artcile img, #participant-testimonia img, #meet-the-founder img {
     object-fit: cover !important;
+    object-position: center !important;
 }
 
 /* Bootstrap */
@@ -245,7 +246,7 @@ section h3:nth-child(2)::before {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    /* height: 200px; */
+    height: 200px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
 }
@@ -305,16 +306,17 @@ section h3:nth-child(2)::before {
     background-color: #FFAD08;
     text-align: center;
     padding: 10px 20px;
+    height: 100px;
 }
 
 .person-name {
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 600;
     margin-bottom: 8px;
 }
 
 .person-details p {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 /* Latest event */
@@ -354,7 +356,7 @@ section h3:nth-child(2)::before {
 .upcoming-event {
     height: 500px;
     display: inline-block;
-    /* width: 100vw; */
+    /* width: auto; */
     transition: .3s left ease-in, .3s transform ease-in, .5s opacity ease-in-out;
     cursor: pointer;
 }
@@ -391,7 +393,7 @@ section h3:nth-child(2)::before {
 
 .upcoming-event img {
     height: 100%;
-    width: 100%;
+    width: auto;
 }
 
 
@@ -538,6 +540,11 @@ section h3:nth-child(2)::before {
     text-align: center;
 }
 
+.ks-media small {
+    margin-top: 20px;
+    display: block;
+}
+
 .ks-media h4, .ks-media h5 {
     font-weight: 600;
 }
@@ -670,6 +677,10 @@ section h3:nth-child(2)::before {
         -webkit-transform: scale(1);
         -moz-transform: scale(1);
         -o-transform: scale(1);
+    }
+
+    .person-name {
+        font-size: 16px;
     }
 
     .person-media i, .person-details p {

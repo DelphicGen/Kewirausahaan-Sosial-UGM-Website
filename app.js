@@ -353,10 +353,15 @@ app.post('/edit', function(req, res) {
     if(req.body.date) {
         date = req.body.date.replace('T', ' ');
     }
-    if(req.body.image) {
+
+    if (req.body.cropped_image.length !== 0) {
+        image = req.body.cropped_image
+    } else if(req.body.image.length !== 0) {
         image = `./assets/images/${req.query.table}/${req.body.image}`;
+    } else {
+        image = './assets/images/default/avatar.svg';
     }
-    console.log(req.body)
+    console.log(image)
     switch(req.query.table) {
         case 'mentor':
             connection.query(
@@ -463,7 +468,6 @@ app.get('/new', function(req, res) {
 });
 
 app.post('/new', function(req, res) {
-    console.log(req.body)
     let date, image;
     if(req.body.date) {
         date = req.body.date.replace('T', ' ');
@@ -572,4 +576,4 @@ function checkNotAuthenticated(req, res, next) {
     return next();
 }
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3030);

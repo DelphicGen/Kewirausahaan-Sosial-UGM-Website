@@ -200,7 +200,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= article.title %></h5>
             <p class="card-text"><%= article.details %></p>
-            <a href="<%= article.link %>" class="article-btn more-details-btn btn">More Details</a>
+            <a href="/article?id=<%= article.id %>" class="article-btn more-details-btn btn">More Details</a>
           </div>
         </div>
       <% }) %>
@@ -285,6 +285,8 @@
         <h5>atau :</h5>
         <p>+62 852 9340 0470 (hanya Whatsapp) <br />
           bayudardias@ugm.ac.id</p>
+
+        <small>Icon by Flaticon</small>
       </div>
 
       <div class="contact-form col-md-6">
