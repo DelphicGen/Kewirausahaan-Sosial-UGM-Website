@@ -1,6 +1,6 @@
-if(process.env.NODE_ENV !== 'production') {
+// if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
-}
+// }
 
 const express = require('express');
 const mysql = require('mysql');
@@ -15,6 +15,7 @@ const initializePassport = require('./passport-config.js');
 const util = require('util');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const baseUrl = '/';
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -48,7 +49,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 
-app.get('/', (req, res) => {
+app.get(baseUrl, (req, res) => {
 
     async.parallel([
         function(callback) { connection.query('SELECT * FROM mentor', callback); },
@@ -65,7 +66,7 @@ app.get('/', (req, res) => {
 
 });
 
-app.get("/events", (req, res) => {
+app.get(`${baseUrl}events`, (req, res) => {
     connection.query(
         'SELECT * FROM upcoming_event WHERE (date >= CURRENT_TIMESTAMP()) OR (date >= CURRENT_TIMESTAMP() AND HOUR(date) >= HOUR(CURRENT_TIMESTAMP())) ORDER BY date',
         (error, results) => {
@@ -74,7 +75,7 @@ app.get("/events", (req, res) => {
     )
 })
 
-app.get("/articles", (req, res) => {
+app.get(`${baseUrl}articles`, (req, res) => {
     connection.query(
         'SELECT * FROM article ORDER BY created DESC',
         (error, results) => {
@@ -84,36 +85,34 @@ app.get("/articles", (req, res) => {
 })
 
 
-app.get("/article", (req, res) => {
+app.get(`${baseUrl}article`, (req, res) => {
     connection.query(
         'SELECT * FROM article WHERE id = ?',
         req.query.id,
         (error, results) => {
-            console.log(results);
-            console.log(results[0].full_details.toString());
             res.render('article.ejs', { article: results[0] });
         }
     )
 })
 
-app.get("/login", checkNotAuthenticated, (req, res) => {
+app.get(`${baseUrl}login`, checkNotAuthenticated, (req, res) => {
     res.render('login.ejs');
 });
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/adminDashboard',
-    failureRedirect: '/login',
+app.post(`${baseUrl}login`, checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: `${baseUrl}adminDashboard`,
+    failureRedirect: `${baseUrl}login`,
     failureFlash: true 
 }));
 
-app.get("/register", async (req, res) => {
+app.get(`${baseUrl}register`, async (req, res) => {
     req.user.then (data => {
         if(data.role === 'super admin') res.render('register.ejs');
-        else res.redirect('/adminDashboard');
+        else res.redirect(`${baseUrl}adminDashboard`);
     })
 });
 
-app.post('/register', async(req, res) => {
+app.post(`${baseUrl}register`, async(req, res) => {
     req.user.then (async (data) => {
         if(data.role === 'super admin') {
             try {
@@ -122,7 +121,7 @@ app.post('/register', async(req, res) => {
                     req.body.email , 
                     function(err , data){
                         if(err){
-                            console.log(err);
+                            throw err;
                         }   
                         else{
                             if(data[0].cnt > 0) {  
@@ -132,7 +131,7 @@ app.post('/register', async(req, res) => {
                                     "INSERT INTO users (email, username, password) VALUES ('" + req.body.email + "', '" + req.body.username + "', '" + hashedPassword + "')",
                                     (error, results) => {
                                         if(error) throw error;
-                                        else res.redirect('/adminDashboard');
+                                        else res.redirect(`${baseUrl}adminDashboard`);
                                     }
                                 );                  
                             }
@@ -140,23 +139,23 @@ app.post('/register', async(req, res) => {
                     })
         
             } catch {
-                res.redirect('/register');
+                res.redirect(`${baseUrl}register`);
             }
         }
-        else res.redirect('/adminDashboard');
+        else res.redirect(`${baseUrl}adminDashboard`);
     }) 
 });
 
-app.delete('/logout', (req, res) => {
+app.delete(`${baseUrl}logout`, (req, res) => {
     req.logOut();
-    res.redirect('/login');
+    res.redirect(`${baseUrl}login`);
 });
 
-app.get('/forgot', function(req, res) {
+app.get(`${baseUrl}forgot`, function(req, res) {
     res.render('forgot');
 });
 
-app.post('/forgot', function(req, res, next) {
+app.post(`${baseUrl}forgot`, function(req, res, next) {
     async.waterfall([
       function(done) {
         crypto.randomBytes(20, function(err, buf) {
@@ -176,11 +175,10 @@ app.post('/forgot', function(req, res, next) {
                     ('00' + (date.getHours() + 1)).slice(-2) + ':' + 
                     ('00' + date.getMinutes()).slice(-2) + ':' + 
                     ('00' + date.getSeconds()).slice(-2);
-                console.log(date)
 
                 if (user.length === 0) {
                     req.flash('error', 'No account with that email address exists.');
-                    return res.redirect('/forgot');
+                    return res.redirect(`${baseUrl}forgot`);
                 }
 
                 connection.query("UPDATE users SET resetPasswordToken = ?, resetPasswordExpires = ? WHERE email = ?",
@@ -216,29 +214,28 @@ app.post('/forgot', function(req, res, next) {
       }
     ], function(err) {
       if (err) return next(err);
-      res.redirect('/forgot');
+      res.redirect(`${baseUrl}forgot`);
     });
   });
 
-app.get('/reset/:token', function(req, res) {
+app.get(`${baseUrl}reset/:token`, function(req, res) {
     connection.query("SELECT * FROM users WHERE resetPasswordToken = ? " ,
         req.params.token,
         function(err, user) {
             if (user.length === 0) {
                 req.flash('error', 'Password reset token is invalid or has expired.');
-                return res.redirect('/forgot');
+                return res.redirect(`${baseUrl}forgot`);
             }
             res.render('reset', {user: user[0]});
         });
 });
 
-app.post('/reset/:token', function(req, res) {
+app.post(`${baseUrl}reset/:token`, function(req, res) {
     async.waterfall([
       function(done) {
             connection.query("SELECT * FROM users WHERE resetPasswordToken = ? " ,
                 req.params.token,
                 async function(err, user) {
-                    console.log(user)
                     if (user.length === 0) {
                         req.flash('error', 'Password reset token is invalid or has expired.');
                         return res.redirect('back');
@@ -276,13 +273,13 @@ app.post('/reset/:token', function(req, res) {
         };
         smtpTransport.sendMail(mailOptions, function(err) {
           req.flash('success', 'Success! Your password has been changed.');
-          res.redirect('/login');
+          res.redirect(`${baseUrl}login`);
         });
       }
     ]);
   });
 
-app.get('/adminDashboard', checkAuthenticated, async function(req, res){
+app.get(`${baseUrl}adminDashboard`, checkAuthenticated, async function(req, res){
     
     req.user.then (data => {
         let username = data.username;
@@ -304,7 +301,7 @@ app.get('/adminDashboard', checkAuthenticated, async function(req, res){
     
 });
 
-app.get('/userList', async function(req, res){
+app.get(`${baseUrl}userList`, async function(req, res){
     req.user.then (data => {
         if(data.role === "super admin") {
             connection.query(
@@ -314,11 +311,11 @@ app.get('/userList', async function(req, res){
                     else res.render('./admin/userList.ejs', { users: results });
                 }
             );
-        } else res.redirect('/adminDashboard');
+        } else res.redirect(`${baseUrl}adminDashboard`);
     })
 })
 
-app.get('/edit', function(req, res) {
+app.get(`${baseUrl}edit`, function(req, res) {
     connection.query(
         "SHOW COLUMNS FROM ??",
         [req.query.table],
@@ -348,7 +345,7 @@ app.get('/edit', function(req, res) {
     
 });
 
-app.post('/edit', function(req, res) {
+app.post(`${baseUrl}edit`, function(req, res) {
     let date, image;
     if(req.body.date) {
         date = req.body.date.replace('T', ' ');
@@ -369,7 +366,7 @@ app.post('/edit', function(req, res) {
                 [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -380,7 +377,7 @@ app.post('/edit', function(req, res) {
                 [req.query.table, date, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -391,7 +388,7 @@ app.post('/edit', function(req, res) {
                 [req.query.table, req.body.title, req.body.details, date, image, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -402,7 +399,7 @@ app.post('/edit', function(req, res) {
                 [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -413,7 +410,7 @@ app.post('/edit', function(req, res) {
                 [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -424,7 +421,7 @@ app.post('/edit', function(req, res) {
                 [req.query.table, req.body.name, req.body.details, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -435,28 +432,28 @@ app.post('/edit', function(req, res) {
                 [req.query.table, req.body.name, req.body.title, req.body.details, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
         default:
-            res.redirect('/adminDashboard')
+            res.redirect(`${baseUrl}adminDashboard`)
     }
 });
 
-app.post('/delete', function(req, res) {
+app.post(`${baseUrl}delete`, function(req, res) {
     connection.query(
         'DELETE FROM ?? WHERE id = (?)',
         [req.query.table, req.query.id],
         (error, results) => {
             if(error) throw error;
-            else res.redirect('/adminDashboard');
+            else res.redirect(`${baseUrl}adminDashboard`);
         }
     );
             
 });
 
-app.get('/new', function(req, res) {
+app.get(`${baseUrl}new`, function(req, res) {
     connection.query(
         "SHOW COLUMNS FROM ??",
         [req.query.table],
@@ -467,7 +464,7 @@ app.get('/new', function(req, res) {
     );
 });
 
-app.post('/new', function(req, res) {
+app.post(`${baseUrl}new`, function(req, res) {
     let date, image;
     if(req.body.date) {
         date = req.body.date.replace('T', ' ');
@@ -482,7 +479,7 @@ app.post('/new', function(req, res) {
                 [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -493,7 +490,7 @@ app.post('/new', function(req, res) {
                 [req.query.table, date, req.body.link],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -504,7 +501,7 @@ app.post('/new', function(req, res) {
                 [req.query.table, req.body.title, req.body.details, date, image, req.body.link],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -515,7 +512,7 @@ app.post('/new', function(req, res) {
                 [req.query.table, req.body.name, req.body.title, req.body.facebook, req.body.twitter, req.body.instagram, req.body.linkedin, image],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -526,7 +523,7 @@ app.post('/new', function(req, res) {
                 [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -537,7 +534,7 @@ app.post('/new', function(req, res) {
                 [req.query.table, req.body.name, req.body.details, image],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
@@ -548,12 +545,12 @@ app.post('/new', function(req, res) {
                 [req.query.table, req.body.name, req.body.title, req.body.details, image],
                 (error, results) => {
                     if(error) throw error;
-                    else res.redirect('/adminDashboard')
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;
         default:
-            res.redirect('/adminDashboard')
+            res.redirect(`${baseUrl}adminDashboard`)
     }
 });
 
@@ -566,14 +563,14 @@ function checkAuthenticated(req, res, next) {
     if(req.isAuthenticated()) {
         return next();
     }
-    res.redirect('/login')
+    res.redirect(`${baseUrl}login`)
 }
 
 function checkNotAuthenticated(req, res, next) {
     if(req.isAuthenticated()) {
-        return res.redirect('/adminDashboard')
+        return res.redirect(`${baseUrl}adminDashboard`)
     }
     return next();
 }
 
-app.listen(process.env.PORT || 3030);
+app.listen(process.env.PORT || 3040);

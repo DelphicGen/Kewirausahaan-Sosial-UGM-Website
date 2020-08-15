@@ -42,7 +42,7 @@ li {
 
 /* landing-page */
 .landing-page {
-    background-image: url('../images/header_image/example2.JPG');
+    background-image: url('../images/header_image/header.jpg');
     background-size: cover;
     background-position: center;
     min-height: 100vh;

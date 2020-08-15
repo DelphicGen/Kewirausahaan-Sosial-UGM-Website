@@ -40,10 +40,10 @@ $(document).ready(function () {
         cropped.classList.remove('d-none');
         img_result.classList.remove('d-none');
         cropped.src = imgSrc;
-        $('.cropped_image').val(imgSrc)
-        // dwn.classList.remove('d-none');
-        // dwn.download = 'imagename';
-        // dwn.setAttribute('href',imgSrc);
+        // $('.cropped_image').val(imgSrc)
+        dwn.classList.remove('d-none');
+        dwn.download = 'imagename';
+        dwn.setAttribute('href',imgSrc);
     });
   
   
