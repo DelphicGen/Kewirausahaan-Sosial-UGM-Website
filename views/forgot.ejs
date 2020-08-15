@@ -6,6 +6,9 @@
     <% if(messages.error) {%>
         <%= messages.error %>
     <% } %>
+    <% if(messages.info) {%>
+        <%= messages.info %>
+    <% } %>
 
     <form action="/forgot" method="POST">
         <div class="form-group">

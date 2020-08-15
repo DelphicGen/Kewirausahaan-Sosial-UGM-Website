@@ -1,9 +1,5 @@
 $(document).ready(function () {
 
-    let fullDetails = $('.full-details').text();
-    $('.full-details').html(fullDetails);
-    $('.full-details p').css("margin-top", "12px");
-
     let result = document.querySelector('.result') && document.querySelector('.result'),
     img_result = document.querySelector('.img-result') && document.querySelector('.img-result'),
     img_w = 300,

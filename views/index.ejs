@@ -1,3 +1,5 @@
+<%- include('admin/function') %>
+
 <%- include('partials/header') %>
 
   <!-- Landing Page -->
@@ -7,7 +9,7 @@
 
         <%- include('partials/nav') %>
 
-        <img class="triangle" src="./assets/images/header_image/triangle.png" alt="triangle">
+        <img class="triangle" src="/assets/images/header_image/triangle.png" alt="triangle">
 
         <div class="wow fadeInUp heading-container">
           <div class="heading-list">
@@ -29,22 +31,22 @@
 
     <div class="statistic d-flex justify-content-around justify-content-sm-between flex-wrap">
       <div class="startup wow bounceInLeft d-flex flex-column justify-content-around">
-        <img src="./assets/images/about_us/rocket2.png" alt="rocket">
+        <img src="/assets/images/about_us/rocket2.png" alt="rocket">
         <h4>37</h4>
         <h5>Startups</h5>
       </div>
       <div class="talent wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".1s">
-        <img src="./assets/images/about_us/people.svg" alt="rocket">
+        <img src="/assets/images/about_us/people.svg" alt="rocket">
         <h4>37</h4>
         <h5>Talents</h5>
       </div>
       <div class="partner wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".2s">
-        <img src="./assets/images/about_us/handyman.svg" alt="rocket">
+        <img src="/assets/images/about_us/handyman.svg" alt="rocket">
         <h4>37</h4>
         <h5>Partners</h5>
       </div>
       <div class="event wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".3s">
-        <img src="./assets/images/about_us/date.svg" alt="rocket">
+        <img src="/assets/images/about_us/date.svg" alt="rocket">
         <h4>37</h4>
         <h5>Events</h5>
       </div>
@@ -54,7 +56,7 @@
   <!-- Curiculum -->
   <section class="curriculum container" id="curriculum">
     <h3>Kurikulum</h3>
-    <img class="curriculum-img" src="./assets/images/curriculum/Kurikulum.png" alt="kurikulum ks">
+    <img class="curriculum-img" src="/assets/images/curriculum/Kurikulum.png" alt="kurikulum ks">
   </section>
 
   <!-- Our Mentor -->
@@ -110,10 +112,10 @@
       <div class="col-12 upcoming-event-list">
         <div class="control-container">
           <a class="" data-slide="prev">
-            <img class="left-control" src="./assets/images/upcoming_event/left_arrow.svg" alt="prev">
+            <img class="left-control" src="/assets/images/upcoming_event/left_arrow.svg" alt="prev">
           </a>
           <a class="">
-            <img class="right-control" src="./assets/images/upcoming_event/right_arrow.svg" alt="next">
+            <img class="right-control" src="/assets/images/upcoming_event/right_arrow.svg" alt="next">
           </a>
         </div>
         <% upcomingEvents.forEach((upcomingEvent, index) => { %>
@@ -140,7 +142,7 @@
               <div class="hidden-event detail">
             <% } %> 
                 <h4 class="event-title"><%= upcomingEvent.title %></h4>
-                <p class="event-date"><%= upcomingEvent.date %></p>
+                <p class="event-date"><%= dateTimeFormat(upcomingEvent.date) %></p>
                 <p class="event-detail"><%= upcomingEvent.details %></p>
                 <a href="<%= upcomingEvent.link %>" class="more-details-btn btn">More Details</a>
               </div>
@@ -195,7 +197,7 @@
           <% if(article.image) { %>
             <img src="<%= article.image %>" class="card-img-top" alt="">
           <% } else { %>
-            <img src="./assets/images/logo2.png" class="card-img-top" alt="">
+            <img src="/assets/images/logo2.png" class="card-img-top" alt="">
           <% } %>
           <div class="card-body">
             <h5 class="card-title"><%= article.title %></h5>
@@ -218,7 +220,7 @@
             <% if(testimonial.image) { %>
               <img src="<%= testimonial.image %>" alt="">
             <% } else { %>
-              <img src="./assets/images/logo2.png" alt="">
+              <img src="/assets/images/logo2.png" alt="">
             <% } %>
             <p><%= testimonial.name %></p>
           </div>
@@ -250,7 +252,7 @@
               <% if(review.image) { %>
                 <img src="<%= review.image %>" class="d-block w-100" alt="">
               <% } else { %>
-                <img src="./assets/images/logo2.png" class="d-block w-100" alt="">
+                <img src="/assets/images/logo2.png" class="d-block w-100" alt="">
               <% } %>
               <em><%= review.name %>, <%= review.title %></em>
             </div>

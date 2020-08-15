@@ -50,7 +50,7 @@
                         <% } else { %>
                             <% if (key !== 'full_details') { %>
                                 <% if(key == "date" || key == "created") {%>
-                                    <td><%= dateFormat(value) %></td>
+                                    <td><%= dateTimeFormat(value) %></td>
                                 <% } else {%>
                                     <td><%= value %></td>
                                 <% } %>
