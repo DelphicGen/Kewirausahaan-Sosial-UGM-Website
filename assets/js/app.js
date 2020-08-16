@@ -15,7 +15,7 @@ $(document).ready(function () {
         autoplay:true,
         autoplayTimeout:5000,
         autoplayHoverPause:true,
-        autoWidth:true,
+        autoWidth: mentors.length < 4 ? true : false,
         responsive:{
             0:{
                 items: mentors.length >= 1 ? 1 : mentors.length
@@ -40,7 +40,7 @@ $(document).ready(function () {
         autoplay:true,
         autoplayTimeout:5000,
         autoplayHoverPause:true,
-        autoWidth:true,
+        autoWidth: members.length < 4 ? true : false,
         responsive:{
             0:{
                 items: members.length >= 1 ? 1 : members.length
