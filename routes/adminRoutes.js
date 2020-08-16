@@ -2,7 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const async = require("async");
 const router = express.Router();
-const [checkAuthenticated, checkNotAuthenticated] = require('../functions/functions')
+const [checkAuthenticated] = require('../functions/functions');
 const baseUrl = require('../variables/variables');
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -178,7 +178,7 @@ router.post(`${baseUrl}delete`, function(req, res) {
         [req.query.table, req.query.id],
         (error, results) => {
             if(error) throw error;
-            else res.redirect(`${baseUrl}adminDashboard`);
+            else res.redirect('back');
         }
     );
             
@@ -289,19 +289,5 @@ router.post(`${baseUrl}new`, function(req, res) {
             res.redirect(`${baseUrl}adminDashboard`)
     }
 });
-
-// function checkAuthenticated(req, res, next) {
-//     if(req.isAuthenticated()) {
-//         return next();
-//     }
-//     res.redirect(`${baseUrl}login`)
-// }
-
-// function checkNotAuthenticated(req, res, next) {
-//     if(req.isAuthenticated()) {
-//         return res.redirect(`${baseUrl}adminDashboard`)
-//     }
-//     return next();
-// }
 
 module.exports = router;

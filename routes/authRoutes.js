@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const [checkAuthenticated, checkNotAuthenticated] = require('../functions/functions');
 const baseUrl = require('../variables/variables');
 
 const connection = mysql.createConnection({
@@ -200,18 +201,18 @@ router.post(`${baseUrl}reset/:token`, function(req, res) {
     ]);
 });
 
-function checkAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect(`${baseUrl}login`)
-}
+// function checkAuthenticated(req, res, next) {
+//     if(req.isAuthenticated()) {
+//         return next();
+//     }
+//     res.redirect(`${baseUrl}login`)
+// }
 
-function checkNotAuthenticated(req, res, next) {
-    if(req.isAuthenticated()) {
-        return res.redirect(`${baseUrl}adminDashboard`)
-    }
-    return next();
-}
+// function checkNotAuthenticated(req, res, next) {
+//     if(req.isAuthenticated()) {
+//         return res.redirect(`${baseUrl}adminDashboard`)
+//     }
+//     return next();
+// }
 
 module.exports = router;
