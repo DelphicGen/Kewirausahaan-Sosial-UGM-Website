@@ -1,4 +1,9 @@
 /* Dashboard */
+.table-container {
+    max-height: 250px;
+    margin-bottom: 50px;
+}
+
 .table-container th:nth-child(1) {
     min-width: fit-content !important;
 }

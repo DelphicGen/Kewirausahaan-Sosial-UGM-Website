@@ -1,0 +1,19 @@
+<%- include('admin/function') %>
+<%- include('partials/header') %>
+
+    <div class="article-page">
+        <div class="container">
+            <%- include('partials/nav') %>
+            <img class="event-image" src="<%= event.image %>" alt="<%= event.title %>">
+            <h1 class="font-weight-bold"><%= event.title %></h1>
+
+            <small class="mt-1"><%= dateFormat(event.date) %></small>
+
+            <div class="full-details mt-4">
+                <%= event.full_details %>
+            </div>
+
+        </div>
+    </div>
+
+<%- include('partials/script') %>

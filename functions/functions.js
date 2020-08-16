@@ -47,8 +47,8 @@ function add(req, res, date, image) {
 
         case 'upcoming_event':
             connection.query(
-                'INSERT INTO ?? (title, details, date, image, link) VALUES (?, ?, ?, ?, ?)',
-                [req.query.table, req.body.title, req.body.details, date, image, req.body.link],
+                'INSERT INTO ?? (title, details, full_details, date, image, link) VALUES (?, ?, ?, ?, ?, ?)',
+                [req.query.table, req.body.title, req.body.details, req.body.full_details, date, image, req.body.link],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect(`${baseUrl}adminDashboard`)
@@ -130,8 +130,8 @@ function edit(req, res, date, image) {
 
         case 'upcoming_event':
             connection.query(
-                'UPDATE (??) SET title = ?, details = ?, date = ?, image = ?, link = ? WHERE id = ?',
-                [req.query.table, req.body.title, req.body.details, date, image, req.body.link, req.query.id],
+                'UPDATE (??) SET title = ?, details = ?, full_details = ?, date = ?, image = ?, link = ? WHERE id = ?',
+                [req.query.table, req.body.title, req.body.details, req.body.full_details, date, image, req.body.link, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect(`${baseUrl}adminDashboard`)

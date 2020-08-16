@@ -144,7 +144,7 @@
                 <h4 class="event-title"><%= upcomingEvent.title %></h4>
                 <p class="event-date"><%= dateTimeFormat(upcomingEvent.date) %></p>
                 <p class="event-detail"><%= upcomingEvent.details %></p>
-                <a href="<%= upcomingEvent.link %>" class="more-details-btn btn">More Details</a>
+                <a href="/event?id=<%= upcomingEvent.id %>" class="more-details-btn btn">More Details</a>
               </div>
           <% }) %>
       </div>

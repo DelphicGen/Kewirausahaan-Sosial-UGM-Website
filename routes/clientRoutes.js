@@ -28,11 +28,21 @@ router.get(baseUrl, (req, res) => {
 
 });
 
-router.get(`/events`, (req, res) => {
+router.get(`${baseUrl}events`, (req, res) => {
     connection.query(
         'SELECT * FROM upcoming_event WHERE (date >= CURRENT_TIMESTAMP()) OR (date >= CURRENT_TIMESTAMP() AND HOUR(date) >= HOUR(CURRENT_TIMESTAMP())) ORDER BY date',
         (error, results) => {
             res.render('events.ejs', { upcomingEvents: results });
+        }
+    )
+})
+
+router.get(`${baseUrl}event`, (req, res) => {
+    connection.query(
+        'SELECT * FROM upcoming_event WHERE id = ?',
+        req.query.id,
+        (error, results) => {
+            res.render('event.ejs', { event: results[0] });
         }
     )
 })

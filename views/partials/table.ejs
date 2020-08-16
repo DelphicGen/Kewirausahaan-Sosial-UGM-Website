@@ -2,7 +2,7 @@
 
 <div class="heading d-flex justify-content-between align-items-center mb-2">
     <h5><b><%= caption %></b></h5>
-    <% if (caption !== "Our Upcoming Events" && caption !== "Our Articles") { %>
+    <% if (caption !== "Event Kami Kedepannya" && caption !== "Artikel Kami") { %>
         <a href="./new?table=<%= caption.split(' ').join('_').toLowerCase() %>" class="btn btn-primary">Add</a>
     <% } %>
 </div>
@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <% columns.forEach((column) => { %>
-                    <% if (caption === "Our Upcoming Events" || caption === "Our Articles") { %>
+                    <% if (caption === "Event Kami Kedepannya" || caption === "Artikel Kami") { %>
                         <% if ( column !== 'id' && column !== 'image' && column !== 'link' && column !== 'full_details') { %>
                             <th scope="col"><%= column %></th>
                         <% } %>
@@ -22,14 +22,12 @@
                         <% } %>
                     <% } %>
                 <% }) %>
-                <% if (caption !== "Our Upcoming Events" && caption !== "Our Articles") { %>
+                <% if (caption !== "Event Kami Kedepannya" && caption !== "Artikel Kami") { %>
                     <% if (caption !== "Users") { %>
                         <th scope="col">Edit</th>
                     <% } %>
                         <th scope="col">Delete</th>
-                <% } else if(caption === "Our Upcoming Events"){ %>
-                    <th scope="col">Register</th>
-                <% } else if(caption === "Our Articles") { %>
+                <% } else { %>
                     <th scope="col">Read More</th>
                 <% } %>
             </tr>
@@ -39,7 +37,7 @@
             <% rows.forEach((row, index) => { %>
                 <tr>
                     <% for (const [key, value] of Object.entries(row)) { %>
-                        <% if (caption === "Our Upcoming Events" || caption === "Our Articles") { %>
+                        <% if (caption === "Event Kami Kedepannya" || caption === "Artikel Kami") { %>
                             <% if(key !== 'id' && key !== 'image' && key !== 'link' && key !== 'full_details') { %>
                                 <% if(key == "date" || key == "created") {%>
                                     <td><%= dateFormat(value) %></td>
@@ -58,7 +56,7 @@
                         <% } %>
                     <% } %>
                     
-                    <% if (caption !== "Our Upcoming Events" && caption !== "Our Articles") { %>
+                    <% if (caption !== "Event Kami Kedepannya" && caption !== "Artikel Kami") { %>
                         <% if (caption !== "Users") { %>
                         <td>
                             <a href="/edit?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" class="btn btn-warning " id="edit <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Edit</a>
@@ -69,11 +67,11 @@
                                 <input type="submit" value="Delete" class="btn btn-danger">
                             </form>
                         </td>
-                    <% } else if(caption === "Our Upcoming Events"){ %>
+                    <% } else if(caption === "Event Kami Kedepannya"){ %>
                         <td>
-                            <a href="<%= rows[index].link %>" target="_blank" class="btn btn-success" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Register</a>
+                            <a href="/event?id=<%= rows[index].id %>" target="_blank" class="btn btn-success" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Read More</a>
                         </td>
-                    <% } else if(caption === "Our Articles") { %>
+                    <% } else if(caption === "Artikel Kami") { %>
                         <td>
                             <a href="/article?id=<%= rows[index].id %>" target="_blank" class="btn btn-success" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Read More</a>
                         </td>

@@ -44,7 +44,6 @@
                                 <button class="btn save d-none">Save</button>
                                 <a href="" class="btn download d-none">Download</a>
                             <% } else if (columns[index].Field === 'full_details') { %>
-                                <%= columns[index].Field %>
                                 <textarea class="form-control ckeditor" id="<%= columns[index].Field %> ckeditor" name="<%= columns[index].Field %>" required><%= value %></textarea>
                             <% } else { %>
                                 <input type="text" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
