@@ -6,9 +6,9 @@
     <h1>Add <%= table[0].toUpperCase() %><%= table.slice(1).replace(/_([a-z])/g, function(g) { return g[1].toUpperCase() }) %>'s Table</h1>
     
     <% if (table == "users") { %>
-        <form action="/register" method="POST">
+        <form class="ewrapper" action="/register" method="POST">
     <% } else { %>
-        <form action="/new?table=<%= table %>" method="POST">
+        <form class="ewrapper" action="/new?table=<%= table %>" method="POST">
     <% } %>
         <% columns.forEach((column) => { %>
             <% if(column.Field !== 'id' && column.Field !== 'role' && column.Field !== 'created' && column.Field !== 'resetPasswordToken' && column.Field !== 'resetPasswordExpires' ) { %>
@@ -26,31 +26,38 @@
                         <% } else if (column.Field === 'date') { %>
                             <input type="datetime-local" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
                         <% } else if (column.Field === 'image') { %>
-                            <input type="file" class="upload form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
+                            <div class="custom-file">
+                                <input type="file" class="form-control custom-file-input upload" id="<%= column.Field %> customFile" name="<%= column.Field %>" required>
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
                             <div class="d-flex flex-sm-row align-items-lg-center">
-                                <div class="box-2">
+                                <div class="col-md-6 col-12 w-100 h-auto box-2">
                                     <div class="result"></div>
                                 </div>
-                                <div class="box-2 img-result">
+                                <div class="col-md-6 col-12 w-100 h-auto box-2 img-result">
                                     <img class="cropped" src="" alt="">
                                 </div>
                             </div>
                             <button class="btn save d-none">Save</button>
                             <a href="" class="btn download d-none">Download</a>
-                        <% } else if (columns.Field === 'full_details') { %>
+                        <% } else if (column.Field === 'full_details') { %>
                             <%= columns.Field %>
-                            <textarea class="form-control ckeditor" id="<%= columns.Field %> ckeditor" name="<%= columns.Field %>" required><%= value %></textarea>
+                            <textarea class="form-control ckeditor" id="<%= column.Field %> ckeditor" name="<%= column.Field %>" required></textarea>
+  
                         <% } else { %>
                             <input type="text" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>" required>
                         <% } %>
                     <% } else { %>
                         <% if (column.Field === 'image') { %>
-                            <input type="file" class="form-control" id="<%= column.Field %>" name="<%= column.Field %>">
+                            <div class="custom-file">
+                                <input type="file" class="form-control custom-file-input upload" id="<%= column.Field %> customFile" name="<%= column.Field %>" required>
+                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            </div>
                             <div class="d-flex flex-sm-row align-items-lg-center">
-                                <div class="box-2">
+                                <div class="col-md-6 col-12 w-100 h-auto box-2">
                                     <div class="result"></div>
                                 </div>
-                                <div class="box-2 img-result">
+                                <div class="col-md-6 col-12 w-100 h-auto box-2 img-result">
                                     <img class="cropped" src="" alt="">
                                 </div>
                             </div>

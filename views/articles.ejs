@@ -1,11 +1,29 @@
-<%- include('partials/header') %>
+<%- include('admin/function') %>
+<%- include('partials/header', {user: "user"}) %>
 
     <div class="article-page">
         <div class="container">
             <%- include('partials/nav') %>
 
-            <div class="pt-5">
-                <%- include('./partials/table', { caption: "Artikel Kami", columns: ["id", "title", "author", "details", "image", "link", "created"], rows: articles }) %>
+            <div>
+    
+                <% articles.forEach((article, index) => { %>
+                    <div class="row mt-5">
+                        <h5 class="col-lg-3 col-12 font-weight-bold article-date"><%= article.author %>, <%= dateFormat(article.created) %></h5>
+                        <div class="article-container row col-lg-9 col-12">
+                            <img class="col-4 w-100 h-auto mb-3 mb-md-0 " src="<%= article.image %>" alt="<%= article.title %>">
+                            <div class="col-8">
+                                <h3 class="font-weight-bold"><%= article.title %></h3>
+
+                                <small class="small-article-date mt-1">by <%= article.author %>, <%= dateFormat(article.created) %></small>
+
+                                <p class="article-detail mt-3 mb-2"><%= article.details %></p>
+
+                                <a href="/article?id=<%= article.id %>" class="btn btn-success">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
             </div>
         </div>
     </div>

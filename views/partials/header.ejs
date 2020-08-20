@@ -32,9 +32,12 @@
   <!-- CSS -->
   <% if(locals.user === "admin") { %>
     <link rel="stylesheet" href="/assets/css/admin.css">
-  <% } %>
+  <% } else if(locals.user === "user") {%>
+    <link rel="stylesheet" href="/assets/css/style2.css">
+  <% } else {%>
     <link rel="stylesheet" href="/assets/css/style.css">
-  
+  <% } %>
+  <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
 <body>

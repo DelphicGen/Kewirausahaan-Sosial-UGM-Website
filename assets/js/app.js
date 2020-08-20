@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    let fullDetails = $('.full-details').text();
-    $('.full-details').html(fullDetails);
-    $('.full-details p').css("margin-bottom", "12px");
+    let fullDetails = $('.article-full-details').text();
+    $('.article-full-details').html(fullDetails);
+    // $('.article-full-details p').css("margin-bottom", "12px");
     
     // Wow JS
     new WOW().init();
@@ -65,6 +65,7 @@ $(document).ready(function () {
         autoplay:true,
         autoplayTimeout:5000,
         autoplayHoverPause:true,
+        autoWidth: testimonials.length < 3 ? true : false,
         responsive:{
             0:{
                 items: testimonials.length >= 1 ? 1 : testimonials.length

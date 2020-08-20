@@ -1,18 +1,18 @@
 <%- include('admin/function') %>
-<%- include('partials/header') %>
+<%- include('partials/header', {user: "user"}) %>
     <div class="article-page">
         <div class="container">
             <%- include('partials/nav') %>
-
+            
             <h1 class="font-weight-bold"><%= article.title %></h1>
 
-            <small class="mt-1">by <%= article.author %>, <%= dateFormat(article.created) %></small>
+            <small class="mt-1">by <%= article.author %>, <%= dateFormat(article.created) %></small> <br />
 
-            <div class="full-details mt-4">
+            <img class="article-full-img" src="<%= article.image%>" alt="">
+
+            <div class="article-full-details mt-4">
                 <%= article.full_details %>
             </div>
-
-            <!-- <textarea class="nd ckeditor" disabled="disabled" name="full_details"><%= article.full_details %></textarea> -->
         </div>
     </div>
 

@@ -29,6 +29,9 @@
                         <th scope="col">Delete</th>
                 <% } else { %>
                     <th scope="col">Read More</th>
+                    <% if (caption === "Event Kami Kedepannya") { %>
+                        <th scope="col">Register</th>
+                    <% } %>
                 <% } %>
             </tr>
         </thead>
@@ -70,6 +73,9 @@
                     <% } else if(caption === "Event Kami Kedepannya"){ %>
                         <td>
                             <a href="/event?id=<%= rows[index].id %>" target="_blank" class="btn btn-success" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Read More</a>
+                        </td>
+                        <td>
+                            <a href="<%= row.link %>" target="_blank" class="btn btn-primary">Register</a>
                         </td>
                     <% } else if(caption === "Artikel Kami") { %>
                         <td>

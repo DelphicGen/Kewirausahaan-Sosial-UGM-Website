@@ -1,5 +1,5 @@
 <%- include('admin/function') %>
-<%- include('partials/header') %>
+<%- include('partials/header', {user: "user"}) %>
 
     <div class="article-page">
         <div class="container">
@@ -12,7 +12,9 @@
             <div class="full-details mt-4">
                 <%= event.full_details %>
             </div>
-
+            <div class="register-now">
+                <a href="<%= event.link %>" class="btn btn-primary">Register</a>
+            </div>
         </div>
     </div>
 

@@ -69,7 +69,7 @@ function add(req, res, date, image) {
         
         case 'article':
             connection.query(
-                'INSERT INTO ?? (title, author, details, full_details, image, link) VALUES (?, ?, ? ?, ?)',
+                'INSERT INTO ?? (title, author, details, full_details, image, link) VALUES (?, ?, ?, ?, ?, ?)',
                 [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link],
                 (error, results) => {
                     if(error) throw error;

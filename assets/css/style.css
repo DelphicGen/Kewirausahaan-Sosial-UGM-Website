@@ -1,43 +1,6 @@
-*, h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    text-align: center;
-}
-
-li {
-    display: inline-block;
-    padding: 13px;
-}
-
-.person-pic, #artcile img, #participant-testimonial img, #meet-the-founder img {
+.person-pic, #articles img, #participant-testimonial img, #meet-the-founder img {
     object-fit: cover !important;
     object-position: center !important;
-}
-
-/* Bootstrap */
-.container {
-    padding: 0;
-}
-
-.navbar {
-    background-color: transparent !important;
-}
-
-.navbar-collapse {
-    flex-grow: unset;
-    margin: 0 0 0 auto;
-}
-
-.navbar-toggler-icon, .nav-link {
-    color: #fff !important;
-    font-size: 16px;
 }
 
 /* landing-page */
@@ -69,11 +32,6 @@ li {
     right: -15%;
     bottom: -3%;
     width: 400px;
-    height: auto;
-}
-
-.logo {
-    width: 150px;
     height: auto;
 }
 
@@ -128,11 +86,6 @@ li {
     margin-top: 12px;
 }
 
-.article-btn {
-    position: absolute;
-    bottom: 3%;
-}
-
 .register-btn {
     background-color: rgba(214, 214, 214, .5);
     border-left: 5px solid #FFAD08;
@@ -170,7 +123,7 @@ section {
 
 section h3 {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 3rem;
     position: relative;
     width: fit-content;
     margin: 0 auto;
@@ -237,13 +190,19 @@ section h3:nth-child(2)::before {
     height: auto;
 }
 
-/* Our Mentor */
+/* Our Mentor and Team Member */
 .owl-nav {
     visibility: hidden;
 }
 
+.owl-carousel .owl-stage {
+    margin: 0 auto;
+}
+
 .mentor, .member {
-    max-width: 277px;
+    /* min-width: 233.33px;
+    width: auto;
+    max-width: 277px; */
 }
 
 .person-img {
@@ -397,8 +356,8 @@ section h3:nth-child(2)::before {
 }
 
 .upcoming-event img {
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 100%;
 }
 
 
@@ -428,12 +387,12 @@ section h3:nth-child(2)::before {
 }
 
 /* Artikel */
-.article {
+.main-page-article {
     width: calc(100% / 3);
     height: 596px !important;
 }
 
-.article img {
+.main-page-article img {
     height: 360px;
 }
 
@@ -462,6 +421,11 @@ section h3:nth-child(2)::before {
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+}
+
+.main-page-article-btn {
+    position: absolute;
+    bottom: 3%;
 }
 
 /* Testimonial */
@@ -619,46 +583,7 @@ section h3:nth-child(2)::before {
     transition: background 0s;
 }
 
-/* Event and Article */
-.event-page, .article-page {
-    background: #0F2027;
-    background: -webkit-linear-gradient(to bottom right, #2C5364, #203A43, #0F2027);
-    background: linear-gradient(to bottom right, #2C5364, #203A43, #0F2027);
-    min-height: 100vh;
-    padding-bottom: 40px;
-}
-
-.event-page *, .article-page * {
-    color: #fff !important;
-}
-
-.event-image {
-    width: 100%;
-    height: auto;
-    margin-bottom: 40px;
-}
-
-/* Table */
-.table-container::-webkit-scrollbar {
-    display: none;
-}
-
-.table-container table {
-    min-width: 1000px;
-}
-
-.table-container th:nth-child(1) {
-    min-width: 500px;
-}
-
-.table-container th:nth-last-child(1) {
-    min-width: 150px;
-}
-
 @media screen and (max-width: 991px) {
-    html {
-        font-size: 14px;
-    }
 
     .heading-container, .about-us p {
         width: 80%;
@@ -752,6 +677,10 @@ section h3:nth-child(2)::before {
         margin-bottom: 0;
     }
 
+    .person-img {
+        height: 250px;
+    }
+
     .latest-event-list iframe {
         width: 90%;
         height: 280px !important;
@@ -771,16 +700,16 @@ section h3:nth-child(2)::before {
         margin-bottom: 20px;
     }
 
-    .article {
+    .main-page-article {
         width: 100%;
         height: fit-content !important;
     }
 
-    .article p {
+    .main-page-article p {
         font-size: 14px;
     }
 
-    .article-btn {
+    .main-page-article-btn {
         position: unset;
     }
 
@@ -834,6 +763,10 @@ section h3:nth-child(2)::before {
         margin-bottom: 0 !important;
     }
 
+    .person-img {
+        height: 300px;
+    }
+
     .latest-event-list iframe {
         width: 100%;
         height: 250px;
@@ -845,6 +778,19 @@ section h3:nth-child(2)::before {
 
     .upcoming-event {
         height: 200px;
+    }
+
+
+    .event-title {
+        font-size: 20px;
+    }
+    
+    .event-date {
+        font-size: 12px;
+    }
+    
+    .event-detail {
+        font-size: 16px;
     }
 }
 

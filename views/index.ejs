@@ -62,7 +62,7 @@
   <!-- Our Mentor -->
   <section class="our-mentor container" id="our-mentor">
     <h3>Mentor Kita</h3>
-    <div class="owl-carousel owl-carousel-1 owl-theme">
+    <div class="owl-carousel owl-carousel-1 owl-theme owl-centered">
       <% mentors.forEach((mentor) => { %>
         <div class="item mentor">
           <div class="person-img">
@@ -190,10 +190,10 @@
   <section class="articles container" id="articles">
     <h3>Artikel</h3>
 
-    <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-lg-between">
+    <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-lg-center">
 
       <% articles.forEach((article) => { %>
-        <div class="article card">
+        <div class="main-page-article card">
           <% if(article.image) { %>
             <img src="<%= article.image %>" class="card-img-top" alt="">
           <% } else { %>
@@ -202,7 +202,7 @@
           <div class="card-body">
             <h5 class="card-title"><%= article.title %></h5>
             <p class="card-text"><%= article.details %></p>
-            <a href="/article?id=<%= article.id %>" class="article-btn more-details-btn btn">More Details</a>
+            <a href="/article?id=<%= article.id %>" class="main-page-article-btn more-details-btn btn">More Details</a>
           </div>
         </div>
       <% }) %>
