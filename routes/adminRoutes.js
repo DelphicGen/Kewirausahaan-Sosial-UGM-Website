@@ -138,7 +138,8 @@ router.post(`${baseUrl}new`, function(req, res) {
     } else if(req.body.image) {
         image = `/assets/images/${req.query.table}/${req.body.image}`;
     } else {
-        image = '/assets/images/default/avatar.svg';
+        if(req.query.table !== 'article') image = '/assets/images/default/avatar.svg';
+        else image = '/assets/images/default/test2.jpg';
     }
     add(req, res, date, image)
 });

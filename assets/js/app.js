@@ -90,12 +90,14 @@ $(document).ready(function () {
 
     // Upcoming Event
     let upcomingEvents = document.querySelectorAll('.upcoming-event');
+    let upcomingEventList = document.querySelectorAll('.upcoming-event-list')
     let details = document.querySelectorAll('.detail');
     let activeEvent = document.querySelector('.active-event');
     let prev = document.querySelector('.prev');
     let next = document.querySelector('.next');
     let leftControl = document.querySelector('.left-control');
     let rightControl = document.querySelector('.right-control');
+    let xDown, xUp;
     let activeIndex = 0;
     let nextIndex = (activeIndex + 1) % upcomingEvents.length;
     let prevIndex = (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;
@@ -103,7 +105,7 @@ $(document).ready(function () {
     $('.upcoming-event').on('click', function() {
         if($(this).hasClass('next')) slide('left');
         else if ($(this).hasClass('prev')) slide('right');
-        else slide('left');
+        // else slide('left');
     })
 
     if(upcomingEvents.length === 1) {
@@ -119,6 +121,30 @@ $(document).ready(function () {
         slide('left');
     });
 
+    const getTouches = (evt) => {
+        return evt.touches || evt.originalEvent.touches;
+    }                                                     
+    
+    const handleTouchStart = (evt) => {
+        const firstTouch = getTouches(evt)[0];                                      
+        xDown = firstTouch.clientX;                       
+    }
+
+    const handleTouchMove = (evt) => {
+        if (!xDown) {
+            return;
+        }
+
+        xUp = evt.touches[0].clientX;
+
+        if(xDown > xUp) slide('left')
+        else slide('right')
+
+        xDown = null;                                       
+    };
+
+    $(upcomingEventList).on('touchstart', handleTouchStart)
+    $(upcomingEventList).on('touchmove', handleTouchMove)
 
     const slide = (direction) => {
         if (upcomingEvents.length == 2) {

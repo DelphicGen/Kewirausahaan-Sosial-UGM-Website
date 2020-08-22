@@ -8,7 +8,7 @@
 
             <small class="mt-1">by <%= article.author %>, <%= dateFormat(article.created) %></small> <br />
 
-            <img class="article-full-img" src="<%= article.image%>" alt="">
+            <img class="article-full-img" src="<%= article.image%>" alt="<%= article.title %>">
 
             <div class="article-full-details mt-4">
                 <%= article.full_details %>

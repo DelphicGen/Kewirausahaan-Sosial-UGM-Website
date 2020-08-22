@@ -5,14 +5,14 @@
   <!-- Landing Page -->
   <div class="landing-page" id="landing-page">
     <div class="filter">
-      <div class="container landing-page-container">
+      <div class="container h-100 landing-page-container">
 
         <%- include('partials/nav') %>
 
-        <img class="triangle" src="/assets/images/header_image/triangle.png" alt="triangle">
+        <img class="position-absolute triangle" src="/assets/images/header_image/triangle.png" alt="triangle">
 
         <div class="wow fadeInUp heading-container">
-          <div class="heading-list">
+          <div class="heading-list text-white">
             <h1 class="main-heading">Bentuk Mindset Wirausaha</h1>
             <h5>Menginspirasi peserta kuliah untuk menemukan cara baru dalam mengatasi permasalahan sosial, khususnya melalui kewirausahaan sosial.</h5>
             <%# <button class="register-btn btn">Gabung Sekarang</button> %>
@@ -36,17 +36,17 @@
         <h5>Startups</h5>
       </div>
       <div class="talent wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".1s">
-        <img src="/assets/images/about_us/people.svg" alt="rocket">
+        <img src="/assets/images/about_us/people.svg" alt="people">
         <h4>37</h4>
         <h5>Talents</h5>
       </div>
       <div class="partner wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".2s">
-        <img src="/assets/images/about_us/handyman.svg" alt="rocket">
+        <img src="/assets/images/about_us/handyman.svg" alt="handyman">
         <h4>37</h4>
         <h5>Partners</h5>
       </div>
       <div class="event wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".3s">
-        <img src="/assets/images/about_us/date.svg" alt="rocket">
+        <img src="/assets/images/about_us/date.svg" alt="date">
         <h4>37</h4>
         <h5>Events</h5>
       </div>
@@ -66,7 +66,7 @@
       <% mentors.forEach((mentor) => { %>
         <div class="item mentor">
           <div class="person-img">
-            <img class="person-pic" src="<%= mentor.image %>" alt="">
+            <img class="person-pic" src="<%= mentor.image %>" alt="<%= mentor.name %>">
             <div class="person-media">
               <ul>
                 <% if(mentor.facebook) { %>
@@ -128,7 +128,7 @@
           <% } else { %>
             <div class="hidden-event upcoming-event">
           <% } %>  
-            <img class="upcoming-event-img img-fluid" id="upcoming-event-img" src="<%= upcomingEvent.image %>" alt="">
+            <img class="upcoming-event-img img-fluid" id="upcoming-event-img" src="<%= upcomingEvent.image %>" alt="<%= upcomingEvent.title %>">
           </div>
 
         <% }) %>
@@ -159,7 +159,7 @@
       <% teamMembers.forEach((member) => { %>
         <div class="member">
           <div class="person-img">
-            <img class="person-pic" src="<%= member.image %>" alt="">
+            <img class="person-pic" src="<%= member.image %>" alt="<%= member.name %>">
             <div class="person-media">
               <ul>
                 <% if(member.facebook) { %>
@@ -194,11 +194,8 @@
 
       <% articles.forEach((article) => { %>
         <div class="main-page-article card">
-          <% if(article.image) { %>
-            <img src="<%= article.image %>" class="card-img-top" alt="">
-          <% } else { %>
-            <img src="/assets/images/logo2.png" class="card-img-top" alt="">
-          <% } %>
+          <img src="<%= article.image %>" class="card-img-top" alt="<%= article.title %>">
+
           <div class="card-body">
             <h5 class="card-title"><%= article.title %></h5>
             <p class="card-text"><%= article.details %></p>
@@ -217,11 +214,7 @@
       <% testimonials.forEach((testimonial) => { %>
         <div class="item testimonial">
           <div class="testimonial-header d-flex align-items-center">
-            <% if(testimonial.image) { %>
-              <img src="<%= testimonial.image %>" alt="">
-            <% } else { %>
-              <img src="/assets/images/logo2.png" alt="">
-            <% } %>
+            <img src="<%= testimonial.image %>" alt="<%= testimonial.name %>">
             <p><%= testimonial.name %></p>
           </div>
           <div class="testimonial-detail d-flex align-items-center">
@@ -249,11 +242,8 @@
               <div class="founder carousel-item">
             <% } %> 
               <h4><%= review.details %></h4>
-              <% if(review.image) { %>
-                <img src="<%= review.image %>" class="d-block w-100" alt="">
-              <% } else { %>
-                <img src="/assets/images/logo2.png" class="d-block w-100" alt="">
-              <% } %>
+              <img src="<%= review.image %>" class="d-block w-100" alt="<%= review.name %>">
+              
               <em><%= review.name %>, <%= review.title %></em>
             </div>
           <% }) %>
