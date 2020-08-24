@@ -1,7 +1,18 @@
 $(document).ready(function () {
     let fullDetails = $('.article-full-details').text();
     $('.article-full-details').html(fullDetails);
-    // $('.article-full-details p').css("margin-bottom", "12px");
+
+    let partialDetails = $('.article-detail');
+    partialDetails.map((index, detail) => {
+        let content = $(detail).text();
+        $(detail).html(content);
+    })
+
+    let mainPageDetail = $('.main-page-article-detail');
+    mainPageDetail.map((index, detail) => {
+        let content = $(detail).text();
+        $(detail).html(content);
+    })
     
     // Wow JS
     new WOW().init();
@@ -34,7 +45,7 @@ $(document).ready(function () {
 
     let members = document.querySelectorAll('.member');
     $('.owl-carousel-2').owlCarousel({
-        loop:false,
+        loop:true,
         margin:10,
         nav:true,
         autoplay:true,
@@ -59,7 +70,7 @@ $(document).ready(function () {
 
     let testimonials = document.querySelectorAll('.testimonial');
     $('.owl-carousel-3').owlCarousel({
-        loop:false,
+        loop:true,
         margin:10,
         nav:true,
         autoplay:true,
@@ -81,8 +92,7 @@ $(document).ready(function () {
 
     
     $('.direct').click(function() {
-        const id = $(this).attr('href');
-        event.preventDefault();
+        const id = $(this).attr('href').substring(1);
         $('html, body').animate({
             scrollTop: $(id).offset().top
         }, 500);
@@ -105,7 +115,6 @@ $(document).ready(function () {
     $('.upcoming-event').on('click', function() {
         if($(this).hasClass('next')) slide('left');
         else if ($(this).hasClass('prev')) slide('right');
-        // else slide('left');
     })
 
     if(upcomingEvents.length === 1) {

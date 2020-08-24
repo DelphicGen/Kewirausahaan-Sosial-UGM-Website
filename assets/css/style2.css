@@ -1,8 +1,17 @@
-*, h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+ul, ol {
+    list-style-position: inside;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+li {
+    padding: 12px 12px 0;
 }
 
 /* Event and Article */
@@ -45,6 +54,10 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+
+.article-detail *:not(:first-child) {
+    display: none;
 }
 
 .article-full-details {
@@ -90,5 +103,12 @@
 
     .article-container, .article-container img, .article-container div {
         padding-right: 0;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .table-container th:nth-child(1) {
+        min-width: 200px;
+        width: 200px;
     }
 }

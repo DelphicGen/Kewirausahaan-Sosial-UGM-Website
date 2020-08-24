@@ -9,7 +9,7 @@
 
         <%- include('partials/nav') %>
 
-        <img class="position-absolute triangle" src="/assets/images/header_image/triangle.png" alt="triangle">
+        <img class="position-absolute triangle" src="/assets/images/header_image/triangle.webp" alt="triangle">
 
         <div class="wow fadeInUp heading-container">
           <div class="heading-list text-white">
@@ -31,75 +31,25 @@
 
     <div class="statistic d-flex justify-content-around justify-content-sm-between flex-wrap">
       <div class="startup wow bounceInLeft d-flex flex-column justify-content-around">
-        <img src="/assets/images/about_us/rocket2.png" alt="rocket">
-        <h4>37</h4>
+        <img src="/assets/images/about_us/rocket2.webp" alt="rocket">
+        <h4>8</h4>
         <h5>Startups</h5>
       </div>
       <div class="talent wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".1s">
         <img src="/assets/images/about_us/people.svg" alt="people">
-        <h4>37</h4>
-        <h5>Talents</h5>
+        <h4>7000</h4>
+        <h5>Participants</h5>
       </div>
       <div class="partner wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".2s">
         <img src="/assets/images/about_us/handyman.svg" alt="handyman">
-        <h4>37</h4>
+        <h4>16</h4>
         <h5>Partners</h5>
       </div>
       <div class="event wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".3s">
         <img src="/assets/images/about_us/date.svg" alt="date">
-        <h4>37</h4>
+        <h4>20</h4>
         <h5>Events</h5>
       </div>
-    </div>
-  </section>
-
-  <!-- Curiculum -->
-  <section class="curriculum container" id="curriculum">
-    <h3>Kurikulum</h3>
-    <img class="curriculum-img" src="/assets/images/curriculum/Kurikulum.png" alt="kurikulum ks">
-  </section>
-
-  <!-- Our Mentor -->
-  <section class="our-mentor container" id="our-mentor">
-    <h3>Mentor Kita</h3>
-    <div class="owl-carousel owl-carousel-1 owl-theme owl-centered">
-      <% mentors.forEach((mentor) => { %>
-        <div class="item mentor">
-          <div class="person-img">
-            <img class="person-pic" src="<%= mentor.image %>" alt="<%= mentor.name %>">
-            <div class="person-media">
-              <ul>
-                <% if(mentor.facebook) { %>
-                  <li><a target="_blank" href="<%= mentor.facebook %>"><i class="fa fa-facebook-f"></i></a></li>
-                <% } %>
-                <% if(mentor.twitter) { %>
-                  <li><a target="_blank" href="<%= mentor.twitter %>"><i class="fa fa-twitter"></i></a></li>
-                <% } %>
-                <% if(mentor.instagram) { %>
-                  <li><a target="_blank" href="<%= mentor.instagram %>"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                <% } %>
-                <% if(mentor.linkedin) { %>
-                  <li><a target="_blank" href="<%= mentor.linkedin %>"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                <% } %>
-              </ul>
-            </div>
-          </div>
-          <div class="person-details">
-            <h5 class="person-name"><%= mentor.name %></h5>
-            <p><%= mentor.title %></p>
-          </div>
-        </div>
-      <% }) %>
-      </div>
-  </section>
-
-  <!-- Latest Event -->
-  <section class="latest-event container" id="latest-event">
-    <h3>Event Terbaru</h3>
-    <div class="latest-event-list d-flex flex-column flex-lg-row justify-content-lg-between flex-wrap">
-      <% latestEvents.forEach((latestEvent) => { %>
-        <iframe width="560" height="315" src="<%= latestEvent.link %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <% }) %>
     </div>
   </section>
 
@@ -152,6 +102,56 @@
 
   </section>
 
+  <!-- Curiculum -->
+  <section class="curriculum container" id="curriculum">
+    <h3>Kurikulum</h3>
+    <img class="curriculum-img" src="/assets/images/curriculum/Kurikulum.png" alt="kurikulum ks">
+  </section>
+
+  <!-- Latest Event -->
+  <section class="latest-event container" id="latest-event">
+    <h3>Event Terbaru</h3>
+    <div class="latest-event-list d-flex flex-column flex-lg-row justify-content-lg-between flex-wrap">
+      <% latestEvents.forEach((latestEvent) => { %>
+        <iframe width="560" height="315" src="<%= latestEvent.link %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Our Mentor -->
+  <section class="our-mentor container" id="our-mentor">
+    <h3>Mentor Kita</h3>
+    <div class="owl-carousel owl-carousel-1 owl-theme owl-centered">
+      <% mentors.forEach((mentor) => { %>
+        <div class="item mentor">
+          <div class="person-img">
+            <img class="person-pic" src="<%= mentor.image %>" alt="<%= mentor.name %>">
+            <div class="person-media">
+              <ul>
+                <% if(mentor.facebook) { %>
+                  <li><a target="_blank" href="<%= mentor.facebook %>"><i class="fa fa-facebook-f"></i></a></li>
+                <% } %>
+                <% if(mentor.twitter) { %>
+                  <li><a target="_blank" href="<%= mentor.twitter %>"><i class="fa fa-twitter"></i></a></li>
+                <% } %>
+                <% if(mentor.instagram) { %>
+                  <li><a target="_blank" href="<%= mentor.instagram %>"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <% } %>
+                <% if(mentor.linkedin) { %>
+                  <li><a target="_blank" href="<%= mentor.linkedin %>"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+          <div class="person-details">
+            <h5 class="person-name"><%= mentor.name %></h5>
+            <p><%= mentor.title %></p>
+          </div>
+        </div>
+      <% }) %>
+      </div>
+  </section>
+
   <!-- Our Team -->
   <section class="our-team container" id="our-team">
     <h3>Team Kita</h3>
@@ -198,7 +198,7 @@
 
           <div class="card-body">
             <h5 class="card-title"><%= article.title %></h5>
-            <p class="card-text"><%= article.details %></p>
+            <p class="main-page-article-detail card-text"><%= article.full_details %></p>
             <a href="/article?id=<%= article.id %>" class="main-page-article-btn more-details-btn btn">More Details</a>
           </div>
         </div>
@@ -275,14 +275,13 @@
           </ul>
         </div>
         <h5>atau :</h5>
-        <p>+62 852 9340 0470 (hanya Whatsapp) <br />
-          bayudardias@ugm.ac.id</p>
+        <p>Rina +62 878-3838-6519 (WA Only)</p>
 
         <small>Icon by Flaticon</small>
       </div>
 
       <div class="contact-form col-md-6">
-        <form action="" class="form">
+        <form action="" method="post" class="form">
           <div class="input-container d-flex flex-column align-items-start">
             <label for="email">Email :</label>
             <input type="text" name="email" class="email input-bar" id="email">
@@ -293,6 +292,11 @@
             <label for="phone">No telp :</label>
             <input type="text" name="phone" class="phone input-bar" id="phone">
             <div class="input-bar-after"></div>
+          </div>
+
+          <div class="input-container d-flex flex-column align-items-start">
+            <label for="message">Message:</label>
+            <textarea name="message" class="message input-bar" id="message"></textarea>
           </div>
 
           <button type="submit" class="btn submit-btn">Kirim</button>

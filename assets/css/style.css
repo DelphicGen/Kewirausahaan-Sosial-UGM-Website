@@ -1,3 +1,14 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    text-align: center;
+}
+
+li {
+    display: inline-block;
+    padding: 12px;
+}
+
 .person-pic, #articles img, #participant-testimonial img, #meet-the-founder img {
     object-fit: cover !important;
     object-position: center !important;
@@ -5,7 +16,7 @@
 
 /* landing-page */
 .landing-page {
-    background-image: url('../images/header_image/header.jpg');
+    background-image: url('../images/header_image/header.webp');
     background-size: cover;
     background-position: center;
     min-height: 100vh;
@@ -270,7 +281,7 @@ section h3:nth-child(2)::before {
     background-color: #FFAD08;
     text-align: center;
     padding: 10px 20px;
-    height: 80px;
+    height: 90px;
 }
 
 .person-name {
@@ -401,6 +412,19 @@ section h3:nth-child(2)::before {
     position: relative;
 }
 
+.main-page-article-detail {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    margin-bottom: 12px !important;
+}
+
+.main-page-article-detail *:not(:first-child) {
+    display: none;
+}
+
 .card:nth-child(1), .card:nth-child(2) {
     margin-right: 10px;
 }
@@ -412,15 +436,6 @@ section h3:nth-child(2)::before {
 .card-title{
     font-weight: bold;
     margin-bottom: 12px !important;
-}
-
-.card-text{
-    margin-bottom: 12px !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
 }
 
 .main-page-article-btn {
@@ -502,7 +517,7 @@ section h3:nth-child(2)::before {
 
 /* Let's collaborate */
 .collaborate {
-    padding-bottom: 80px;
+    padding-bottom: 80px !important;
 }
 
 .ks-media *{
@@ -725,7 +740,7 @@ section h3:nth-child(2)::before {
     }
 
     .collaborate {
-        padding-bottom: 0;
+        padding-bottom: 0 !important;
     }
 
     .form {

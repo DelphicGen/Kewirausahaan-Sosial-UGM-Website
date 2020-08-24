@@ -60,7 +60,7 @@ router.get(`${baseUrl}edit`, function(req, res) {
                     [req.query.table, req.query.id],
                     (error, results) => {
                         if('date' in results[0]){
-                            let mm = results[0].date.getMonth() + 1 < 9 ? `0${results[0].date.getMonth() + 1}` : results[0].date.getMonth() + 1;
+                            let mm = results[0].date.getMonth() < 9 ? `0${results[0].date.getMonth() + 1}` : results[0].date.getMonth() + 1;
                             let dd = results[0].date.getDate() < 9 ? `0${results[0].date.getDate()}` : results[0].date.getDate();
                             let yyyy = results[0].date.getFullYear();
                             let hh = results[0].date.getHours() < 9 ? `0${results[0].date.getHours()}` : results[0].date.getHours();
@@ -78,6 +78,8 @@ router.get(`${baseUrl}edit`, function(req, res) {
 });
 
 router.post(`${baseUrl}edit`, async function(req, res) {
+
+    console.log(req.body.full_details)
     let date, image;
     if(req.body.date) {
         date = req.body.date.replace('T', ' ');
