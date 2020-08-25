@@ -1,11 +1,6 @@
 const baseUrl = require('../variables/variables');
 const mysql = require('mysql');
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'kewirausahaan_sosial_ugm'
-});
+const connection = require('../connection/connection');
 
 function checkAuthenticated(req, res, next) {
     if(req.isAuthenticated()) {

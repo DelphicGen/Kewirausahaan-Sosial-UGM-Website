@@ -37,6 +37,25 @@ li {
 
 .register-now {
     margin-top: 40px;
+    text-align: center;
+}
+
+.register-now a{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.partner {
+    background-color: #FFAD08;
+}
+
+.partner * {
+    color: #000 !important;
+}
+
+.partner i {
+    width: 19px;
+    height: 19px;
 }
 
 /* Article */
@@ -60,8 +79,9 @@ li {
     display: none;
 }
 
-.article-full-details {
+.article-full-details, .event-full-details {
     overflow: auto;
+    font-size: 16px;
 }
 
 .article-full-img {
@@ -70,9 +90,20 @@ li {
     margin-top: 20px;
 }
 
-.article-full-details p img {
+.article-full-details img, .event-full-details img {
+    display: block;
+    margin: 0 auto;
     max-width: 100% !important;
     height: auto !important;
+}
+
+.register-btn {
+    background-color: #FFAD08;
+    border-radius: 5px;
+    border: none;
+    padding: 8px 20px;
+    width: fit-content;
+    color: #000 !important;
 }
 
 /* Table */

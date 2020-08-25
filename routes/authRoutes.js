@@ -9,12 +9,7 @@ const crypto = require('crypto');
 const [checkAuthenticated, checkNotAuthenticated] = require('../functions/functions');
 const baseUrl = require('../variables/variables');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'kewirausahaan_sosial_ugm'
-});
+const connection = require('../connection/connection');
 
 
 router.get(`${baseUrl}login`, checkNotAuthenticated, (req, res) => {

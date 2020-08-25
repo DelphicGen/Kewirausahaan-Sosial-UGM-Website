@@ -4,12 +4,7 @@ const async = require("async");
 const router = express.Router();
 const [checkAuthenticated, checkNotAuthenticated, add, edit] = require('../functions/functions');
 const baseUrl = require('../variables/variables');
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'kewirausahaan_sosial_ugm'
-});
+const connection = require('../connection/connection');
 
 router.get(`${baseUrl}adminDashboard`, checkAuthenticated, async function(req, res){
     

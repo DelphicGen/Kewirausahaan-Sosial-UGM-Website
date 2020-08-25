@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const mysql = require('mysql');
 const app = express();
 const passport = require('passport');
 const flash = require('express-flash');
@@ -13,13 +12,7 @@ const baseUrl = require('./variables/variables');
 const clientRoutes = require("./routes/clientRoutes");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
-
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'kewirausahaan_sosial_ugm'
-});
+const connection = require('./connection/connection');
 
 const query = util.promisify(connection.query).bind(connection);
 

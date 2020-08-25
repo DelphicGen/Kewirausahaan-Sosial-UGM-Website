@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    let fullDetails = $('.article-full-details').text();
-    $('.article-full-details').html(fullDetails);
+    let fullDetails = $('.full-details').text();
+    $('.full-details').html(fullDetails);
 
     let partialDetails = $('.article-detail');
     partialDetails.map((index, detail) => {
@@ -22,7 +22,7 @@ $(document).ready(function () {
     $('.owl-carousel-1').owlCarousel({
         loop:false,
         margin:10,
-        nav:true,
+        nav:false,
         autoplay:true,
         autoplayTimeout:5000,
         autoplayHoverPause:true,
@@ -47,7 +47,7 @@ $(document).ready(function () {
     $('.owl-carousel-2').owlCarousel({
         loop:true,
         margin:10,
-        nav:true,
+        nav:false,
         autoplay:true,
         autoplayTimeout:5000,
         autoplayHoverPause:true,
@@ -72,7 +72,7 @@ $(document).ready(function () {
     $('.owl-carousel-3').owlCarousel({
         loop:true,
         margin:10,
-        nav:true,
+        nav:false,
         autoplay:true,
         autoplayTimeout:5000,
         autoplayHoverPause:true,
@@ -86,6 +86,25 @@ $(document).ready(function () {
             },
             992: {
                 items: testimonials.length >= 3 ? 3 : testimonials.length
+            }
+        }
+    });
+
+    let partners = document.querySelectorAll('.partner');
+    $('.owl-carousel-4').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:false,
+        autoplay:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
+        autoWidth: partners.length < 3 ? true : false,
+        responsive:{
+            0:{
+                items: partners.length >= 1 ? 1 : partners.length
+            },
+            576:{
+                items: partners.length >= 2 ? 2 : partners.length
             }
         }
     });

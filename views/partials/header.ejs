@@ -4,7 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kewirausahaan Sosial UGM</title>
+  <meta name="description" content=" Kuliah Kewirausahaan Sosial didasari oleh kegelisahaan atas ketidaksinkronan dunia pendidikan dengan dunia luar. Belajar dari yang ahli, dosen menjadi fasilitator.">
+  <meta name="keywords" content="Kewirausahaan, Sosial, UGM, Entrepreneur, Merdeka Belajar, Kampus Merdeka, Kewirausahaan Sosial">
+  <title>Kewirausahaan Sosial - Kuliah Paling Inovatif</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/header_image/faveicon_ks.webp"/>
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
@@ -26,11 +31,11 @@
   <!-- Cropper JS -->
   <link rel="stylesheet" href="/assets/css/cropper.css">
 
-  <!-- CKEditor -->
-  <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js" type="text/javascript"></script>
-
-  <!-- CSS -->
   <% if(locals.user === "admin") { %>
+    <!-- CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.14.1/standard/ckeditor.js" type="text/javascript"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script> -->
+    <!-- CSS -->
     <link rel="stylesheet" href="/assets/css/admin.css">
   <% } else if(locals.user === "user") {%>
     <link rel="stylesheet" href="/assets/css/style2.css">

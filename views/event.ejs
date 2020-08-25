@@ -4,16 +4,36 @@
     <div class="article-page">
         <div class="container">
             <%- include('partials/nav') %>
-            <img class="event-image" src="<%= event.image %>" alt="<%= event.title %>">
+            <img class="event-image mt-3" src="<%= event.image %>" alt="<%= event.title %>">
             <h1 class="font-weight-bold"><%= event.title %></h1>
 
             <small class="mt-1"><%= dateFormat(event.date) %></small>
 
-            <div class="full-details mt-4">
+            <div class="event-full-details full-details my-4">
                 <%= event.full_details %>
             </div>
+
+            <% if(event.title === 'Test10') { %>
+                <h5><strong>ALUR REGISTRASI</strong></h5>
+                <img class="alur mb-5" src="/assets/images/partner/Alur Registrasi.webp" alt="">
+                <div class="owl-carousel owl-carousel-4 owl-theme">
+
+                    <img src="/assets/images/partner/1 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/2 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/3 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/4 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/5 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/6 - ok (1).webp" class="partner" alt="">
+                    <img src="/assets/images/partner/6 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/8 - ok (1).webp" class="partner" alt="">
+                    <img src="/assets/images/partner/8 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/9 - ok.webp" class="partner" alt="">
+                    <img src="/assets/images/partner/10 - ok.webp" class="partner" alt="">
+
+                </div>
+            <% } %>
             <div class="register-now">
-                <a href="<%= event.link %>" class="btn btn-primary">Register</a>
+                <a href="<%= event.link %>" class="btn register-btn">Daftar Sekarang!</a>
             </div>
         </div>
     </div>

@@ -4,12 +4,7 @@ const mysql = require('mysql');
 const async = require("async");
 const baseUrl = require('../variables/variables');
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'kewirausahaan_sosial_ugm'
-});
+const connection = require('../connection/connection');
 
 router.get(baseUrl, (req, res) => {
 
