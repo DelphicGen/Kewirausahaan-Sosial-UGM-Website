@@ -62,4 +62,15 @@ router.get(`${baseUrl}article`, (req, res) => {
     )
 })
 
+router.post(`${baseUrl}collab`, (req, res) => {
+    connection.query(
+        'INSERT INTO collaboration (email, message) VALUES (?, ?)',
+        [req.body.email, req.body.message],
+        (error, results) => {
+            if(error) throw error;
+            else res.redirect('/')
+        }
+    )
+})
+
 module.exports = router;

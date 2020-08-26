@@ -33,6 +33,9 @@
 
         <!-- Leader -->
         <%- include('../partials/table', { caption: "Leader Review", columns: ["id", "name", "title", "details", "image"], rows: leaderReviews }) %>
+
+        <!-- Collaboration -->
+        <%- include('../partials/table', { caption: "Collaboration", columns: ["id", "email", "message", "date"], rows: collaboration }) %>
     </div>
 
 <%- include('../partials/script', {user: "admin"}) %>

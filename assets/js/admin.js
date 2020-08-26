@@ -1,30 +1,6 @@
 $(document).ready(function () {
-    // let ckeditor = document.querySelector('.ckeditor');
-    // if(ckeditor) CKEDITOR.replace('#ckeditor');
-    // let config = {
-    //     toolbar: [
-    //         ['Font','FontSize'],
-    //         ['Bold','Italic','Underline'],
-    //         ['TextColor','BGColor'],
-    //         ['JustifyLeft', 'JustifyCenter', 'JustifyRight']
-    //     ],
-    // };
-    // $('.ckeditor').ckeditor(config);
-    ClassicEditor
-        .create( document.querySelector('.ckeditor'), {
-            alignment: {
-                options: [ 'left', 'right', 'center', 'justify' ]
-            },
-            toolbar: [
-                'heading', '|', 'bulletedList', 'numberedList', 'alignment', 'undo', 'redo'
-            ]
-        })
-        .then( editor => {
-            CKEDITOR.replace(editor);
-        } )
-        .catch( error => {
-                console.error( error );
-        } );
+    let ckeditor = document.querySelector('.ckeditor')
+    if(ckeditor) CKEDITOR.replace('#ckeditor');
 
     let result = document.querySelector('.result') && document.querySelector('.result'),
     img_result = document.querySelector('.img-result') && document.querySelector('.img-result'),
@@ -63,14 +39,12 @@ $(document).ready(function () {
             cropped.classList.remove('d-none');
             img_result.classList.remove('d-none');
             cropped.src = imgSrc;
-            // $('.cropped_image').val(imgSrc)
             dwn.classList.remove('d-none');
             dwn.download = 'imagename';
             dwn.setAttribute('href',imgSrc);
         });
 
     }
-  
   
 
 });

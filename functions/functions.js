@@ -94,6 +94,16 @@ function add(req, res, date, image) {
                 }
             );
             break;
+        case 'collaboration':
+            connection.query(
+                'INSERT INTO ?? (email, message) VALUES (?, ?)',
+                [req.query.table, req.body.email, req.body.message],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
+                }
+            );
+            break;
         default:
             res.redirect(`${baseUrl}adminDashboard`)
     }
@@ -171,6 +181,16 @@ function edit(req, res, date, image) {
             connection.query(
                 'UPDATE (??) SET name = ?, title = ?, details = ?, image = ? WHERE id = ?',
                 [req.query.table, req.body.name, req.body.title, req.body.details, image, req.query.id],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
+                }
+            );
+            break;
+        case 'collaboration':
+            connection.query(
+                'UPDATE ?? SET email = ?, message = ? WHERE id = ?',
+                [req.query.table, req.body.email, req.body.message, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect(`${baseUrl}adminDashboard`)

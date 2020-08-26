@@ -27,22 +27,6 @@
                                 <input type="password" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
                             <% } else if (columns[index].Field === 'date') { %>
                                 <input type="datetime-local" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
-                            <% } else if (columns[index].Field === 'image') { %>
-                                <div class="custom-file">
-                                    <input type="file" class="form-control custom-file-input upload" id="<%= columns[index].Field %> customFile" name="<%= columns[index].Field %>" value="<%= value %>" required>
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                </div>
-                                
-                                <div class="d-flex flex-sm-row align-items-lg-center">
-                                    <div class="col-md-6 col-12 w-100 h-auto box-2">
-                                        <div class="result"></div>
-                                    </div>
-                                    <div class="col-md-6 col-12 w-100 h-auto box-2 img-result">
-                                        <img class="cropped" src="" alt="">
-                                    </div>
-                                </div>
-                                <button class="btn save d-none">Save</button>
-                                <a href="" class="btn download d-none">Download</a>
                             <% } else if (columns[index].Field === 'full_details') { %>
                                 <textarea class="form-control ckeditor" id="<%= columns[index].Field %> ckeditor" name="<%= columns[index].Field %>" required><%= value %></textarea>
                             <% } else { %>
@@ -63,7 +47,6 @@
                                     </div>
                                 </div>
                                 <button class="btn save d-none">Save</button>
-                                <input type="text" class="form-control cropped_image" style="opacity: 0;" id="cropped_image" name="cropped_image" value="">
                                 <a href="" class="btn download d-none">Download</a>
                             <% } else { %>
                                 <input type="text" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>">
