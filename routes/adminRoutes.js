@@ -1,5 +1,4 @@
 const express = require('express');
-const mysql = require('mysql');
 const async = require("async");
 const router = express.Router();
 const [checkAuthenticated, checkNotAuthenticated, add, edit] = require('../functions/functions');

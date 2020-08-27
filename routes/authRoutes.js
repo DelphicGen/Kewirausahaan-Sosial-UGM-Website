@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql');
 const async = require("async");
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -74,61 +73,61 @@ router.get(`${baseUrl}forgot`, function(req, res) {
 
 router.post(`${baseUrl}forgot`, function(req, res, next) {
     async.waterfall([
-      function(done) {
-        crypto.randomBytes(20, function(err, buf) {
-          var token = buf.toString('hex');
-          done(err, token);
-        });
-      },
-      function(token, done) {
-        connection.query("SELECT * FROM users WHERE email = ? " , 
-            req.body.email , 
-            function(err , user){
-                var date;
-                date = new Date();
-                date = date.getUTCFullYear() + '-' +
-                    ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
-                    ('00' + date.getUTCDate()).slice(-2) + ' ' + 
-                    ('00' + (date.getHours())).slice(-2) + ':' + 
-                    ('00' + date.getMinutes()).slice(-2) + ':' + 
-                    ('00' + date.getSeconds()).slice(-2);
-
-                if (user.length === 0) {
-                    req.flash('error', 'No account with that email address exists.');
-                    return res.redirect(`${baseUrl}forgot`);
-                }
-
-                connection.query("UPDATE users SET resetPasswordToken = ?, resetPasswordExpires = ? WHERE email = ?",
-                    [ token, date, user[0].email ],
-                    function(err) {
-                        done(err, token, user);
-                    }
-                )
-
+        function(done) {
+            crypto.randomBytes(20, function(err, buf) {
+            let token = buf.toString('hex');
+            done(err, token);
             });
-      },
-      function(token, user, done) {
-        var smtpTransport = nodemailer.createTransport({
-          service: 'Gmail',
-          auth: {
-            user: 'ksugm123',
-            pass: 'ksjaya123'
-          }
-        });
-        var mailOptions = {
-          to: user[0].email,
-          from: 'ksugm123',
-          subject: 'Node.js Password Reset',
-          text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-            'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-            'http://' + req.headers.host + '/reset/' + token + '\n\n' +
-            'If you did not request this, please ignore this email and your password will remain unchanged.\n'
-        };
-        smtpTransport.sendMail(mailOptions, function(err) {
-          req.flash('info', 'An e-mail has been sent to ' + user[0].email + ' with further instructions.');
-          done(err, 'done');
-        });
-      }
+        },
+        function(token, done) {
+            connection.query("SELECT * FROM users WHERE email = ? " , 
+                req.body.email , 
+                function(err , user){
+                    let date;
+                    date = new Date();
+                    date = date.getUTCFullYear() + '-' +
+                        ('00' + (date.getUTCMonth()+1)).slice(-2) + '-' +
+                        ('00' + date.getUTCDate()).slice(-2) + ' ' + 
+                        ('00' + (date.getHours())).slice(-2) + ':' + 
+                        ('00' + date.getMinutes()).slice(-2) + ':' + 
+                        ('00' + date.getSeconds()).slice(-2);
+
+                    if (user.length === 0) {
+                        req.flash('error', 'No account with that email address exists.');
+                        return res.redirect(`${baseUrl}forgot`);
+                    }
+
+                    connection.query("UPDATE users SET resetPasswordToken = ?, resetPasswordExpires = ? WHERE email = ?",
+                        [ token, date, user[0].email ],
+                        function(err) {
+                            done(err, token, user);
+                        }
+                    )
+
+                });
+        },
+        function(token, user, done) {
+            let smtpTransport = nodemailer.createTransport({
+            service: 'Gmail',
+            auth: {
+                user: 'ksugm123',
+                pass: 'ksjaya123'
+            }
+            });
+            let mailOptions = {
+            to: user[0].email,
+            from: 'ksugm123',
+            subject: 'Node.js Password Reset',
+            text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+                'http://' + req.headers.host + '/reset/' + token + '\n\n' +
+                'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+            };
+            smtpTransport.sendMail(mailOptions, function(err) {
+            req.flash('info', 'An e-mail has been sent to ' + user[0].email + ' with further instructions.');
+            done(err, 'done');
+            });
+        }
     ], function(err) {
       if (err) return next(err);
       res.redirect(`${baseUrl}forgot`);
@@ -174,14 +173,14 @@ router.post(`${baseUrl}reset/:token`, function(req, res) {
         
     },
     function(user, done) {
-        var smtpTransport = nodemailer.createTransport({
+        let smtpTransport = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
             user: 'ksugm123',
             pass: 'ksjaya123'
         }
         });
-        var mailOptions = {
+        let mailOptions = {
         to: user.email,
         from: 'ksugm123',
         subject: 'Your password has been changed',
@@ -195,19 +194,5 @@ router.post(`${baseUrl}reset/:token`, function(req, res) {
     }
     ]);
 });
-
-// function checkAuthenticated(req, res, next) {
-//     if(req.isAuthenticated()) {
-//         return next();
-//     }
-//     res.redirect(`${baseUrl}login`)
-// }
-
-// function checkNotAuthenticated(req, res, next) {
-//     if(req.isAuthenticated()) {
-//         return res.redirect(`${baseUrl}adminDashboard`)
-//     }
-//     return next();
-// }
 
 module.exports = router;

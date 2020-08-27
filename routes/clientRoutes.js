@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const mysql = require('mysql');
 const async = require("async");
+const nodemailer = require('nodemailer');
 const baseUrl = require('../variables/variables');
 
 const connection = require('../connection/connection');
@@ -62,15 +62,43 @@ router.get(`${baseUrl}article`, (req, res) => {
     )
 })
 
-router.post(`${baseUrl}collab`, (req, res) => {
-    connection.query(
-        'INSERT INTO collaboration (email, message) VALUES (?, ?)',
-        [req.body.email, req.body.message],
-        (error, results) => {
-            if(error) throw error;
-            else res.redirect('/')
+router.post(`${baseUrl}collab`, (req, res, next) => {
+    async.waterfall([
+        (done) => {
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'ksugm123',
+                    pass: 'ksjaya123'
+                }
+            });
+              
+            let mailOptions = {
+                from: 'ksugm123',
+                // to: 'gennardo@mail.ugm.ac.id',
+                to: 'brian@kewirausahaansosial.com',
+                subject: `Ajakan Kolaborasi dari ${req.body.name}, email: ${req.body.email}`,
+                text: req.body.message
+            };
+            transporter.sendMail(mailOptions, (error, info) => {
+                done(error, info)
+            });
+        },
+        (info) => {
+            connection.query(
+                'INSERT INTO collaboration (name, email, message) VALUES (?, ?, ?)',
+                [req.body.name, req.body.email, req.body.message],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect('/')
+                }
+            )
         }
-    )
+    ], (error) => {
+        if(error) return next(err);
+        res.redirect(`${baseUrl}`)
+    })
+
 })
 
 module.exports = router;
