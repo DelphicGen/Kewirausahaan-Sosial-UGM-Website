@@ -9,13 +9,18 @@
 
             <small class="mt-1"><%= dateFormat(event.date) %></small>
 
+            <% if(event.title === 'Test10') { %>
+                <div class="event-iframe">
+                    <p><strong>Rekap Perkuliahan Kewirausahaan Sosial Batch #1 Semester Genap 2019/2020</strong></p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/lZ1Pf5_RBZw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            <% } %>
+
             <div class="event-full-details full-details my-4">
                 <%= event.full_details %>
             </div>
 
-            <% if(event.title === 'Test10') { %>
-                <h5><strong>ALUR REGISTRASI</strong></h5>
-                <img class="alur mb-5" src="/assets/images/partner/Alur Registrasi.webp" alt="">
+            <% if(event.title === 'Program Kuliah Kewirausahaan Sosial UGM Semester Gasal 2020/2021 Kode Mata Kuliah SPU 2309') { %>
                 <div class="owl-carousel owl-carousel-4 owl-theme">
 
                     <img src="/assets/images/partner/1 - ok.webp" class="partner" alt="">

@@ -35,6 +35,16 @@
     height: auto;
 }
 
+/* Table */
+
+.table-container::-webkit-scrollbar {
+    display: none;
+}
+
+.table-container table {
+    min-width: 1000px;
+}
+
 @media screen and (max-width: 991px) {
     html {
         font-size: 14px;

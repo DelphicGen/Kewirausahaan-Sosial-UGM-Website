@@ -1,0 +1,37 @@
+<%- include('admin/function') %>
+
+<%- include('partials/header', {user: "user"}) %>
+
+<div class="curriculum-page">
+    <div class="container">
+        <%- include('partials/nav') %>
+        <!-- <img class="curriculum-img" src="/assets/images/curriculum/Kurikulum.webp" alt="kurikulum ks"> -->
+
+        <img class="event-image mt-3" src="<%= event.image %>" alt="<%= event.title %>">
+        <div class="event-full-details full-details my-4">
+            <%= event.full_details %>
+        </div>
+
+        <div class="owl-carousel owl-carousel-4 owl-theme">
+
+            <img src="/assets/images/partner/1 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/2 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/3 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/4 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/5 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/6 - ok (1).webp" class="partner" alt="">
+            <img src="/assets/images/partner/6 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/8 - ok (1).webp" class="partner" alt="">
+            <img src="/assets/images/partner/8 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/9 - ok.webp" class="partner" alt="">
+            <img src="/assets/images/partner/10 - ok.webp" class="partner" alt="">
+
+        </div>
+
+        <div class="register-now">
+            <a href="https://datastudio.google.com/reporting/ec7fbba3-c22a-471d-9d01-c6279890be98" class="btn register-btn">Daftar Perserta yang Lulus</a>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/script') %>

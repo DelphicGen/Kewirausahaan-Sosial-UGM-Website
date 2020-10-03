@@ -1,24 +1,29 @@
 <%- include('partials/header') %>
 
-<div class="form d-flex flex-column justify-content-center mt-5">
-
-    <h1>Login</h1>
-    <% if(messages.error) {%>
-        <%= messages.error %>
-    <% } %>
-
-    <form action="/login" method="POST">
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="/forgot" class="btn">Forgot Password ?</a>
-    </form>
+<div class="login d-flex justify-content-center align-items-center">
+    <div class="login__form form">
+    
+        <h1 class="login__header">Login</h1>
+        <% if(messages.error) {%>
+            <%= messages.error %>
+        <% } %>
+    
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="login__input" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" required>
+                <div className="login__inputAfter"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="login__input" id="password" name="password" placeholder="Password" required>
+                <div className="login__inputAfter"></div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/forgot" class="btn">Forgot Password ?</a>
+        </form>
+    
+    </div>
 
 </div>
 <%- include('partials/script') %>

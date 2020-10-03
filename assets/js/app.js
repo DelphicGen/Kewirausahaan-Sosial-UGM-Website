@@ -185,14 +185,18 @@ $(document).ready(function () {
                     $(next).addClass('active-event').removeClass('next');
                     $(activeEvent).addClass('prev').removeClass('active-event');
                     $(prev).addClass('hidden-event').removeClass('prev');
+                    
                     $(upcomingEvents[(nextIndex + 1) % upcomingEvents.length]).addClass('next').removeClass('hidden-event');
+                    
                     $(details[activeIndex]).addClass('hidden-event');
                     $(details[nextIndex]).removeClass('hidden-event');
             } else {
                     $(prev).addClass('active-event').removeClass('prev');
                     $(activeEvent).addClass('next').removeClass('active-event');
                     $(next).addClass('hidden-event').removeClass('next');
+                    
                     $(upcomingEvents[(prevIndex + upcomingEvents.length-1) % upcomingEvents.length]).addClass('prev').removeClass('hidden-event');
+                    
                     $(details[activeIndex]).addClass('hidden-event');
                     $(details[prevIndex]).removeClass('hidden-event');
             }

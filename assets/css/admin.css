@@ -1,6 +1,17 @@
 /* Dashboard */
+.adminDashboard {
+    background: #0F2027;
+    background-image: linear-gradient(to right top, rgba(43, 45, 66, .95), rgba(49, 63, 90, .9), rgba(50, 82, 113, .9), rgba(46, 103, 136, .85), rgba(34, 124, 157, .85));
+    min-height: 100vh;
+    padding-bottom: 50px;
+}
+
+.adminDashboard * {
+    color: #fff;
+}
+
 .table-container {
-    max-height: 250px;
+    max-height: 500px;
     margin-bottom: 50px;
 }
 

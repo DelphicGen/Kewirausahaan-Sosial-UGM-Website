@@ -19,9 +19,10 @@ router.get(`${baseUrl}adminDashboard`, checkAuthenticated, async function(req, r
             function(callback) { connection.query('SELECT * FROM testimonial', callback); },
             function(callback) { connection.query('SELECT * FROM leader_review', callback); },
             function(callback) { connection.query('SELECT * FROM collaboration', callback); },
+            function(callback) { connection.query('SELECT * FROM announcement', callback); },
         ], function(error, results) {
             if(error) throw error;
-            else res.render('./admin/adminDashboard.ejs', { username: username, role: role, mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], collaboration: results[7][0] });
+            else res.render('./admin/adminDashboard.ejs', { username: username, role: role, mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], collaboration: results[7][0], announcements: results[8][0] });
         });
     })
 

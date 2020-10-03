@@ -1,9 +1,13 @@
+<% let table = "mentor"; %>
 <%- include('../partials/header', {user: "admin"}) %>
 
-    <div class="container pt-5">
-        <div class="d-flex justify-content-between align-items-center">
-            <h1 class="mb-5">Hi <%= username %></h1>
-            <div>
+<div class="adminDashboard pt-3">
+
+    <div class="container">
+        <%- include('../partials/nav') %>
+        <div class="d-flex align-items-center justify-content-between my-3">
+            <h1><%= username %></h1>
+            <div class="d-flex">
                 <% if(role === "super admin") { %>
                     <a href="/userList" class="btn">List of Admin</a>
                 <% } %>
@@ -11,11 +15,11 @@
                     <button class="btn" type="submit">Logout</button>
                 </form>
             </div>
-        </div>   
+        </div>
 
         <!-- List of Mentor -->
         <%- include('../partials/table', { caption: "Mentor", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: mentors }) %>
-
+        
         <!-- Latest Event -->
         <%- include('../partials/table', { caption: "Latest Event", columns: ["id", "date", "link"], rows: latestEvents }) %>
 
@@ -36,6 +40,10 @@
 
         <!-- Collaboration -->
         <%- include('../partials/table', { caption: "Collaboration", columns: ["id", "name", "email", "message", "date"], rows: collaboration }) %>
-    </div>
 
+        <!-- Announcement -->
+        <%- include('../partials/table', { caption: "Announcement", columns: ["id", "text", "button text", "link"], rows: announcements }) %>
+
+    </div>
+</div>
 <%- include('../partials/script', {user: "admin"}) %>

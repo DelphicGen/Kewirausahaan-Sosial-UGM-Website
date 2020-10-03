@@ -603,6 +603,46 @@ section h3:nth-child(2)::before {
     transition: background 0s;
 }
 
+/* Login */
+.login {
+    height: 100vh;
+    background: #0F2027;
+    background-image: linear-gradient(to right top, rgba(43, 45, 66, .95), rgba(49, 63, 90, .9), rgba(50, 82, 113, .9), rgba(46, 103, 136, .85), rgba(34, 124, 157, .85));
+}
+
+.login * {
+    color: #fff;
+}
+
+.login__header {
+    text-align: center;
+}
+
+.login__input {
+    border: none;
+    border-bottom: solid 1px #FFAD08;
+    background-color: transparent !important;
+    padding: 8px;
+    width: 100%;
+    color: #fff;
+}
+
+.login__input:focus {
+    outline: none !important;
+}
+
+.login__inputAfter {
+    border-bottom: solid 1px #FFAD08;
+    transform: scaleX(0);
+    transition: transform 200ms ease-in-out;
+    width: 100%;
+}
+
+.login__input:focus + .login__inputAfter {
+    transform-origin: 100% 50%;
+    transform: scaleX(1);
+}
+
 @media screen and (max-width: 991px) {
 
     .heading-container, .about-us p {

@@ -16,16 +16,17 @@ router.get(baseUrl, (req, res) => {
         function(callback) { connection.query('SELECT * FROM article ORDER BY created DESC LIMIT 3', callback); },
         function(callback) { connection.query('SELECT * FROM testimonial LIMIT 6', callback); },
         function(callback) { connection.query('SELECT * FROM leader_review LIMIT 6', callback); },
+        function(callback) { connection.query('SELECT * FROM announcement ORDER BY created DESC LIMIT 1', callback); },
     ], function(error, results) {
         if(error) throw error;
-        else res.render('index.ejs', { mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0] });
+        else res.render('index.ejs', { mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], announcements: results[7][0][0] });
     });
 
 });
 
 router.get(`${baseUrl}events`, (req, res) => {
     connection.query(
-        'SELECT * FROM upcoming_event WHERE (date >= CURRENT_TIMESTAMP()) OR (date >= CURRENT_TIMESTAMP() AND HOUR(date) >= HOUR(CURRENT_TIMESTAMP())) ORDER BY date',
+        'SELECT id, title, details, date, link FROM upcoming_event WHERE (date >= CURRENT_TIMESTAMP()) OR (date >= CURRENT_TIMESTAMP() AND HOUR(date) >= HOUR(CURRENT_TIMESTAMP())) ORDER BY date',
         (error, results) => {
             res.render('events.ejs', { upcomingEvents: results });
         }
@@ -38,6 +39,15 @@ router.get(`${baseUrl}event`, (req, res) => {
         req.query.id,
         (error, results) => {
             res.render('event.ejs', { event: results[0] });
+        }
+    )
+})
+
+router.get(`${baseUrl}curriculum`, (req, res) => {
+    connection.query(
+        'SELECT * FROM upcoming_event WHERE id = 1',
+        (error, results) => {
+            res.render('curriculum.ejs', { event: results[0] });
         }
     )
 })
