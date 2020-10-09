@@ -1,0 +1,9 @@
+<div class="article2">
+    <img class="article2__image" src="<%= article.image %>" alt="<%= article.title %>" />
+    <div class="article2__info">
+        <h3><%= article.title %></h3>
+        <small>Oleh <%= article.author %>, <%= dateFormat(article.created)%></small>
+        <p class="article2__fullDetails"><%= article.full_details %></p>
+        <a href="/article?id=<%= article.id %>">Selengkapnya</a>
+    </div>
+</div>

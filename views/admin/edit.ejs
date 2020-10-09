@@ -2,65 +2,59 @@
 <%- include('function') %>
 <% let index; %>
 <% index = 1; %>
-<div class="form d-flex flex-column justify-content-center mt-5">
 
-    <h1>Edit <%= table[0].toUpperCase() %><%= table.slice(1).replace(/_([a-z])/g, function(g) { return g[1].toUpperCase() }) %>'s Table</h1>
-    
-    <% if (table == "users") { %>
-        <form action="/editAdmin" method="POST">
-    <% } else { %>
-        <form action="/edit?table=<%= table %>&id=<%= id %>" method="POST">
-    <% } %>
-        <% for (const [key, value] of Object.entries(data)) { %>
-            <% if(key !== "id" && key !== "role" && key !== "created") {%>
-
-                
-                    <div class="form-group">
-                        <label for="<%= key %>">
-                            <%= key %> 
-                            <% if(columns[index].Null == 'NO' && columns[index].Default == null) {%>
-                                *
-                            <% } %>
-                        </label>
-                        <% if(columns[index].Null == 'NO') { %>
-                            <% if (columns[index].Field === 'password') { %>
-                                <input type="password" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
-                            <% } else if (columns[index].Field === 'date') { %>
-                                <input type="datetime-local" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
-                            <% } else if (columns[index].Field === 'full_details') { %>
-                                <textarea class="form-control ckeditor" id="<%= columns[index].Field %> ckeditor" name="<%= columns[index].Field %>" required><%= value %></textarea>
-                            <% } else { %>
-                                <input type="text" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>" required>
-                            <% } %>
-                        <% } else { %>
-                            <% if (columns[index].Field === 'image') { %>
-                                <div class="custom-file">
-                                    <input type="file" class="form-control custom-file-input upload" id="<%= columns[index].Field %> customFile" name="<%= columns[index].Field %>" value="<%= value %>">
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
-                                </div>
-                                <div class="d-flex flex-sm-row align-items-lg-center">
-                                    <div class="col-md-6 col-12 h-auto box-2">
-                                        <div class="result"></div>
-                                    </div>
-                                    <div class="col-md-6 col-12 h-auto box-2 img-result">
-                                        <img class="cropped" src="" alt="">
-                                    </div>
-                                </div>
-                                <button class="btn save d-none">Save</button>
-                                <a href="" class="btn download d-none">Download</a>
-                            <% } else { %>
-                                <input type="text" class="form-control" id="<%= columns[index].Field %>" name="<%= columns[index].Field %>" value="<%= value %>">
-                            <% } %>
-                        <% } %>
-                    </div>
-                <% index++; %>
-            <% } %>
+    <div class="adminForm">
+        
+        <% if (table == "users") { %>
+            <form class="adminForm__form" action="/editAdmin" method="POST">
+        <% } else { %>
+            <form class="adminForm__form" action="/edit?table=<%= table %>&id=<%= id %>" method="POST">
         <% } %>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+            <h1>Edit <%= table[0].toUpperCase() %><%= table.slice(1).replace(/_([a-z])/g, function(g) { return g[1].toUpperCase() }) %>'s Table</h1>
+            
+            <% for (const [key, value] of Object.entries(data)) { %>
+                <% if(key !== "id" && key !== "role" && key !== "created") {%>                    
+                        <div>
+                            <% if(columns[index].Null == 'NO') { %>
+                                <% if (columns[index].Field === 'password') { %>
+                                    <%- include('../partials/input', {name: 'password', type: 'password', required: true, value: value}) %>
+                                <% } else if (columns[index].Field === 'date') { %>
+                                    <%- include('../partials/input', {name: columns[index].Field, type: 'datetime-local', required: true, value: value}) %>
+                                <% } else if (columns[index].Field === 'full_details') { %>
+                                    <%= columns[index].Field.Field %>*
+                                    <textarea class="form-control ckeditor" id="<%= columns[index].Field %> ckeditor" name="<%= columns[index].Field %>" required><%= value %></textarea>
+                                <% } else { %>
+                                    <%- include('../partials/input', {name: columns[index].Field, type: 'text', required: true, value: value}) %>
+                                <% } %>
+                            <% } else { %>
+                                <% if (columns[index].Field === 'image') { %>
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control custom-file-input upload" id="<%= columns[index].Field %> customFile" name="<%= columns[index].Field %>" value="<%= value %>">
+                                    </div>
+                                    <div>
+                                        <div class="box-2">
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="box-2 img-result">
+                                            <img class="cropped" src="" alt="">
+                                        </div>
+                                    </div>
+                                    <button class="button button--green save d-none">Save</button>
+                                    <a href="" class="download button button--orange d-none">Download</a>
+                                <% } else { %>
+                                    <%- include('../partials/input', {name: columns[index].Field, type: 'text', required: false, value: value}) %>
+                                <% } %>
+                            <% } %>
+                        </div>
+                    <% index++; %>
+                <% } %>
+            <% } %>
 
-        <a href="/adminDashboard" class="btn">Cancel</a>
-    </form>
-</div>
+            <button type="submit" class="button button--green">Submit</button>
+
+            <a href="/adminDashboard" class="button cancelBtn button--orange">Cancel</a>
+        </form>
+    </div>
 
 <%- include('../partials/script', { user: 'admin' }) %>

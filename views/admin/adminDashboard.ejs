@@ -1,48 +1,70 @@
 <% let table = "mentor"; %>
 <%- include('../partials/header', {user: "admin"}) %>
 
-<div class="adminDashboard pt-3">
+<div class="adminDashboard">
 
     <div class="container">
         <%- include('../partials/nav') %>
-        <div class="d-flex align-items-center justify-content-between my-3">
+        <div class="adminDashboard__container">
             <h1><%= username %></h1>
-            <div class="d-flex">
+            <div class="adminDashboard__logout">
                 <% if(role === "super admin") { %>
                     <a href="/userList" class="btn">List of Admin</a>
                 <% } %>
                 <form class="logout" action="/logout?_method=DELETE" method="POST">
-                    <button class="btn" type="submit">Logout</button>
+                    <button class="button button--transparent" type="submit">Logout</button>
                 </form>
             </div>
         </div>
 
+        <select class="adminDashboard__select" name="table" id="table" >
+            <option value="mentor">mentor</option>
+            <option value="latestEvent">latestEvent</option>
+            <option value="upcomingEvent">upcomingEvent</option>
+            <option value="teamMembers">teamMembers</option>
+            <option value="article">article</option>
+            <option value="testimonial">testimonial</option>
+            <option value="leaderReview">leaderReview</option>
+            <option value="collaboration">collaboration</option>
+            <option value="announcement">announcement</option>
+        </select>
+
         <!-- List of Mentor -->
-        <%- include('../partials/table', { caption: "Mentor", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: mentors }) %>
+        <div class="mentorTable hideTable">
+            <%- include('../partials/table', { caption: "Mentor", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: mentors }) %>
+        </div>
         
         <!-- Latest Event -->
-        <%- include('../partials/table', { caption: "Latest Event", columns: ["id", "date", "link"], rows: latestEvents }) %>
+        <div class="latestEventTable hideTable">
+        <%- include('../partials/table', { caption: "Latest Event", columns: ["id", "date", "link"], rows: latestEvents }) %></div>
 
         <!-- Upcoming Event -->
-        <%- include('../partials/table', { caption: "Upcoming Event", columns: ["id", "title", "details", "date", "image", "link"], rows: upcomingEvents }) %>
+        <div class="upcomingEventTable hideTable">
+        <%- include('../partials/table', { caption: "Upcoming Event", columns: ["id", "title", "details", "date", "image", "link"], rows: upcomingEvents }) %></div>
 
         <!-- Team Members -->
-        <%- include('../partials/table', { caption: "Team Member", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: teamMembers }) %>
+        <div class="teamMemberTable hideTable">
+        <%- include('../partials/table', { caption: "Team Member", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: teamMembers }) %></div>
 
         <!-- Artikel -->
-        <%- include('../partials/table', { caption: "Article", columns: ["id", "title", "author", "details", "image", "link", "created"], rows: articles }) %>
+        <div class="articleTable hideTable">
+        <%- include('../partials/table', { caption: "Article", columns: ["id", "title", "author", "details", "image", "link", "created"], rows: articles }) %></div>
 
         <!-- testimonial -->
-        <%- include('../partials/table', { caption: "Testimonial", columns: ["id", "name", "details", "image"], rows: testimonials }) %>
+        <div class="testimonialTable hideTable">
+        <%- include('../partials/table', { caption: "Testimonial", columns: ["id", "name", "details", "image"], rows: testimonials }) %></div>
 
         <!-- Leader -->
-        <%- include('../partials/table', { caption: "Leader Review", columns: ["id", "name", "title", "details", "image"], rows: leaderReviews }) %>
+        <div class="leaderReviewTable hideTable">
+        <%- include('../partials/table', { caption: "Leader Review", columns: ["id", "name", "title", "details", "image"], rows: leaderReviews }) %></div>
 
         <!-- Collaboration -->
-        <%- include('../partials/table', { caption: "Collaboration", columns: ["id", "name", "email", "message", "date"], rows: collaboration }) %>
+        <div class="collaborationTable hideTable">
+        <%- include('../partials/table', { caption: "Collaboration", columns: ["id", "name", "email", "message", "date"], rows: collaboration }) %></div>
 
         <!-- Announcement -->
-        <%- include('../partials/table', { caption: "Announcement", columns: ["id", "text", "button text", "link"], rows: announcements }) %>
+        <div class="announcementTable hideTable">
+        <%- include('../partials/table', { caption: "Announcement", columns: ["id", "text", "button text", "link"], rows: announcements }) %></div>
 
     </div>
 </div>

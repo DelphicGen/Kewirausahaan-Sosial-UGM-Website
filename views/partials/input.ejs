@@ -1,0 +1,15 @@
+<div class="inputContainer d-flex flex-column align-items-start">
+    <label for="<%= locals.name %>">
+        <% if(locals.required) { %>
+            <%= locals.name.charAt(0).toUpperCase() + name.slice(1) %> *
+        <% } else { %>
+            <%= locals.name.charAt(0).toUpperCase() + name.slice(1) %>
+        <% } %>
+    </label>
+    <% if(locals.required) { %>
+        <input value="<%= locals.value %>" type="<%= locals.type %>" name="<%= locals.name %>" class="<%= locals.name %> inputContainer__input" id="<%= locals.name %>" required="<%= locals.required %>">
+    <% } else { %>
+        <input value="<%= locals.value %>" type="<%= locals.type %>" name="<%= locals.name %>" class="<%= locals.name %> inputContainer__input" id="<%= locals.name %>">
+    <% } %>
+    <div class="inputContainer__inputAfter"></div>
+</div>

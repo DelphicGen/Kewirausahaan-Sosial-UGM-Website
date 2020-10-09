@@ -1,18 +1,22 @@
 <%- include('admin/function') %>
 <%- include('partials/header', {user: "user"}) %>
-    <div class="article-page">
+    <div class="article3">
         <div class="container">
             <%- include('partials/nav') %>
-            
-            <h1 class="font-weight-bold mt-3"><%= article.title %></h1>
 
-            <small class="mt-1">by <%= article.author %>, <%= dateFormat(article.created) %></small> <br />
-
-            <img class="article-full-img" src="<%= article.image%>" alt="<%= article.title %>">
-
-            <div class="article-full-details full-details mt-4">
-                <%= article.full_details %>
+            <div class="article3__imageContainer">
+                <img class="article3__image" src="<%= article.image %>" alt="<%= article.title %>" />
+                <div class="article3__titleContainer">
+                    <h3 class="article3__title"><%= article.title %></h3>
+                    <p>
+                        Oleh: <%= article.author %>, <%= dateFormat(article.created) %>
+                    </p>
+                </div>
             </div>
+            <div class="article3__fullDetailsContainer">
+                <div class="article3__fullDetails"><%= article.full_details %></div>
+            </div>
+
         </div>
     </div>
 

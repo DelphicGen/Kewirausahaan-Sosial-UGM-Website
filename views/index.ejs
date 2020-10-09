@@ -3,55 +3,49 @@
 <%- include('partials/header') %>
 
   <!-- Landing Page -->
-  <div class="landing-page" id="landing-page">
-    <div class="filter">
+  <header class="landingPage" id="landingPage">
+    <div class="landingPage__filter">
 
       <% if(announcements) { %>
-        <div class="ads d-flex justify-content-center align-items-center p-2">
-          <span><%= announcements.text %></span>
-          <a href="<%= announcements.link %>" class="ads-btn btn ml-5 rounded-lg"><%= announcements.button_text %></a>
-        </div>
+        <%- include('partials/announcement', {text: announcements.text, buttonText: announcements.button_text, link: announcements.link}) %>
       <% } %>
 
-      <div class="container h-100 landing-page-container">
+      <div class="container h-100 landingPage__container">
         <%- include('partials/nav') %>
 
-        <img class="position-absolute triangle" src="/assets/images/header_image/triangle.webp" alt="triangle">
-
-        <div class="wow fadeInUp heading-container">
-          <div class="heading-list text-white">
-            <h1 class="main-heading">Bentuk Mindset Wirausaha</h1>
+        <div class="wow fadeInUp landingPage__headingContainer">
+          <div class="landingPage__headingList">
+            <h1>Bentuk Mindset Wirausaha</h1>
             <h5>Menginspirasi peserta kuliah untuk menemukan cara baru dalam mengatasi permasalahan sosial, khususnya melalui kewirausahaan sosial.</h5>
-            <%# <button class="register-btn btn">Gabung Sekarang</button> %>
           </div>
         </div>
 
       </div>
     </div>
-  </div>
+  </header>
 
   <!-- About us -->
-  <section class="about-us container" id="about-us">
-    <h3 class="ks">Kuliah Kewirausahaan Sosial</h3>
+  <section class="aboutUs container" id="aboutUs">
+    <h3 class="aboutUs__heading">Kuliah Kewirausahaan Sosial</h3>
     <p>Kuliah Kewirausahaan Sosial didasari oleh kegelisahaan atas ketidaksinkronan dunia pendidikan dengan dunia luar. Belajar dari yang ahli, dosen menjadi fasilitator.</p>
 
-    <div class="statistic d-flex justify-content-around justify-content-sm-between flex-wrap">
-      <div class="startup wow bounceInLeft d-flex flex-column justify-content-around">
+    <div class="aboutUs__statistic">
+      <div class="startup wow bounceInLeft">
         <img src="/assets/images/about_us/rocket2.webp" alt="rocket">
         <h4>8</h4>
         <h5>Startups</h5>
       </div>
-      <div class="talent wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".1s">
+      <div class="talent wow bounceInLeft" data-wow-delay=".1s">
         <img src="/assets/images/about_us/people.svg" alt="people">
         <h4>7000</h4>
         <h5>Participants</h5>
       </div>
-      <div class="partner wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".2s">
+      <div class="partner wow bounceInLeft" data-wow-delay=".2s">
         <img src="/assets/images/about_us/handyman.svg" alt="handyman">
         <h4>16</h4>
         <h5>Partners</h5>
       </div>
-      <div class="event wow bounceInLeft d-flex flex-column justify-content-around" data-wow-delay=".3s">
+      <div class="event wow bounceInLeft" data-wow-delay=".3s">
         <img src="/assets/images/about_us/date.svg" alt="date">
         <h4>20</h4>
         <h5>Events</h5>
@@ -60,47 +54,47 @@
   </section>
 
   <!-- Upcoming Event -->
-  <section class="upcoming-events container" id="upcoming-events">
+  <section class="upcomingEvents container" id="upcomingEvents">
     <h3>Event Kami Kedepannya</h3>
 
-    <div class="d-flex flex-row justify-content-between align-items-center row upcoming-events-container">
+    <div class="upcomingEvents__container">
       
-      <div class="col-12 upcoming-event-list">
-        <div class="control-container">
+      <div class="upcomingEvents__list">
+        <div>
           <a class="" data-slide="prev">
-            <img class="left-control" src="/assets/images/upcoming_event/left_arrow.svg" alt="prev">
+            <img class="upcomingEvents__leftControl" src="/assets/images/upcoming_event/left_arrow.svg" alt="prev">
           </a>
           <a class="">
-            <img class="right-control" src="/assets/images/upcoming_event/right_arrow.svg" alt="next">
+            <img class="upcomingEvents__rightControl" src="/assets/images/upcoming_event/right_arrow.svg" alt="next">
           </a>
         </div>
         <% upcomingEvents.forEach((upcomingEvent, index) => { %>
           <% if(index === 0) { %>
-            <div class="active-event upcoming-event">
+            <div class="active-event upcomingEvents__event">
           <% } else if(index === 1) { %>
-            <div class="next upcoming-event">
+            <div class="next upcomingEvents__event">
           <% } else if(index === upcomingEvents.length - 1) { %>
-            <div class="prev upcoming-event">
+            <div class="prev upcomingEvents__event">
           <% } else { %>
-            <div class="hidden-event upcoming-event">
+            <div class="hidden-event upcomingEvents__event">
           <% } %>  
-            <img class="upcoming-event-img img-fluid" id="upcoming-event-img" src="<%= upcomingEvent.image %>" alt="<%= upcomingEvent.title %>">
+            <img class="upcomingEvents__img" id="upcomingEvents__img" src="<%= upcomingEvent.image %>" alt="<%= upcomingEvent.title %>">
           </div>
 
         <% }) %>
       </div>
 
-      <div class="col-12 event-details">
+      <div>
           <% upcomingEvents.forEach((upcomingEvent, index) => { %>
             <% if(index === 0) { %>
-              <div class="detail">
+              <div class="upcomingEvents__detailContainer">
             <% } else { %>
-              <div class="hidden-event detail">
+              <div class="hidden-event upcomingEvents__detailContainer">
             <% } %> 
-                <h4 class="event-title"><%= upcomingEvent.title %></h4>
-                <p class="event-date"><%= dateTimeFormat(upcomingEvent.date) %></p>
-                <p class="event-detail"><%= upcomingEvent.details %></p>
-                <a href="/event?id=<%= upcomingEvent.id %>" class="more-details-btn btn">Selengkapnya</a>
+                <h4 class="upcomingEvents__title"><%= upcomingEvent.title %></h4>
+                <p class="upcomingEvents__date"><%= dateTimeFormat(upcomingEvent.date) %></p>
+                <p class="upcomingEvents__detail"><%= upcomingEvent.details %></p>
+                <a href="/event?id=<%= upcomingEvent.id %>" class="button button--orange moreDetailsBtn">Selengkapnya</a>
               </div>
           <% }) %>
       </div>
@@ -111,13 +105,14 @@
   <!-- Curiculum -->
   <section class="curriculum container" id="curriculum">
     <h3>Kurikulum</h3>
-    <img class="curriculum-img" src="/assets/images/curriculum/Kurikulum.webp" alt="kurikulum ks">
+    <img class="curriculum__img" src="/assets/images/curriculum/Kurikulum.webp" alt="kurikulum ks">
   </section>
 
   <!-- Latest Event -->
-  <section class="latest-event container" id="latest-event">
-    <h3>Event Terbaru</h3>
-    <div class="latest-event-list d-flex flex-column flex-lg-row justify-content-lg-between flex-wrap">
+  <section class="latestEvent container" id="latestEvent">
+    <h3 class="latestEvent__header">Event Terbaru</h3>
+    <p>Merupakan kegiatan perkuliahaan baik SKS ataupun non-SKS. Untuk melihat materi-materi perkuliahan lainnya bisa cek Youtube Channel Kewirausahaan Sosial UGM</p>
+    <div class="latestEvent__list d-flex flex-column flex-lg-row justify-content-lg-between flex-wrap">
       <% latestEvents.forEach((latestEvent) => { %>
         <iframe width="560" height="315" src="<%= latestEvent.link %>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       <% }) %>
@@ -125,37 +120,13 @@
   </section>
 
   <!-- Our Mentor -->
-  <section class="our-mentor container" id="our-mentor">
-    <h3>Mentor Kita</h3>
+  <section class="ourMentor container" id="ourMentor">
+    <h3>Dosen Tamu - Praktisi</h3>
     <div class="owl-carousel owl-carousel-1 owl-theme owl-centered">
       <% mentors.forEach((mentor) => { %>
-        <div class="item mentor">
-          <div class="person-img">
-            <img class="person-pic" src="<%= mentor.image %>" alt="<%= mentor.name %>">
-            <div class="person-media">
-              <ul>
-                <% if(mentor.facebook) { %>
-                  <li><a target="_blank" href="<%= mentor.facebook %>"><i class="fa fa-facebook-f"></i></a></li>
-                <% } %>
-                <% if(mentor.twitter) { %>
-                  <li><a target="_blank" href="<%= mentor.twitter %>"><i class="fa fa-twitter"></i></a></li>
-                <% } %>
-                <% if(mentor.instagram) { %>
-                  <li><a target="_blank" href="<%= mentor.instagram %>"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                <% } %>
-                <% if(mentor.linkedin) { %>
-                  <li><a target="_blank" href="<%= mentor.linkedin %>"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                <% } %>
-              </ul>
-            </div>
-          </div>
-          <div class="person-details">
-            <h5 class="person-name"><%= mentor.name %></h5>
-            <p><%= mentor.title %></p>
-          </div>
-        </div>
+        <%- include('partials/card', {person: mentor}) %>
       <% }) %>
-      </div>
+    </div>
   </section>
 
   <!-- Our Team -->
@@ -163,31 +134,7 @@
     <h3>Team Kita</h3>
     <div class="owl-carousel owl-carousel-2 owl-theme">
       <% teamMembers.forEach((member) => { %>
-        <div class="member">
-          <div class="person-img">
-            <img class="person-pic" src="<%= member.image %>" alt="<%= member.name %>">
-            <div class="person-media">
-              <ul>
-                <% if(member.facebook) { %>
-                  <li><a target="_blank" href="<%= member.facebook %>"><i class="fa fa-facebook-f"></i></a></li>
-                <% } %>
-                <% if(member.twitter) { %>
-                  <li><a target="_blank" href="<%= member.twitter %>"><i class="fa fa-twitter"></i></a></li>
-                <% } %>
-                <% if(member.instagram) { %>
-                  <li><a target="_blank" href="<%= member.instagram %>"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                <% } %>
-                <% if(member.linkedin) { %>
-                  <li><a target="_blank" href="<%= member.linkedin %>"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
-                <% } %>
-              </ul>
-            </div>
-          </div>
-          <div class="person-details">
-            <h5 class="person-name"><%= member.name %></h5>
-            <p><%= member.title %></p>
-          </div>
-        </div>
+        <%- include('partials/card', {person: member}) %>
       <% }) %>
     </div>
   </section>
@@ -196,121 +143,68 @@
   <section class="articles container" id="articles">
     <h3>Artikel</h3>
 
-    <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start justify-content-lg-center">
+    <div class="articles__container">
 
       <% articles.forEach((article) => { %>
-        <div class="main-page-article card">
-          <img src="<%= article.image %>" class="card-img-top" alt="<%= article.title %>">
-
-          <div class="card-body">
-            <h5 class="card-title"><%= article.title %></h5>
-            <p class="main-page-article-detail card-text"><%= article.full_details %></p>
-            <a href="/article?id=<%= article.id %>" class="main-page-article-btn more-details-btn btn">Selengkapnya</a>
-          </div>
-        </div>
+        <%- include('partials/article', {article: article}) %>
       <% }) %>
       
     </div>
   </section>
 
   <!-- Testimonial -->
-  <section class="participant-testimonial container" id="participant-testimonial">
+  <section class="testimonials container" id="testimonials">
     <h3>Testimonial</h3>
     <div class="owl-carousel owl-carousel-3 owl-theme">
       <% testimonials.forEach((testimonial) => { %>
-        <div class="item testimonial">
-          <div class="testimonial-header d-flex align-items-center">
-            <img src="<%= testimonial.image %>" alt="<%= testimonial.name %>">
-            <p><%= testimonial.name %></p>
-          </div>
-          <div class="testimonial-detail d-flex align-items-center">
-            <p><%= testimonial.details %></p>
-          </div>
-        </div>
+        <%- include('partials/testimonial', {testimonial: testimonial}) %>
       <% }) %>
 
     </div>
   </section>
 
   <!-- Meet The Founder -->
-  <section class="meet-the-founder container" id="meet-the-founder">
+  <section class="meet-the-founder container" id="meet-the-founder" class="coverImage">
     <h3>Meet the Founder</h3>
     
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-      
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <% leaderReviews.forEach((review, index) => { %>
-            
-            <% if(index === 0) { %>
-              <div class="founder carousel-item active">
-            <% } else { %>
-              <div class="founder carousel-item">
-            <% } %> 
-              <h4><%= review.details %></h4>
-              <img src="<%= review.image %>" class="d-block w-100" alt="<%= review.name %>">
-              
-              <em><%= review.name %>, <%= review.title %></em>
-            </div>
-          <% }) %>
-
-        </div>
-
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+      <div class="owl-carousel owl-carousel-5 owl-theme">
+        <% leaderReviews.forEach(review => { %>
+          <%- include('partials/review', {review: review}) %>
+        <% }) %>
       </div>
   </section>
 
   <!-- Collaborate -->
     <section class="collaborate container" id="collaborate">
       <h3>Let's Collaborate</h3>
-      <div class="contact-us d-flex flex-md-row flex-column-reverse justify-content-around align-items-center">
-        <div class="ks-media col-md-6 mt-md-0 mt-5">
-          <h4>Hubungi Kami</h4>
-          <div>
-            <ul>
-              <li><a target="_blank" href="https://www.instagram.com/kewirausahaansosialugm/"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-              <li><a target="_blank" href="https://www.facebook.com/kewirausahaansosialugm"><i class="fa fa-facebook-f"></i></a></li>
-              <li><a target="_blank" href="https://twitter.com/SosialUgm"><i class="fa fa-twitter"></i></a></li>
-            </ul>
-          </div>
-          <h5>atau :</h5>
-          <p>Rina +62 878-3838-6519 (WA Only)</p>
 
-          <small>Icons by Flaticon and Font Awesome</small>
-          <small class="d-md-none">Made with ❤ From Yogyakarta for Indonesia © Kewirausahaan Sosial 2020</small>
+      <div class="collaborate__container">
+        <div class="collaborate__media">
+            <h4>Hubungi Kami</h4>
+            <div>
+                <a class="collaborate__link" rel="noopener noreferrer" target="_blank" href="https://www.instagram.com/kewirausahaansosialugm/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                <a class="collaborate__link" rel="noopener noreferrer" target="_blank" href="https://www.facebook.com/kewirausahaansosialugm"><i class="fa fa-facebook-f"></i></a>
+                <a class="collaborate__link" rel="noopener noreferrer" target="_blank" href="https://twitter.com/SosialUgm"><i class="fa fa-twitter"></i></a>
+            </div>
+            <h5>atau :</h5>
+            <p>Rina +62 878-3838-6519 (WA Only)</p>
+
+            <small>Icons by Flaticon and Font Awesome</small>
+            <small class="collaborate__madeWith">Made with ❤ From Yogyakarta for Indonesia © Kewirausahaan Sosial 2020</small>
         </div>
 
-        <div class="contact-form col-md-6">
-          <form action="/collab" method="post" class="form">
-            <div class="input-container d-flex flex-column align-items-start">
-              <label for="name">Name :</label>
-              <input type="text" name="name" class="name input-bar" id="name">
-              <div class="input-bar-after"></div>
-            </div>
+        <form action="/collab" method="post" class="collaborate__form">
+            <%- include('partials/input', {name: 'name', type: 'text', required: true}) %>
 
-            <div class="input-container d-flex flex-column align-items-start">
-              <label for="email">Email :</label>
-              <input type="text" name="email" class="email input-bar" id="email">
-              <div class="input-bar-after"></div>
-            </div>
-
-            <div class="input-container d-flex flex-column align-items-start">
+            <%- include('partials/input', {name: 'email', type: 'email', required: true}) %>
+            <div class="inputContainer">
               <label for="message">Message:</label>
-              <textarea name="message" class="message input-bar" id="message"></textarea>
+              <textarea name="message" class="message inputContainer__input" id="message"></textarea>
             </div>
 
-            <button type="submit" class="btn submit-btn">Kirim</button>
-          </form>
-        </div>
-      </div>
-      <small class="d-none d-md-block text-center mt-5">Made with ❤ From Yogyakarta for Indonesia © Kewirausahaan Sosial 2020</small>
+            <%- include('partials/button', {type: 'submit', for: 'submitBtn', color: 'orange', text: 'Submit'}) %>
+        </form>
+    </div>
     </section>
 
 

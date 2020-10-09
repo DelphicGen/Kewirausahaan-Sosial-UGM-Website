@@ -1,14 +1,14 @@
 <%- include('../admin/function') %>
 
-<div class="heading d-flex justify-content-between align-items-center mb-2">
+<div class="tableHeading d-flex justify-content-between align-items-center mb-2">
     <h5><b><%= caption %></b></h5>
     <% if (caption !== "Event Kami Kedepannya" && caption !== "Artikel Kami") { %>
         <a href="./new?table=<%= caption.split(' ').join('_').toLowerCase() %>" class="btn btn-primary">Add</a>
     <% } %>
 </div>
 
-<div class="table-container position-relative overflow-auto mw-100">
-    <table class="table">
+<div class="tableContainer">
+    <table class="tableContainer__table">
         <thead>
             <tr>
                 <% columns.forEach((column) => { %>
@@ -18,7 +18,11 @@
                         <% } %>
                     <% } else { %>
                         <% if (column !== 'full_details') { %>
-                            <th scope="col"><%= column %></th>
+                            <% if (column !== 'id') { %>
+                                <th class="id" scope="col"><%= column %></th>
+                            <% } else {%>
+                                <th scope="col"><%= column %></th>
+                            <% } %>
                         <% } %>
                     <% } %>
                 <% }) %>
@@ -62,24 +66,24 @@
                     <% if (caption !== "Event Kami Kedepannya" && caption !== "Artikel Kami") { %>
                         <% if (caption !== "Users") { %>
                         <td>
-                            <a href="/edit?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" class="btn btn-warning " id="edit <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Edit</a>
+                            <a href="/edit?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" class="button button--orange" id="edit <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Edit</a>
                         </td>
                         <% } %>
                         <td>
                             <form action="/delete?table=<%= caption.split(' ').join('_').toLowerCase() %>&id=<%= row.id %>" method="post">
-                                <input type="submit" value="Delete" class="btn btn-danger">
+                                <input type="submit" value="Delete" class="button button--red">
                             </form>
                         </td>
                     <% } else if(caption === "Event Kami Kedepannya"){ %>
                         <td>
-                            <a href="/event?id=<%= rows[index].id %>" target="_blank" class="btn btn-success" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Selengkapnya</a>
+                            <a href="/event?id=<%= rows[index].id %>" target="_blank" class="button button--green" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Selengkapnya</a>
                         </td>
                         <td>
-                            <a href="<%= row.link %>" target="_blank" class="btn register-btn">Daftar Sekarang</a>
+                            <a href="<%= row.link %>" target="_blank" class="button button--orange moreDetailsBtn">DaftarSekarang</a>
                         </td>
                     <% } else if(caption === "Artikel Kami") { %>
                         <td>
-                            <a href="/article?id=<%= rows[index].id %>" target="_blank" class="btn btn-success" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Read More</a>
+                            <a href="/article?id=<%= rows[index].id %>" target="_blank" class="button button--green" id="register <%= caption.split(' ').join('_').toLowerCase() %> <%= row.id %>">Read More</a>
                         </td>
                     <% } %>
                 </tr>

@@ -2,15 +2,12 @@
 
 <%- include('partials/header', {user: "user"}) %>
 
-<div class="curriculum-page">
+<div class="curriculumPage">
     <div class="container">
         <%- include('partials/nav') %>
-        <!-- <img class="curriculum-img" src="/assets/images/curriculum/Kurikulum.webp" alt="kurikulum ks"> -->
 
-        <img class="event-image mt-3" src="<%= event.image %>" alt="<%= event.title %>">
-        <div class="event-full-details full-details my-4">
-            <%= event.full_details %>
-        </div>
+        <!-- <img class="upcomingEvent__image" src="<%= event.image %>" alt="<%= event.title %>" /> -->
+        <div class="upcomingEvent__fullDetails"><%= event.full_details %></div>
 
         <div class="owl-carousel owl-carousel-4 owl-theme">
 

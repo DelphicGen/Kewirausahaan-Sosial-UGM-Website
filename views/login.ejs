@@ -1,29 +1,18 @@
 <%- include('partials/header') %>
 
-<div class="login d-flex justify-content-center align-items-center">
-    <div class="login__form form">
-    
-        <h1 class="login__header">Login</h1>
+<div class="login">
+    <div class="login__container">
+        <h3 class="login__header">Login</h3>
         <% if(messages.error) {%>
             <%= messages.error %>
         <% } %>
-    
         <form action="/login" method="POST">
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="login__input" id="email" aria-describedby="emailHelp" name="email" placeholder="Email" required>
-                <div className="login__inputAfter"></div>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="login__input" id="password" name="password" placeholder="Password" required>
-                <div className="login__inputAfter"></div>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="/forgot" class="btn">Forgot Password ?</a>
+            <%- include('partials/input', {name: 'email', type: 'email', required: true}) %>
+            <%- include('partials/input', {name: 'password', type: 'password', required: true}) %>
+            <button type="submit" class="login__button button button--orange submitBtn">Submit</button>
+            <a href="/forgot" class="login__forgot">Forgot Password ?</a>
         </form>
-    
     </div>
-
 </div>
+
 <%- include('partials/script') %>

@@ -1,0 +1,10 @@
+<div class="review text-white text-center md:text-left flex md:flex-row flex-col-reverse items-center p-5 md:p-0 justify-center rounded-lg">
+    <div class="review__imageContainer mt-5 md:mr-10 block p-2 bg-white">
+        <img src="<%= review.image %>" alt="<%= review.name %>" class="review__image" />
+    </div>
+    <div class="review__contentContainer">
+        <h4 class="review__content text-2xl md:text-3xl lg:text-2xl font-semibold mb-5">"<%= review.details %>"</h4>
+        
+        <em>-<%= review.name %>, <%= review.title %></em>
+    </div>
+</div>

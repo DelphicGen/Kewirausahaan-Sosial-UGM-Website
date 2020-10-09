@@ -1,20 +1,81 @@
 /* Dashboard */
-.adminDashboard {
+.adminDashboard, .adminForm {
     background: #0F2027;
     background-image: linear-gradient(to right top, rgba(43, 45, 66, .95), rgba(49, 63, 90, .9), rgba(50, 82, 113, .9), rgba(46, 103, 136, .85), rgba(34, 124, 157, .85));
     min-height: 100vh;
     padding-bottom: 50px;
 }
 
-.adminDashboard * {
+.adminDashboard *, .adminForm * {
     color: #fff;
 }
 
-.table-container {
-    max-height: 500px;
-    margin-bottom: 50px;
+.adminDashboard__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0;
 }
 
-.table-container th:nth-child(1) {
-    min-width: fit-content !important;
+.adminDashboard__logout {
+    display: flex;
+    align-items: center;
+}
+
+.adminDashboard__logout a {
+    margin-right: 12px;
+}
+
+.adminDashboard__select {
+    background-color: transparent;
+    margin: 20px 0;
+    border: none;
+    border-bottom: 2px solid #fff;
+    font-size: 16px;
+}
+
+.adminDashboard__select option {
+    color: #000;
+    font-size: 16px;
+}
+
+.hideTable {
+    display: none;
+}
+
+/* Edit and Add */
+.adminForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.adminForm__form {
+    width: 75%;
+    margin: 40px auto;
+}
+
+.adminForm h1 {
+    margin-bottom: 20px;
+}
+
+.d-none {
+    display: none;
+}
+
+.cancelBtn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 767px) {
+    .adminForm__form {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .adminForm__form {
+        width: 90%;
+    }
 }

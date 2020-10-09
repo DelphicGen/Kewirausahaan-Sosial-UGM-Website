@@ -1,44 +1,21 @@
 <%- include('admin/function') %>
 <%- include('partials/header', {user: "user"}) %>
 
-    <div class="article-page">
+    <div class="upcomingEvent">
         <div class="container">
             <%- include('partials/nav') %>
-            <img class="event-image mt-3" src="<%= event.image %>" alt="<%= event.title %>">
-            <h1 class="font-weight-bold"><%= event.title %></h1>
-
-            <small class="mt-1"><%= dateFormat(event.date) %></small>
-
-            <% if(event.title === 'Test10') { %>
-                <div class="event-iframe">
-                    <p><strong>Rekap Perkuliahan Kewirausahaan Sosial Batch #1 Semester Genap 2019/2020</strong></p>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/lZ1Pf5_RBZw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="upcomingEvent__imageContainer">
+                <img class="upcomingEvent__image" src="<%= event.image %>" alt="<%= event.title %>" />
+                <div class="upcomingEvent__titleContainer">
+                    <h3 class="upcomingEvent__title"><%= event.title %></h3>
+                    <p>
+                            <%= dateTimeFormat(event.date) %>
+                    </p>
                 </div>
-            <% } %>
-
-            <div class="event-full-details full-details my-4">
-                <%= event.full_details %>
             </div>
-
-            <% if(event.title === 'Program Kuliah Kewirausahaan Sosial UGM Semester Gasal 2020/2021 Kode Mata Kuliah SPU 2309') { %>
-                <div class="owl-carousel owl-carousel-4 owl-theme">
-
-                    <img src="/assets/images/partner/1 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/2 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/3 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/4 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/5 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/6 - ok (1).webp" class="partner" alt="">
-                    <img src="/assets/images/partner/6 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/8 - ok (1).webp" class="partner" alt="">
-                    <img src="/assets/images/partner/8 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/9 - ok.webp" class="partner" alt="">
-                    <img src="/assets/images/partner/10 - ok.webp" class="partner" alt="">
-
-                </div>
-            <% } %>
-            <div class="register-now">
-                <a href="<%= event.link %>" class="btn register-btn">Daftar Sekarang!</a>
+            <div class="upcomingEvent__fullDetailsContainer">
+                <div class="upcomingEvent__fullDetails"><%= event.full_details %></div>
+                <a href="<%= event.link %>" target="_blank" class="button button--orange moreDetailsBtn">Daftar Sekarang!</a>
             </div>
         </div>
     </div>

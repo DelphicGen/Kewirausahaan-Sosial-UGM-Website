@@ -1,23 +1,21 @@
 <%- include('partials/header') %>
 
-<div class="form d-flex flex-column justify-content-center mt-5">
+<div class="forgot">
+    <div class="forgot__container">
+        <h1 class="forgot__header">Forgot Password</h1>
+        <% if(messages.error) {%>
+            <%= messages.error %>
+        <% } %>
+        <% if(messages.info) {%>
+            <%= messages.info %>
+        <% } %>
 
-    <h1>Forgot Password</h1>
-    <% if(messages.error) {%>
-        <%= messages.error %>
-    <% } %>
-    <% if(messages.info) {%>
-        <%= messages.info %>
-    <% } %>
-
-    <form action="/forgot" method="POST">
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Reset Password</button>
-        <a href="/login" class="btn">Login</a>
-    </form>
+        <form class="adminForm__form" action="/forgot" method="POST">
+            <%- include('partials/input', {name: 'email', type: 'email', required: true}) %>
+            <button type="submit" class="forgot__button button button--orange submitBtn">Reset Password</button>
+            <a href="/login" class="btn">Login</a>
+        </form>
+    </div>
 
 </div>
 <%- include('partials/script') %>

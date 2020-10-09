@@ -1,0 +1,13 @@
+<div class="articles__article">
+    <img src="<%= article.image %>" class="coverImage" alt="<%= article.title %>">
+
+    <div class="articles__body">
+        <h5 class="article__title"><%= article.title %></h5>
+        <p class="articles__detail"><%= article.full_details %></p>
+    </div>
+
+    <div class="articles__footer">
+        <small>Oleh <%= article.author %></small>
+        <a href="/article?id=<%= article.id %>">Selengkapnya</a>
+    </div>
+</div>

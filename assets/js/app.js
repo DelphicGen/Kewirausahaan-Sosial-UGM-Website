@@ -1,17 +1,25 @@
 $(document).ready(function () {
-    let fullDetails = $('.full-details').text();
-    $('.full-details').html(fullDetails);
+    let article2FullDetails = $('.article2__fullDetails').text();
+    $('.article2__fullDetails').html(article2FullDetails);
 
-    let partialDetails = $('.article-detail');
-    partialDetails.map((index, detail) => {
+    let article3FullDetails = $('.article3__fullDetails').text();
+    $('.article3__fullDetails').html(article3FullDetails);
+
+    let upcomingEventFullDetails = $('.upcomingEvent__fullDetails').text();
+    $('.upcomingEvent__fullDetails').html(upcomingEventFullDetails);
+
+    let mainPageDetail = $('.articles__detail');
+    mainPageDetail.map((index, detail) => {
         let content = $(detail).text();
         $(detail).html(content);
     })
 
-    let mainPageDetail = $('.main-page-article-detail');
-    mainPageDetail.map((index, detail) => {
-        let content = $(detail).text();
-        $(detail).html(content);
+    // Navigation
+    let navbarLinks2 = document.querySelector('.navbar__links2');
+    let navbarHamburger = document.querySelector('.navbar__hamburger');
+    navbarHamburger.addEventListener('click', () => {
+        navbarHamburger.classList.toggle('open');
+        navbarLinks2.classList.toggle('show');
     })
     
     // Wow JS
@@ -20,7 +28,7 @@ $(document).ready(function () {
     // Owl Carousel
     let mentors = document.querySelectorAll('.mentor');
     $('.owl-carousel-1').owlCarousel({
-        loop:false,
+        loop:true,
         margin:10,
         nav:false,
         autoplay:true,
@@ -109,29 +117,36 @@ $(document).ready(function () {
         }
     });
 
-    
-    $('.direct').click(function() {
-        const id = $(this).attr('href').substring(1);
-        $('html, body').animate({
-            scrollTop: $(id).offset().top
-        }, 500);
-    })
+    $('.owl-carousel-5').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:false,
+        autoplay:true,
+        autoplayTimeout:5000,
+        autoplayHoverPause:true,
+        autoWidth: false,
+        responsive:{
+            0:{
+                items:1
+            }
+        }
+    });
 
     // Upcoming Event
-    let upcomingEvents = document.querySelectorAll('.upcoming-event');
-    let upcomingEventList = document.querySelectorAll('.upcoming-event-list')
-    let details = document.querySelectorAll('.detail');
+    let upcomingEvents = document.querySelectorAll('.upcomingEvents__event');
+    let upcomingEventList = document.querySelectorAll('.upcomingEvents__list')
+    let details = document.querySelectorAll('.upcomingEvents__detailContainer');
     let activeEvent = document.querySelector('.active-event');
     let prev = document.querySelector('.prev');
     let next = document.querySelector('.next');
-    let leftControl = document.querySelector('.left-control');
-    let rightControl = document.querySelector('.right-control');
+    let leftControl = document.querySelector('.upcomingEvents__leftControl');
+    let rightControl = document.querySelector('.upcomingEvents__rightControl');
     let xDown, xUp;
     let activeIndex = 0;
     let nextIndex = (activeIndex + 1) % upcomingEvents.length;
     let prevIndex = (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;
 
-    $('.upcoming-event').on('click', function() {
+    $('.upcomingEvents__event').on('click', function() {
         if($(this).hasClass('next')) slide('left');
         else if ($(this).hasClass('prev')) slide('right');
     })
@@ -205,8 +220,8 @@ $(document).ready(function () {
         activeEvent = document.querySelector('.active-event');
         prev = document.querySelector('.prev');
         next = document.querySelector('.next');
-        upcomingEvents = document.querySelectorAll('.upcoming-event');
-        details = document.querySelectorAll('.detail');
+        upcomingEvents = document.querySelectorAll('.upcomingEvents__event');
+        details = document.querySelectorAll('.upcomingEvents__detailContainer');
         activeIndex = direction === 'left' ? (activeIndex + 1) % upcomingEvents.length : (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;
         nextIndex = (activeIndex + 1) % upcomingEvents.length;
         prevIndex = (activeIndex + upcomingEvents.length-1) % upcomingEvents.length;

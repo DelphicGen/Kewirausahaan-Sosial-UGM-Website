@@ -1,0 +1,27 @@
+<div class="item card">
+    <div class="card__upper">
+        <img class="coverImage card__image" src="<%= person.image %>" alt="<%= person.name %>">
+        <div class="card__media">
+            <ul>
+                <% if(person.facebook) { %>
+                <li><a target="_blank" href="<%= person.facebook %>"><i class="fa fa-facebook-f"></i></a></li>
+                <% } %>
+                <% if(person.twitter) { %>
+                <li><a target="_blank" href="<%= person.twitter %>"><i class="fa fa-twitter"></i></a></li>
+                <% } %>
+                <% if(person.instagram) { %>
+                <li><a target="_blank" href="<%= person.instagram %>"><i class="fa fa-instagram"
+                            aria-hidden="true"></i></a></li>
+                <% } %>
+                <% if(person.linkedin) { %>
+                <li><a target="_blank" href="<%= person.linkedin %>"><i class="fa fa-linkedin-square"
+                            aria-hidden="true"></i></a></li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+    <div class="card__bottom">
+        <h5 class="card__name"><%= person.name %></h5>
+        <p><%= person.title %></p>
+    </div>
+</div>
