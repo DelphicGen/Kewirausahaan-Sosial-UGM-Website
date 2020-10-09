@@ -104,6 +104,47 @@ function add(req, res, date, image) {
                 }
             );
             break;
+        case 'announcement':
+            connection.query(
+                'INSERT INTO ?? (text, button_text, link) VALUES (?, ?, ?)',
+                [req.query.table, req.body.text, req.body.button_text, req.body.link],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
+                }
+            );
+            break;
+        case 'collection':
+            connection.query(
+                'INSERT INTO ?? (name) VALUES (?)',
+                [req.query.table, req.body.name],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
+                }
+            );
+            break;
+        case 'gallery':
+            connection.query(
+                'SELECT id FROM collection WHERE name = (?)',
+                [req.body.folder_name],
+                (error, result) => {
+                    const folder_id = parseInt(result[0].id)
+                    if(error) throw error;
+                    else {
+                        connection.query(
+                            'INSERT INTO ?? (image, folder_id) VALUES (?, ?)',
+                            [req.query.table, image, folder_id],
+                            (error, results) => {
+                                if(error) throw error;
+                                else res.redirect(`${baseUrl}adminDashboard`)
+                            }
+                        );
+                    }
+                }
+            );
+            
+            break;
         default:
             res.redirect(`${baseUrl}adminDashboard`)
     }
@@ -194,6 +235,46 @@ function edit(req, res, date, image) {
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect(`${baseUrl}adminDashboard`);
+                }
+            );
+            break;
+        case 'announcement':
+            connection.query(
+                'UPDATE ?? SET text = ?, button_text = ?, link = ? WHERE id = ?',
+                [req.query.table, req.body.text, req.body.button_text, req.body.link, req.query.id],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
+                }
+            );
+            break;
+        case 'collection':
+            connection.query(
+                'UPDATE ?? SET name = ? WHERE id = ?',
+                [req.query.table, req.body.name, req.query.id],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
+                }
+            );
+            break;
+        case 'gallery':
+            connection.query(
+                'SELECT id FROM collection WHERE name = (?)',
+                [req.body.folder_name],
+                (error, result) => {
+                    const folder_id = parseInt(result[0].id)
+                    if(error) throw error;
+                    else {
+                        connection.query(
+                            'UPDATE ?? SET image = ?, folder_id = ? WHERE id = ?',
+                            [req.query.table, image, folder_id, req.query.id],
+                            (error, results) => {
+                                if(error) throw error;
+                                else res.redirect(`${baseUrl}adminDashboard`)
+                            }
+                        );
+                    }
                 }
             );
             break;

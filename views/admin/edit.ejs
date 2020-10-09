@@ -24,6 +24,24 @@
                                 <% } else if (columns[index].Field === 'full_details') { %>
                                     <%= columns[index].Field.Field %>*
                                     <textarea class="form-control ckeditor" id="<%= columns[index].Field %> ckeditor" name="<%= columns[index].Field %>" required><%= value %></textarea>
+                                <% } else if(columns[index].Field === 'image') { %>
+                                    <div class="custom-file">
+                                        <input type="file" class="form-control custom-file-input upload" id="<%= columns[index].Field %> customFile" name="<%= columns[index].Field %>" value="<%= value %>">
+                                    </div>
+                                    <div>
+                                        <div class="box-2">
+                                            <div class="result"></div>
+                                        </div>
+                                        <div class="box-2 img-result">
+                                            <img class="cropped" src="" alt="">
+                                        </div>
+                                    </div>
+                                    <button class="button button--green save d-none">Save</button>
+                                    <a href="" class="download button button--orange d-none">Download</a>
+                                <% } else if (columns[index].Field === 'folder_id') { %>
+                                    <select class="select" name="folder_name" id="folder_name">
+                                        <option value="KKS Batch 1">KKS Batch 1</option>
+                                    </select>
                                 <% } else { %>
                                     <%- include('../partials/input', {name: columns[index].Field, type: 'text', required: true, value: value}) %>
                                 <% } %>

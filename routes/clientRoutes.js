@@ -72,6 +72,26 @@ router.get(`${baseUrl}article`, (req, res) => {
     )
 })
 
+router.get(`${baseUrl}collections`, (req, res) => {
+    connection.query(
+        'SELECT * FROM collection ORDER BY name ASC',
+        (error, results) => {
+            res.render('collections.ejs', { collections: results });
+        }
+    )
+})
+
+router.get(`${baseUrl}gallery`, (req, res) => {
+    connection.query(
+        'SELECT * FROM gallery WHERE folder_id = ? ORDER BY image ASC',
+        req.query.id,
+        (error, results) => {
+            res.render('gallery.ejs', { gallery: results });
+        }
+    )
+})
+
+
 router.post(`${baseUrl}collab`, (req, res, next) => {
     async.waterfall([
         (done) => {

@@ -1,8 +1,8 @@
 <%- include('partials/header', {user: "user"}) %>
-    <div class="events">
+    <div class="events bg--blue">
         <div class="container">
             <%- include('partials/nav') %>
-
+            
             <div class="pt-5">
                 <%- include('./partials/table', { caption: "Event Kami Kedepannya", columns: ["id", "title", "details", "date", "image", "link"], rows: upcomingEvents }) %>
             </div>

@@ -1,0 +1,20 @@
+<%- include('admin/function') %>
+<%- include('partials/header', {user: "user"}) %>
+
+    <div class="bg--blue">
+        <div class="container">
+            <%- include('partials/nav') %>
+
+            <h3 class="header">Gallery</h3>
+
+            <div class="gallery">
+                <% gallery.forEach(image => { %>
+                    <div class="gallery__imageContainer">
+                        <img src="<%= image.image %>" alt="<%= image.image %>" class="gallery__image coverImage">
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+<%- include('partials/script') %>

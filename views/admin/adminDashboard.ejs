@@ -9,7 +9,7 @@
             <h1><%= username %></h1>
             <div class="adminDashboard__logout">
                 <% if(role === "super admin") { %>
-                    <a href="/userList" class="btn">List of Admin</a>
+                <a href="/userList" class="btn">List of Admin</a>
                 <% } %>
                 <form class="logout" action="/logout?_method=DELETE" method="POST">
                     <button class="button button--transparent" type="submit">Logout</button>
@@ -17,54 +17,74 @@
             </div>
         </div>
 
-        <select class="adminDashboard__select" name="table" id="table" >
-            <option value="mentor">mentor</option>
-            <option value="latestEvent">latestEvent</option>
-            <option value="upcomingEvent">upcomingEvent</option>
-            <option value="teamMembers">teamMembers</option>
-            <option value="article">article</option>
-            <option value="testimonial">testimonial</option>
-            <option value="leaderReview">leaderReview</option>
-            <option value="collaboration">collaboration</option>
-            <option value="announcement">announcement</option>
+        <select class="adminDashboard__select select" name="table" id="table">
+            <option value="mentor">Mentor</option>
+            <option value="latestEvent">Latest Event</option>
+            <option value="upcomingEvent">Upcoming Event</option>
+            <option value="teamMember">Team Member</option>
+            <option value="article">Article</option>
+            <option value="testimonial">Testimonial</option>
+            <option value="leaderReview">Leader Review</option>
+            <option value="collaboration">Collaboration</option>
+            <option value="announcement">Announcement</option>
+            <option value="collection">Collection</option>
+            <option value="gallery">Gallery</option>
         </select>
 
         <!-- List of Mentor -->
         <div class="mentorTable hideTable">
             <%- include('../partials/table', { caption: "Mentor", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: mentors }) %>
         </div>
-        
+
         <!-- Latest Event -->
         <div class="latestEventTable hideTable">
-        <%- include('../partials/table', { caption: "Latest Event", columns: ["id", "date", "link"], rows: latestEvents }) %></div>
+            <%- include('../partials/table', { caption: "Latest Event", columns: ["id", "date", "link"], rows: latestEvents }) %>
+        </div>
 
         <!-- Upcoming Event -->
         <div class="upcomingEventTable hideTable">
-        <%- include('../partials/table', { caption: "Upcoming Event", columns: ["id", "title", "details", "date", "image", "link"], rows: upcomingEvents }) %></div>
+            <%- include('../partials/table', { caption: "Upcoming Event", columns: ["id", "title", "details", "date", "image", "link"], rows: upcomingEvents }) %>
+        </div>
 
         <!-- Team Members -->
         <div class="teamMemberTable hideTable">
-        <%- include('../partials/table', { caption: "Team Member", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: teamMembers }) %></div>
+            <%- include('../partials/table', { caption: "Team Member", columns: ["id", "name", "title", "facebook", "twitter", "instagram", "linkedin", "image"], rows: teamMembers }) %>
+        </div>
 
         <!-- Artikel -->
         <div class="articleTable hideTable">
-        <%- include('../partials/table', { caption: "Article", columns: ["id", "title", "author", "details", "image", "link", "created"], rows: articles }) %></div>
+            <%- include('../partials/table', { caption: "Article", columns: ["id", "title", "author", "image", "link"], rows: articles }) %>
+        </div>
 
         <!-- testimonial -->
         <div class="testimonialTable hideTable">
-        <%- include('../partials/table', { caption: "Testimonial", columns: ["id", "name", "details", "image"], rows: testimonials }) %></div>
+            <%- include('../partials/table', { caption: "Testimonial", columns: ["id", "name", "details", "image"], rows: testimonials }) %>
+        </div>
 
         <!-- Leader -->
         <div class="leaderReviewTable hideTable">
-        <%- include('../partials/table', { caption: "Leader Review", columns: ["id", "name", "title", "details", "image"], rows: leaderReviews }) %></div>
+            <%- include('../partials/table', { caption: "Leader Review", columns: ["id", "name", "title", "details", "image"], rows: leaderReviews }) %>
+        </div>
 
         <!-- Collaboration -->
         <div class="collaborationTable hideTable">
-        <%- include('../partials/table', { caption: "Collaboration", columns: ["id", "name", "email", "message", "date"], rows: collaboration }) %></div>
+            <%- include('../partials/table', { caption: "Collaboration", columns: ["id", "name", "email", "message", "date"], rows: collaboration }) %>
+        </div>
 
         <!-- Announcement -->
         <div class="announcementTable hideTable">
-        <%- include('../partials/table', { caption: "Announcement", columns: ["id", "text", "button text", "link"], rows: announcements }) %></div>
+            <%- include('../partials/table', { caption: "Announcement", columns: ["id", "text", "button text", "link", "created"], rows: announcements }) %>
+        </div>
+
+        <!-- Folder -->
+        <div class="collectionTable hideTable">
+            <%- include('../partials/table', { caption: "Collection", columns: ["id", "name", "created"], rows: collections }) %>
+        </div>
+
+        <!-- Gallery -->
+        <div class="galleryTable hideTable">
+            <%- include('../partials/table', { caption: "Gallery", columns: ["id", "image", "folder_id", "created"], rows: gallery }) %>
+        </div>
 
     </div>
 </div>

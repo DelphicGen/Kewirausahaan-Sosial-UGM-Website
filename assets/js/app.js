@@ -17,7 +17,7 @@ $(document).ready(function () {
     // Navigation
     let navbarLinks2 = document.querySelector('.navbar__links2');
     let navbarHamburger = document.querySelector('.navbar__hamburger');
-    navbarHamburger.addEventListener('click', () => {
+    navbarHamburger?.addEventListener('click', () => {
         navbarHamburger.classList.toggle('open');
         navbarLinks2.classList.toggle('show');
     })

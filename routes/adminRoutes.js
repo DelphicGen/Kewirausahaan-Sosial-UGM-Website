@@ -20,13 +20,13 @@ router.get(`${baseUrl}adminDashboard`, checkAuthenticated, async function(req, r
             function(callback) { connection.query('SELECT * FROM leader_review', callback); },
             function(callback) { connection.query('SELECT * FROM collaboration', callback); },
             function(callback) { connection.query('SELECT * FROM announcement', callback); },
+            function(callback) { connection.query('SELECT * FROM collection', callback); },
+            function(callback) { connection.query('SELECT * FROM gallery', callback); },
         ], function(error, results) {
             if(error) throw error;
-            else res.render('./admin/adminDashboard.ejs', { username: username, role: role, mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], collaboration: results[7][0], announcements: results[8][0] });
+            else res.render('./admin/adminDashboard.ejs', { username: username, role: role, mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], collaboration: results[7][0], announcements: results[8][0], collections: results[9][0], gallery: results[10][0] });
         });
     })
-
-    
 });
 
 router.get(`${baseUrl}userList`, async function(req, res){
@@ -84,7 +84,8 @@ router.post(`${baseUrl}edit`, async function(req, res) {
         image = req.body.cropped_image
         edit(req, res, date, image)
     } else if(req.body.image) {
-        image = `/assets/images/${req.query.table}/${req.body.image}`;
+        if(req.query.table === 'gallery') image = `/assets/images/${req.query.table}/${req.body.folder_name}/${req.body.image}`;
+        else image = `/assets/images/${req.query.table}/${req.body.image}`;
         edit(req, res, date, image)
     } else if(!req.body.image) {
         connection.query(
@@ -133,7 +134,8 @@ router.post(`${baseUrl}new`, function(req, res) {
     if (req.body.cropped_image) {
         image = req.body.cropped_image
     } else if(req.body.image) {
-        image = `/assets/images/${req.query.table}/${req.body.image}`;
+        if(req.query.table === 'gallery') image = `/assets/images/${req.query.table}/${req.body.folder_name}/${req.body.image}`;
+        else image = `/assets/images/${req.query.table}/${req.body.image}`;
     } else {
         if(req.query.table !== 'article') image = '/assets/images/default/avatar.svg';
         else image = '/assets/images/default/test2.jpg';

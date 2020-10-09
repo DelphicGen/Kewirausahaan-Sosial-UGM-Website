@@ -1,0 +1,18 @@
+<%- include('admin/function') %>
+<%- include('partials/header', {user: "user"}) %>
+
+    <div class="bg--blue">
+        <div class="container">
+            <%- include('partials/nav') %>
+
+            <h3 class="header">Gallery</h3>
+
+            <div class="collections">
+                <% collections.forEach(collection => { %>
+                    <%- include('partials/collection', {collection: collection}) %>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+<%- include('partials/script') %>
