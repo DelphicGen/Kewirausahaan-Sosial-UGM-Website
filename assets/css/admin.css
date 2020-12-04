@@ -1,15 +1,4 @@
 /* Dashboard */
-.adminDashboard, .adminForm {
-    background: #0F2027;
-    background-image: linear-gradient(to right top, rgba(43, 45, 66, .95), rgba(49, 63, 90, .9), rgba(50, 82, 113, .9), rgba(46, 103, 136, .85), rgba(34, 124, 157, .85));
-    min-height: 100vh;
-    padding-bottom: 50px;
-}
-
-.adminDashboard *, .adminForm * {
-    color: #fff;
-}
-
 .adminDashboard__container {
     display: flex;
     align-items: center;
@@ -57,6 +46,10 @@
 
 .adminForm h1 {
     margin-bottom: 20px;
+}
+
+.adminForm__content {
+    margin-bottom: 32px;
 }
 
 .d-none {

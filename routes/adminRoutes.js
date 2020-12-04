@@ -1,9 +1,24 @@
 const express = require('express');
 const async = require("async");
+const multer  = require('multer');
+const path = require('path');
 const router = express.Router();
 const [checkAuthenticated, checkNotAuthenticated, add, edit] = require('../functions/functions');
 const baseUrl = require('../variables/variables');
 const connection = require('../connection/connection');
+
+// Set Storage Engine
+const storage = multer.diskStorage({
+    destination: './assets/images/uploadedImage/',
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+// Init Upload
+const upload = multer({
+    storage: storage
+}).single('image');
 
 router.get(`${baseUrl}adminDashboard`, checkAuthenticated, async function(req, res){
     
@@ -22,9 +37,10 @@ router.get(`${baseUrl}adminDashboard`, checkAuthenticated, async function(req, r
             function(callback) { connection.query('SELECT * FROM announcement', callback); },
             function(callback) { connection.query('SELECT * FROM collection', callback); },
             function(callback) { connection.query('SELECT * FROM gallery', callback); },
+            function(callback) { connection.query('SELECT * FROM ebook', callback); },
         ], function(error, results) {
             if(error) throw error;
-            else res.render('./admin/adminDashboard.ejs', { username: username, role: role, mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], collaboration: results[7][0], announcements: results[8][0], collections: results[9][0], gallery: results[10][0] });
+            else res.render('./admin/adminDashboard.ejs', { username: username, role: role, mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], collaboration: results[7][0], announcements: results[8][0], collections: results[9][0], gallery: results[10][0], ebooks: results[11][0] });
         });
     })
 });
@@ -73,33 +89,38 @@ router.get(`${baseUrl}edit`, function(req, res) {
     
 });
 
-router.post(`${baseUrl}edit`, async function(req, res) {
-
+router.post(`${baseUrl}edit`, upload, async function(req, res) {
     let date, image;
     if(req.body.date) {
         date = req.body.date.replace('T', ' ');
     }
+    if(req.file) image = req.file.destination + req.file.filename;
+    // if (req.body.cropped_image) {
+    //     image = req.body.cropped_image
+    //     edit(req, res, date, image)
+    // } else if(req.body.image) {
+    //     if(req.query.table === 'gallery') image = `/assets/images/${req.query.table}/${req.body.folder_name}/${req.body.image}`;
+    //     else image = `/assets/images/${req.query.table}/${req.body.image}`;
+    //     edit(req, res, date, image)
+    // } else if (req.body.cover) {
 
-    if (req.body.cropped_image) {
-        image = req.body.cropped_image
-        edit(req, res, date, image)
-    } else if(req.body.image) {
-        if(req.query.table === 'gallery') image = `/assets/images/${req.query.table}/${req.body.folder_name}/${req.body.image}`;
-        else image = `/assets/images/${req.query.table}/${req.body.image}`;
-        edit(req, res, date, image)
-    } else if(!req.body.image) {
-        connection.query(
-            'SELECT * FROM (??) WHERE id = ?',
-            [req.query.table, req.query.id],
-            (error, results) => {
-                if(error) throw error;
-                else {
-                    if(results[0].image) image = results[0].image
-                    edit(req, res, date, image)
-                }
-            }
-        );
-    }
+    //     image = `/assets/images/${req.query.table}/${req.body.cover}`;
+    //     edit(req, res, date, image)
+
+    // } else if(!req.body.image) {
+    //     connection.query(
+    //         'SELECT * FROM (??) WHERE id = ?',
+    //         [req.query.table, req.query.id],
+    //         (error, results) => {
+    //             if(error) throw error;
+    //             else {
+    //                 if(results[0].image) image = results[0].image
+    //                 edit(req, res, date, image)
+    //             }
+    //         }
+    //     );
+    // }
+    edit(req, res, date, image)
 });
 
 router.post(`${baseUrl}delete`, function(req, res) {
@@ -125,21 +146,27 @@ router.get(`${baseUrl}new`, function(req, res) {
     );
 });
 
-router.post(`${baseUrl}new`, function(req, res) {
+router.post(`${baseUrl}new`, upload, function(req, res) {
     let date, image;
     if(req.body.date) {
         date = req.body.date.replace('T', ' ');
     }
+    if(req.file) image = req.file.destination + req.file.filename;
+    // if (req.body.cropped_image) {
+    //     image = req.body.cropped_image
+    // } else if(req.body.image) {
+    //     if(req.query.table === 'gallery') image = `/assets/images/${req.query.table}/${req.body.folder_name}/${req.body.image}`;
+    //     else image = `/assets/images/${req.query.table}/${req.body.image}`;
+    // } else if (req.body.cover) {
 
-    if (req.body.cropped_image) {
-        image = req.body.cropped_image
-    } else if(req.body.image) {
-        if(req.query.table === 'gallery') image = `/assets/images/${req.query.table}/${req.body.folder_name}/${req.body.image}`;
-        else image = `/assets/images/${req.query.table}/${req.body.image}`;
-    } else {
-        if(req.query.table !== 'article') image = '/assets/images/default/avatar.svg';
-        else image = '/assets/images/default/test2.jpg';
-    }
+    //     image = `/assets/images/${req.query.table}/${req.body.cover}`;
+    //     add(req, res, date, image)
+
+    // } else {
+    //     if(req.query.table !== 'article') image = '/assets/images/default/avatar.svg';
+    //     else image = '/assets/images/default/test2.jpg';
+    // }
+
     add(req, res, date, image)
 });
 

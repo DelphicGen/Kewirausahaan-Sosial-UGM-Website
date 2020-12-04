@@ -5,11 +5,17 @@
         <div class="container">
             <%- include('partials/nav') %>
 
-            <h3 class="header">Gallery</h3>
+            <h3 class="header">Foto Dokumentasi</h3>
 
             <div class="collections">
-                <% collections.forEach(collection => { %>
-                    <%- include('partials/collection', {collection: collection}) %>
+                <%# collections.forEach(collection => { %>
+                    <%#- include('partials/collection', {collection: collection}) %>
+                <%# }) %> %>
+
+                <% collections.forEach(image => { %>
+                    <div class="gallery__imageContainer">
+                        <img src="<%= image.image %>" alt="<%= image.image %>" class="gallery__image coverImage">
+                    </div>
                 <% }) %>
             </div>
         </div>

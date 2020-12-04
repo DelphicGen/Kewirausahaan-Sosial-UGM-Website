@@ -1,7 +1,7 @@
 <% let table = "mentor"; %>
 <%- include('../partials/header', {user: "admin"}) %>
 
-<div class="adminDashboard">
+<div class="adminDashboard bg--blue">
 
     <div class="container">
         <%- include('../partials/nav') %>
@@ -29,6 +29,7 @@
             <option value="announcement">Announcement</option>
             <option value="collection">Collection</option>
             <option value="gallery">Gallery</option>
+            <option value="ebook">Ebook</option>
         </select>
 
         <!-- List of Mentor -->
@@ -84,6 +85,11 @@
         <!-- Gallery -->
         <div class="galleryTable hideTable">
             <%- include('../partials/table', { caption: "Gallery", columns: ["id", "image", "folder_id", "created"], rows: gallery }) %>
+        </div>
+
+        <!-- Ebook -->
+        <div class="ebookTable hideTable">
+            <%- include('../partials/table', { caption: "Ebook", columns: ["id", "cover", "title", "details", "date", "link"], rows: ebooks }) %>
         </div>
 
     </div>

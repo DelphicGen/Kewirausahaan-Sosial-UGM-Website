@@ -17,7 +17,7 @@
 
 .landingPage__filter {
     background-color: rgba(43, 42, 42, .8);
-    min-height: 100%;
+    min-height: 100vh;
     position: relative;
     overflow: hidden;
 }
@@ -55,7 +55,7 @@
 }
 
 @media screen and (max-width: 767px) {
-    .landingPage {
+    .landingPage, .landingPage__filter {
         min-height: 600px;
     }
 
@@ -242,6 +242,10 @@ section h3:nth-child(2)::before {
     height: 500px;
     display: inline-block;
     transition: .3s left ease-in, .3s transform ease-in, .5s opacity ease-in-out;
+    -webkit-transition: .3s left ease-in, .3s transform ease-in, .5s opacity ease-in-out;
+    -moz-transition: .3s left ease-in, .3s transform ease-in, .5s opacity ease-in-out;
+    -o-transition: .3s left ease-in, .3s transform ease-in, .5s opacity ease-in-out;
+    -ms-transition: .3s left ease-in, .3s transform ease-in, .5s opacity ease-in-out;
     cursor: pointer;
 }
 
@@ -385,6 +389,47 @@ section h3:nth-child(2)::before {
         align-items: center;
         justify-content: flex-start;
         flex-direction: column;
+    }
+}
+
+/* Gallery */
+.gallerySection__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gallerySection__imageContainer {
+    width: 30%;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.gallerySection__image {
+    min-width: 100%;
+}
+
+@media screen and (max-width: 991px) {
+    .gallerySection__imageContainer {
+        width: 49%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .gallerySection__container {
+        justify-content: center;
+    }
+
+    .gallerySection__imageContainer {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .gallerySection__imageContainer {
+        width: 90%;
     }
 }
 
@@ -553,6 +598,10 @@ section h3:nth-child(2)::before {
     background-color: #FFAD08;
     background-position: center;
     transition: background 0.8s;
+    -webkit-transition: background 0.8s;
+    -moz-transition: background 0.8s;
+    -o-transition: background 0.8s;
+    -ms-transition: background 0.8s;
 }
 
 .collaborate__submit:hover, .collaborate__submit:focus {
@@ -563,6 +612,10 @@ section h3:nth-child(2)::before {
     background-color: #f0d803 !important;
     background-size: 100%;
     transition: background 0s;
+    -webkit-transition: background 0s;
+    -moz-transition: background 0s;
+    -o-transition: background 0s;
+    -ms-transition: background 0s;
 }
 
 .collaborate__form {
@@ -604,16 +657,9 @@ section h3:nth-child(2)::before {
 
 /* Login */
 .login, .forgot {
-    height: 100vh;
-    background: #0F2027;
-    background-image: linear-gradient(to right top, rgba(43, 45, 66, .95), rgba(49, 63, 90, .9), rgba(50, 82, 113, .9), rgba(46, 103, 136, .85), rgba(34, 124, 157, .85));
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.login *, .forgot * {
-    color: #fff;
 }
 
 .login__container, .forgot__container {

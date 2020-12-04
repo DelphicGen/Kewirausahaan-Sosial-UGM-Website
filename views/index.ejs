@@ -13,7 +13,7 @@
       <div class="container h-100 landingPage__container">
         <%- include('partials/nav') %>
 
-        <div class="wow fadeInUp landingPage__headingContainer">
+        <div class="landingPage__headingContainer">
           <div class="landingPage__headingList">
             <h1>Bentuk Mindset Wirausaha</h1>
             <h5>Menginspirasi peserta kuliah untuk menemukan cara baru dalam mengatasi permasalahan sosial, khususnya melalui kewirausahaan sosial.</h5>
@@ -30,22 +30,22 @@
     <p>Kuliah Kewirausahaan Sosial didasari oleh kegelisahaan atas ketidaksinkronan dunia pendidikan dengan dunia luar. Belajar dari yang ahli, dosen menjadi fasilitator.</p>
 
     <div class="aboutUs__statistic">
-      <div class="startup wow bounceInLeft">
+      <div class="startup">
         <img src="/assets/images/about_us/rocket2.webp" alt="rocket">
         <h4>8</h4>
         <h5>Startups</h5>
       </div>
-      <div class="talent wow bounceInLeft" data-wow-delay=".1s">
+      <div class="talent">
         <img src="/assets/images/about_us/people.svg" alt="people">
         <h4>7000</h4>
         <h5>Participants</h5>
       </div>
-      <div class="partner wow bounceInLeft" data-wow-delay=".2s">
+      <div class="partner">
         <img src="/assets/images/about_us/handyman.svg" alt="handyman">
         <h4>16</h4>
         <h5>Partners</h5>
       </div>
-      <div class="event wow bounceInLeft" data-wow-delay=".3s">
+      <div class="event">
         <img src="/assets/images/about_us/date.svg" alt="date">
         <h4>20</h4>
         <h5>Events</h5>
@@ -54,53 +54,55 @@
   </section>
 
   <!-- Upcoming Event -->
-  <section class="upcomingEvents container" id="upcomingEvents">
-    <h3>Event Kami Kedepannya</h3>
+  <% if(upcomingEvents.length > 0) { %>
+    <section class="upcomingEvents container" id="upcomingEvents">
+      <h3>Acara Kami ke Depan</h3>
 
-    <div class="upcomingEvents__container">
-      
-      <div class="upcomingEvents__list">
-        <div>
-          <a class="" data-slide="prev">
-            <img class="upcomingEvents__leftControl" src="/assets/images/upcoming_event/left_arrow.svg" alt="prev">
-          </a>
-          <a class="">
-            <img class="upcomingEvents__rightControl" src="/assets/images/upcoming_event/right_arrow.svg" alt="next">
-          </a>
-        </div>
-        <% upcomingEvents.forEach((upcomingEvent, index) => { %>
-          <% if(index === 0) { %>
-            <div class="active-event upcomingEvents__event">
-          <% } else if(index === 1) { %>
-            <div class="next upcomingEvents__event">
-          <% } else if(index === upcomingEvents.length - 1) { %>
-            <div class="prev upcomingEvents__event">
-          <% } else { %>
-            <div class="hidden-event upcomingEvents__event">
-          <% } %>  
-            <img class="upcomingEvents__img" id="upcomingEvents__img" src="<%= upcomingEvent.image %>" alt="<%= upcomingEvent.title %>">
+      <div class="upcomingEvents__container">
+        
+        <div class="upcomingEvents__list">
+          <div>
+            <a class="" data-slide="prev">
+              <img class="upcomingEvents__leftControl" src="/assets/images/upcoming_event/left_arrow.svg" alt="prev">
+            </a>
+            <a class="">
+              <img class="upcomingEvents__rightControl" src="/assets/images/upcoming_event/right_arrow.svg" alt="next">
+            </a>
           </div>
-
-        <% }) %>
-      </div>
-
-      <div>
           <% upcomingEvents.forEach((upcomingEvent, index) => { %>
             <% if(index === 0) { %>
-              <div class="upcomingEvents__detailContainer">
+              <div class="active-event upcomingEvents__event">
+            <% } else if(index === 1) { %>
+              <div class="next upcomingEvents__event">
+            <% } else if(index === upcomingEvents.length - 1) { %>
+              <div class="prev upcomingEvents__event">
             <% } else { %>
-              <div class="hidden-event upcomingEvents__detailContainer">
-            <% } %> 
-                <h4 class="upcomingEvents__title"><%= upcomingEvent.title %></h4>
-                <p class="upcomingEvents__date"><%= dateTimeFormat(upcomingEvent.date) %></p>
-                <p class="upcomingEvents__detail"><%= upcomingEvent.details %></p>
-                <a href="/event?id=<%= upcomingEvent.id %>" class="button button--orange moreDetailsBtn">Selengkapnya</a>
-              </div>
-          <% }) %>
-      </div>
-    </div>
+              <div class="hidden-event upcomingEvents__event">
+            <% } %>  
+              <img class="upcomingEvents__img" id="upcomingEvents__img" src="<%= upcomingEvent.image %>" alt="<%= upcomingEvent.title %>">
+            </div>
 
-  </section>
+          <% }) %>
+        </div>
+
+        <div>
+            <% upcomingEvents.forEach((upcomingEvent, index) => { %>
+              <% if(index === 0) { %>
+                <div class="upcomingEvents__detailContainer">
+              <% } else { %>
+                <div class="hidden-event upcomingEvents__detailContainer">
+              <% } %> 
+                  <h4 class="upcomingEvents__title"><%= upcomingEvent.title %></h4>
+                  <p class="upcomingEvents__date"><%= dateTimeFormat(upcomingEvent.date) %></p>
+                  <p class="upcomingEvents__detail"><%= upcomingEvent.details %></p>
+                  <a href="/event?id=<%= upcomingEvent.id %>" class="button button--orange moreDetailsBtn">Selengkapnya</a>
+                </div>
+            <% }) %>
+        </div>
+      </div>
+
+    </section>
+  <% } %>
 
   <!-- Curiculum -->
   <section class="curriculum container" id="curriculum">
@@ -110,7 +112,7 @@
 
   <!-- Latest Event -->
   <section class="latestEvent container" id="latestEvent">
-    <h3 class="latestEvent__header">Event Terbaru</h3>
+    <h3 class="latestEvent__header">Acara Terbaru</h3>
     <p>Merupakan kegiatan perkuliahaan baik SKS ataupun non-SKS. Untuk melihat materi-materi perkuliahan lainnya bisa cek Youtube Channel Kewirausahaan Sosial UGM</p>
     <div class="latestEvent__list d-flex flex-column flex-lg-row justify-content-lg-between flex-wrap">
       <% latestEvents.forEach((latestEvent) => { %>
@@ -131,7 +133,7 @@
 
   <!-- Our Team -->
   <section class="our-team container" id="our-team">
-    <h3>Team Kita</h3>
+    <h3>Tim Kami</h3>
     <div class="owl-carousel owl-carousel-2 owl-theme">
       <% teamMembers.forEach((member) => { %>
         <%- include('partials/card', {person: member}) %>
@@ -149,6 +151,18 @@
         <%- include('partials/article', {article: article}) %>
       <% }) %>
       
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallerySection container" id="gallerySection">
+    <h3>Foto Dokumentasi</h3>
+    <div class="gallerySection__container">
+      <% gallery.forEach(image => { %>
+          <div class="gallerySection__imageContainer">
+            <img src="<%= image.image %>" alt="<%= image.image %>" class="gallerySection__image coverImage">
+          </div>
+      <% }) %>
     </div>
   </section>
 

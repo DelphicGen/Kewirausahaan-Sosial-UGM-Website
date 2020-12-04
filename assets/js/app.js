@@ -12,18 +12,30 @@ $(document).ready(function () {
     mainPageDetail.map((index, detail) => {
         let content = $(detail).text();
         $(detail).html(content);
-    })
+    });
 
     // Navigation
     let navbarLinks2 = document.querySelector('.navbar__links2');
     let navbarHamburger = document.querySelector('.navbar__hamburger');
+    let body = document.querySelector('body')
     navbarHamburger?.addEventListener('click', () => {
         navbarHamburger.classList.toggle('open');
         navbarLinks2.classList.toggle('show');
-    })
-    
-    // Wow JS
-    new WOW().init();
+    });
+
+    let navbarDropDownTriggers = document.querySelectorAll('.navbar__dropdownTrigger');
+    navbarDropDownTriggers[0]?.addEventListener('click', (e) => {
+        e.stopPropagation()
+        navbarDropDownTriggers[0].classList.toggle('open');
+    });
+    navbarDropDownTriggers[1]?.addEventListener('click', (e) => {
+        e.stopPropagation()
+        navbarDropDownTriggers[1].classList.toggle('open');
+    });
+    body.addEventListener('click', () => {
+        navbarDropDownTriggers[0]?.classList.remove('open');
+        navbarDropDownTriggers[1]?.classList.remove('open');
+    });
 
     // Owl Carousel
     let mentors = document.querySelectorAll('.mentor');

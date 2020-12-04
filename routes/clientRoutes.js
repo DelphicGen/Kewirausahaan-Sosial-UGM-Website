@@ -14,12 +14,13 @@ router.get(baseUrl, (req, res) => {
         function(callback) { connection.query('SELECT * FROM latest_event WHERE date <= CURDATE() ORDER BY date DESC LIMIT 2', callback); },
         function(callback) { connection.query('SELECT * FROM upcoming_event WHERE (date >= CURRENT_TIMESTAMP()) OR (date >= CURRENT_TIMESTAMP() AND HOUR(date) >= HOUR(CURRENT_TIMESTAMP())) ORDER BY date', callback); },
         function(callback) { connection.query('SELECT * FROM article ORDER BY created DESC LIMIT 3', callback); },
+        function(callback) { connection.query('SELECT * FROM gallery LIMIT 9', callback); },
         function(callback) { connection.query('SELECT * FROM testimonial LIMIT 6', callback); },
         function(callback) { connection.query('SELECT * FROM leader_review LIMIT 6', callback); },
         function(callback) { connection.query('SELECT * FROM announcement ORDER BY created DESC LIMIT 1', callback); },
     ], function(error, results) {
         if(error) throw error;
-        else res.render('index.ejs', { mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], testimonials: results[5][0], leaderReviews: results[6][0], announcements: results[7][0][0] });
+        else res.render('index.ejs', { mentors: results[0][0], teamMembers: results[1][0], latestEvents: results[2][0], upcomingEvents: results[3][0], articles: results[4][0], gallery: results[5][0], testimonials: results[6][0], leaderReviews: results[7][0], announcements: results[8][0][0] });
     });
 
 });
@@ -43,11 +44,30 @@ router.get(`${baseUrl}event`, (req, res) => {
     )
 })
 
-router.get(`${baseUrl}curriculum`, (req, res) => {
+router.get(`${baseUrl}odd_curriculum`, (req, res) => {
+    // connection.query(
+    //     'SELECT * FROM upcoming_event WHERE id = 1',
+    //     (error, results) => {
+    //         res.render('oddCurriculum.ejs', { event: results[0] });
+    //     }
+    // )
+    res.render('oddCurriculum.ejs');
+})
+
+router.get(`${baseUrl}even_curriculum`, (req, res) => {
     connection.query(
         'SELECT * FROM upcoming_event WHERE id = 1',
         (error, results) => {
-            res.render('curriculum.ejs', { event: results[0] });
+            res.render('evenCurriculum.ejs', { event: results[0] });
+        }
+    )
+})
+
+router.get(`${baseUrl}ebook`, (req, res) => {
+    connection.query(
+        'SELECT * FROM ebook',
+        (error, results) => {
+            res.render('ebook.ejs', { ebooks: results });
         }
     )
 })
@@ -73,8 +93,14 @@ router.get(`${baseUrl}article`, (req, res) => {
 })
 
 router.get(`${baseUrl}collections`, (req, res) => {
+    // connection.query(
+    //     'SELECT * FROM collection ORDER BY name ASC',
+    //     (error, results) => {
+    //         res.render('collections.ejs', { collections: results });
+    //     }
+    // )
     connection.query(
-        'SELECT * FROM collection ORDER BY name ASC',
+        'SELECT * FROM gallery',
         (error, results) => {
             res.render('collections.ejs', { collections: results });
         }

@@ -1,20 +1,20 @@
 <%- include('../partials/header', {user: "admin"}) %>
 <%- include('function') %>
 
-<div class="adminForm">
+<div class="adminForm bg--blue">
 
     
     <% if (table == "users") { %>
         <form class="adminForm__form" action="/register" method="POST">
     <% } else { %>
-        <form class="adminForm__form" action="/new?table=<%= table %>" method="POST">
+        <form enctype="multipart/form-data" class="adminForm__form" action="/new?table=<%= table %>" method="POST">
     <% } %>
 
         <h1>Add <%= table[0].toUpperCase() %><%= table.slice(1).replace(/_([a-z])/g, function(g) { return g[1].toUpperCase() }) %>'s Table</h1>
 
         <% columns.forEach((column) => { %>
             <% if(column.Field !== 'id' && column.Field !== 'role' && column.Field !== 'created' && column.Field !== 'resetPasswordToken' && column.Field !== 'resetPasswordExpires') { %>
-                <div class="form-group">
+                <div class="form-group adminForm__content">
                     
                     <% if(column.Null == 'NO') { %>
                         <% if (column.Field === 'password') { %>
@@ -22,11 +22,12 @@
                         <% } else if (column.Field === 'date') { %>
                             <%- include('../partials/input', {name: column.Field, type: 'datetime-local', required: true}) %>
                         <% } else if (column.Field === 'full_details') { %>
-                            <%= column.Field %>*
+                            <label for="<%= column.Field %>"><%= column.Field %>*</label>
                             <textarea class="form-control ckeditor" id="<%= column.Field %> ckeditor" name="<%= column.Field %>" required></textarea>
-                        <% } else if (column.Field === 'image') { %>
+                        <% } else if (column.Field === 'image' || column.Field === 'cover') { %>
+                            <label for="<%= column.Field %>"><%= column.Field %>*</label>
                             <div class="custom-file">
-                                <input type="file" class="form-control custom-file-input upload" id="<%= column.Field %> customFile" name="<%= column.Field %>">
+                                <input type="file" class="form-control custom-file-input upload" id="<%= column.Field %> customFile" name="image">
                             </div>
                             <div>
                                 <div class="box-2">
@@ -48,7 +49,7 @@
                     <% } else { %>
                         <% if (column.Field === 'image') { %>
                             <div class="custom-file">
-                                <input type="file" class="form-control custom-file-input upload" id="<%= column.Field %> customFile" name="<%= column.Field %>">
+                                <input type="file" class="form-control custom-file-input upload" id="<%= column.Field %> customFile" name="image">
                             </div>
                             <div>
                                 <div class="box-2">

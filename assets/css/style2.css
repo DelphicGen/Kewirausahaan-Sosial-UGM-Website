@@ -16,6 +16,10 @@ li {
     padding: 12px 12px 0;
 }
 
+span {
+    color: #fff !important;
+}
+
 /* Article3 and Upcoming Event */
 .article3__imageContainer, .upcomingEvent__imageContainer {
     position: relative;
@@ -33,6 +37,10 @@ li {
     width: 70%;
     left: 15%;
     transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
     position: absolute;
     padding: 20px 40px;
 }
@@ -186,6 +194,11 @@ li {
     -webkit-line-clamp: 3;
 }
 
+.article2__fullDetails p span span span, .article3__fullDetails p span span span {
+    color: inherit !important;
+    font-size: 16px;
+}
+
 .article2__info a {
     font-weight: bold;
 }
@@ -270,6 +283,7 @@ li {
 
 .gallery__imageContainer {
     width: 30%;
+    height: 300px;
     overflow: hidden;
     margin-bottom: 20px;
 }
@@ -298,4 +312,11 @@ li {
     .gallery__imageContainer {
         width: 90%;
     }
+}
+
+/* Odd Curriculum */
+.underConstruction {
+    font-size: 30px;
+    text-align: center;
+    /* margin-top: 100px; */
 }

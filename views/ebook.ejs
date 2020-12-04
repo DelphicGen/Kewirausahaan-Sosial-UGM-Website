@@ -1,0 +1,15 @@
+<%- include('admin/function') %>
+
+<%- include('partials/header', {user: "user"}) %>
+
+<div class="curriculumPage bg--blue">
+    <div class="container">
+        <%- include('partials/nav') %>
+
+        <div class="pt-5">
+            <%- include('./partials/table', { caption: "Ebook Kami", columns: ["cover", "title", "details", "date"], rows: ebooks }) %>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/script') %>

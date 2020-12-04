@@ -64,8 +64,8 @@ function add(req, res, date, image) {
         
         case 'article':
             connection.query(
-                'INSERT INTO ?? (title, author, details, full_details, image, link) VALUES (?, ?, ?, ?, ?, ?)',
-                [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link],
+                'INSERT INTO ?? (title, author, full_details, image) VALUES (?, ?, ?, ?)',
+                [req.query.table, req.body.title, req.body.author, req.body.full_details, image],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect(`${baseUrl}adminDashboard`)
@@ -143,7 +143,16 @@ function add(req, res, date, image) {
                     }
                 }
             );
-            
+            break;
+        case 'ebook':
+            connection.query(
+                'INSERT INTO ?? (cover, title, details, date, link) VALUES (?, ?, ?, ?, ?)',
+                [req.query.table, image, req.body.title, req.body.details, req.body.date, req.body.link],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
+                }
+            );
             break;
         default:
             res.redirect(`${baseUrl}adminDashboard`)
@@ -198,8 +207,8 @@ function edit(req, res, date, image) {
         
         case 'article':
             connection.query(
-                'UPDATE (??) SET title = ?, author = ?, details = ?, full_details = ?, image = ?, link = ? WHERE id = ?',
-                [req.query.table, req.body.title, req.body.author, req.body.details, req.body.full_details, image, req.body.link, req.query.id],
+                'UPDATE (??) SET title = ?, author = ?, full_details = ?, image = ? WHERE id = ?',
+                [req.query.table, req.body.title, req.body.author, req.body.full_details, image, req.query.id],
                 (error, results) => {
                     if(error) throw error;
                     else res.redirect(`${baseUrl}adminDashboard`)
@@ -275,6 +284,16 @@ function edit(req, res, date, image) {
                             }
                         );
                     }
+                }
+            );
+            break;
+        case 'ebook':
+            connection.query(
+                'UPDATE ?? SET cover = ?, title = ?, details = ?, date = ?, link = ? WHERE id = ?',
+                [req.query.table, image, req.body.title, req.body.details, req.body.date, req.body.link, req.query.id],
+                (error, results) => {
+                    if(error) throw error;
+                    else res.redirect(`${baseUrl}adminDashboard`)
                 }
             );
             break;

@@ -51,21 +51,23 @@ $(document).ready(function () {
     const hideTables = document.querySelectorAll('.hideTable');
     let tableName;
 
-    select.value = selectValue;
-
-    hideTables.forEach(table => {
-        tableName = table.classList[0];
-        if(tableName === `${selectValue}Table`) {
-            table.classList.remove('hideTable')
+    if(select) {
+        select.value = selectValue;
+    
+        hideTables.forEach(table => {
+            tableName = table.classList[0];
+            if(tableName === `${selectValue}Table`) {
+                table.classList.remove('hideTable')
+            }
+        })
+    
+        const handleSelectChange = () => {
+            document.querySelector(`.${selectValue}Table`).classList.add('hideTable');
+            selectValue = select.value;
+            localStorage.setItem('table', selectValue);
+            document.querySelector(`.${selectValue}Table`).classList.remove('hideTable');
         }
-    })
-
-    const handleSelectChange = () => {
-        document.querySelector(`.${selectValue}Table`).classList.add('hideTable');
-        selectValue = select.value;
-        localStorage.setItem('table', selectValue);
-        document.querySelector(`.${selectValue}Table`).classList.remove('hideTable');
+    
+        select.addEventListener('change', handleSelectChange);
     }
-
-    select.addEventListener('change', handleSelectChange);
 });
